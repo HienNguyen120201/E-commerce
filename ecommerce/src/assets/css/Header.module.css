@@ -1,0 +1,120 @@
+h1 {
+    font-size: 4rem;
+}
+ul li {
+    list-style-type: none;
+}
+
+.header a {
+    font-size: 1.3rem;
+    text-decoration: none;
+    color: #fff;
+}
+
+.header__contact_list {
+    display: flex;
+    gap: 1rem;
+}
+
+.header {
+    background-color: #1e1f29;
+}
+.header__contact ul li:last-of-type {
+    margin-left: auto;
+}
+
+.header__contact ul li a i {
+    padding-right: 5px;
+}
+.header__contact {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.header__action {
+    background: #15161d;
+    padding-top: 2.5rem;
+    padding-bottom: 3.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__search {
+    width: 40rem;
+    border-radius: 2rem;
+    background-color: #fff;
+    position: relative;
+}
+
+.header__search_input {
+    height: 100%;
+    width: 100%;
+    padding-left: 2rem;
+    font-size: 1.5rem;
+    outline: none;
+    border-radius: 20px 20px 20px 20px;
+}
+.header__cart > * {
+    color: #fff;
+}
+.header__cart {
+    text-align: center;
+}
+a.header__search_submit {
+    padding: 1rem 2rem;
+    outline: none;
+
+    border-radius: 20px 20px 20px 20px;
+    background-color: #d10124;
+    color: #fff;
+    font-size: 1.5rem;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.header__navigation {
+    padding-top: 1.6rem;
+    padding-bottom: 1.6rem;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.header__navigation > * > * {
+    font-size: 1.5rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+.header__navigation_item {
+    color: #111;
+    font-size: 1.6rem;
+}
+
+.header__shape >*{
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.header__shape > span {
+    position: relative;
+    display: inline-block;
+}
+.header__shape > span::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #d10124;
+    transform-origin: bottom right;
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
+}
+
+.header__shape > span:hover::before {
+    transform-origin: bottom left;
+    transform: scaleX(1);
+}
+.header__shape > span:hover{
+    color: red;
+}

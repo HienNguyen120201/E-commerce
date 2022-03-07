@@ -1,0 +1,13 @@
+.sf_container {
+    width: 100%;
+    font-size: 1.5rem;
+}
+.sf_sidebar_category {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.sf_sidebar_category > h4{
+    font-size: 2rem;
+    text-transform: uppercase;
+}

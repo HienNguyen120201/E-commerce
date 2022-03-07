@@ -1,0 +1,26 @@
+.category-container {
+    width: 100%;
+    border-bottom: 1px solid #c8c8c8;
+    padding-bottom: 1rem;
+    padding-top: 7px;
+    margin-left: 1rem;
+    color: #333;
+}
+
+.category__dropdown > ui > li {
+    list-style-type: circle;
+}
+.category__dropdown ul li a {
+    text-decoration: none;
+    color: #333;
+    line-height: 1.75;
+}
+.category__heading {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+.category__dropdown {
+    margin-left: 3rem;
+}
