@@ -24,3 +24,46 @@ h6 {
 p {
     color: #333;
 }
+
+.slider_mui {
+    color: #d10124 !important;
+}
+
+.slider_mui:hover {
+    color: red;
+}
+
+.slider_mui .MuiSlider-thumb {
+    /* border-radius: 1px; */
+    height: 15px;
+    width: 15px;
+}
+
+/* html{
+    background: #f2f2f2;
+} */
+
+.btn-small {
+    padding: 5px 11px;
+    color: #fff;
+    border-radius: 20px;
+    display: inline-block;
+    font-size: 13px;
+}
+
+.green-gradient {
+    background: -webkit-linear-gradient(left, #60bb22, #20863d);
+}
+.red-gradient {
+    background: #f85032; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #e73827,
+        #f85032
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #e73827,
+        #f85032
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}

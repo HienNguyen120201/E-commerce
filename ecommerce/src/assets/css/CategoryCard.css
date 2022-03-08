@@ -3,13 +3,13 @@
     border-bottom: 1px solid #c8c8c8;
     padding-bottom: 1rem;
     padding-top: 7px;
-    margin-left: 1rem;
     color: #333;
 }
 
-.category__dropdown > ui > li {
-    list-style-type: circle;
+.category__dropdown ul li a:hover {
+    color: #d10124;
 }
+
 .category__dropdown ul li a {
     text-decoration: none;
     color: #333;
@@ -19,8 +19,11 @@
     display: flex;
     justify-content: space-between;
     padding-right: 1rem;
-    padding-left: 1rem;
 }
 .category__dropdown {
-    margin-left: 3rem;
+    margin-left: 2rem;
+}
+
+.category__heading > h3 {
+    font-size: 1.7rem;
 }

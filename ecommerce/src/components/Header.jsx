@@ -120,7 +120,9 @@ function Header() {
 const navStyle = {
     fontSize: "1.6rem",
     color: "#111",
-    bgcolor: "#fff",
+    backgroundColor: "#fff",
+    fontWeight: 600,
+
 };
 
 export default Header;
