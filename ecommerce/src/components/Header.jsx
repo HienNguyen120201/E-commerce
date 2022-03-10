@@ -72,7 +72,7 @@ function Header() {
                         </Link>
                     </div>
                     <div className={styles.header__cart}>
-                        <Badge badgeContent={4} color="error">
+                        <Badge badgeContent={4} color="error" sx={{ fontSize: "20px"}}>
                             <FaShoppingCart fontSize="2rem" />
                         </Badge>
                         <p style={{ fontSize: "1.5rem", paddingTop: "5px" }}>
