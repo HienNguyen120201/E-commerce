@@ -5,8 +5,8 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                {routes.map(({ path, element, ...rest }) => {
-                    return <Route path={path} element={element} />;
+                {routes.map(({ path, element, ...rest }, idx) => {
+                    return <Route path={path} element={element} key={idx} />;
                 })}
             </Routes>
         </BrowserRouter>

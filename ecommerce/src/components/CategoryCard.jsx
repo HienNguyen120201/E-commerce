@@ -6,7 +6,7 @@ import "./../assets/css/CategoryCard.css";
 import { useState } from "react";
 import Collapse from "@mui/material/Collapse";
 
-function CategoryCard({ title, listCategory, isOpen }) {
+function CategoryCard({ title, listCategory, isOpen, category, subCategory }) {
     const [open, setOpen] = useState(isOpen);
     
     const handleClick = () => {
@@ -16,7 +16,7 @@ function CategoryCard({ title, listCategory, isOpen }) {
     return (
         <div className="category-container">
             <div className="category__heading">
-                <h3>{title}</h3>
+                <Link to = {`${category}`}><h3>{title}</h3></Link>
                 <i onClick={handleClick}>
                     {open ? (
                         <ExpandLess fontSize="large" />
@@ -32,7 +32,7 @@ function CategoryCard({ title, listCategory, isOpen }) {
                         {listCategory.map((item, index) => {
                             return (
                                 <li key={index}>
-                                    <Link to={`${item.toLowerCase()}`}>
+                                    <Link to={`${category}/${subCategory[index]}`}>
                                         {item}
                                     </Link>
                                     

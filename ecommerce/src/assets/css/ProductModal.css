@@ -1,0 +1,247 @@
+.prodModal-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    margin-top: auto;
+    margin-bottom: auto;
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+    color: #444b52;
+    backdrop-filter: blur(50px);
+}
+.prodModal__body {
+    padding: 3rem 2rem 2rem 2rem;
+    font-size: 1.5rem;
+}
+.prodModal__left {
+    padding-right: 2rem;
+}
+.prodModal__header {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #dee2e6;
+}
+.close {
+    margin: 0.5rem -0.5rem 0rem auto;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.prodRating-wrap {
+    display: flex;
+}
+
+.prodModal__details {
+    padding: 0 16px 0 25px;
+}
+
+.prodRating-wrap {
+    font-size: 14px;
+    padding: 20px 0 10px;
+}
+
+.prodRating__star {
+    margin-right: 1rem;
+}
+
+.prodRaing__digit {
+    margin-right: 2rem;
+    position: relative;
+}
+
+.prodRaing__digit::before {
+    position: absolute;
+    content: "";
+    top: 50%;
+    transform: translateY(-50%);
+    background: #bcbcbc;
+    height: 1.5rem;
+    width: 2px;
+    right: -1rem;
+}
+.proRating__stat > * {
+    margin-right: 1.5rem;
+    font-weight: 500;
+}
+.prodModal__details > p {
+    line-height: 2.5rem;
+    font-size: 15px;
+    color: #555;
+    margin-top: 1.5rem;
+    font-weight: 1.6rem;
+}
+.prodModal__details > h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+.proModal__price {
+    margin: 22px 0px;
+}
+.new_price {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #ff2f2f;
+    margin-right: 2rem;
+}
+
+.market_price {
+    font-size: 2rem;
+    text-decoration: line-through;
+    font-weight: 500;
+}
+
+.proModal__color--list {
+    margin-top: 1rem;
+}
+
+.proModal__color,
+.proModal__size,
+.proModal__qty {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.proModal__color > ul {
+    display: flex;
+}
+.proModal__color li {
+    display: inline-block;
+    margin-right: 5px;
+    width: 3rem;
+    height: 3rem;
+    border: 1px #e3e4e9 solid;
+    position: relative;
+    cursor: pointer;
+}
+.proModal__color a {
+    opacity: 0;
+}
+.proModal__color ul li > * {
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    color: #ff4938;
+    pointer-events: none;
+}
+
+.proModal__size,
+.proModal__color,
+.proModal__qty {
+    margin-top: 2rem;
+}
+.proModal__size > *,
+.proModal__color > *,
+.proModal__qty > * {
+    margin-top: 1rem;
+}
+
+.proModal__qty input[value]{
+    font-size: 1.6rem;
+}
+.prodModal__meta{
+    margin-top: 2rem;
+    font-weight: 500;
+}
+
+.prodModal__meta span{
+    display: inline-block;
+    width: 20%;
+}
+.prodModal__meta a{
+    margin-right: 1rem;
+}
+
+.prodModal__action {
+    display: flex;
+    gap: 3rem
+}
+
+.cart-plus-minus {
+    display: flex;
+    height: 3rem;
+    /* width: 30%; */
+}
+.cart-plus-minus > * {
+    width: 7%;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    border: none;
+    font-size: 1;
+}
+.cart-plus-minus > *:not(:nth-child(2)) {
+    border: 1px solid #dee2e6;
+    font-size: 2rem;
+    cursor: pointer;
+}
+.product-large-img {
+    width: 35rem;
+    height: 43rem;
+}
+
+.yellow {
+    background-color: #fff200;
+}
+.white {
+    background-color: #fff;
+}
+.navy {
+    background-color: #273c75;
+}
+.pink {
+    background-color: #fb9696;
+}
+.orange {
+    background-color: #ffcc8a;
+}
+.green {
+    background-color: #6ab04c;
+}
+
+.black {
+    background-color: #2d3436;
+}
+
+.blue {
+    background-color: #3498db;
+}
+
+.proModal__size > ul {
+    display: flex;
+}
+.proModal__size li {
+    display: inline-block;
+    width: 15%;
+    height: 3.5rem;
+    border: 1px #e3e4e9 solid;
+    margin-right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.proModal__color span,
+.proModal__size > span,
+.product-details__quantity span {
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.hidden-check {
+    display: none;
+}
+.size-check {
+    color: #fff;
+    background-color: #ff2f2f;
+}
+
+.MuiDialogContent-root{
+    padding: 0;
+}

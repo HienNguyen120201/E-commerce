@@ -8,26 +8,135 @@ const phoneList = [
         imgSrc: img1,
         discount_price: 13490000,
         market_price: 13490000,
-        isSale: false,
-        saleText: ""
+        isSale: true,
+        saleText: "Sale ngày 8/3",
+        category: "Iphone",
+        features: [
+            "finger",
+            "faceId",
+            "warerProof",
+        ],
+        screen: "mediumScreen",
     },
 
     {
-        title: "Iphone 11 64GB Chính Hãng VN/A",
+        title: "Samsung Galaxy S22 8/256GB Chính Hãng",
         imgSrc: img2,
         discount_price: 13490000,
         market_price: 13490000,
-        isSale: true,
-        saleText: "Sale ngày 8/3"
+        category: "Samsung",
+        features: [
+            "finger",
+            "faceId",
+            "warerProof",
+            "quickCharge"
+        ],
+        screen: "largeScreen",
     },
 
     {
-        title: "Iphone 11 64GB Chính Hãng VN/A",
+        title: "Samsung Galaxy A32 6/128GB Chính Hãng",
         imgSrc: img3,
         discount_price: 13490000,
         market_price: 13490000,
         isSale: true,
-        saleText: "Sale ngày 8/3"
+        saleText: "Sale ngày 8/3",
+        category: "Samsung",
+        features: [
+            "finger",
+            "quickCharge"
+        ],
+        screen: "largeScreen",
+    },
+
+    {
+        title: "Iphone 11 64GB Chính Hãng VN/A",
+        imgSrc: img1,
+        discount_price: 13490000,
+        market_price: 13490000,
+        category: "Iphone",
+        features: [
+            "finger",
+            "faceId",
+            "warerProof",
+        ],
+        screen: "mediumScreen",
+    },
+
+    {
+        title: "Samsung Galaxy S22 8/256GB Chính Hãng",
+        imgSrc: img2,
+        discount_price: 13490000,
+        market_price: 13490000,
+        category: "Samsung",
+        features: [
+            "finger",
+            "faceId",
+            "warerProof",
+            "quickCharge"
+        ],
+        screen: "largeScreen",
+    },
+
+    {
+        title: "Samsung Galaxy A32 6/128GB Chính Hãng",
+        imgSrc: img3,
+        discount_price: 13490000,
+        market_price: 13490000,
+        isSale: true,
+        saleText: "Sale ngày 8/3",
+        category: "Samsung",
+        features: [
+            "finger",
+            "quickCharge"
+        ],
+        screen: "largeScreen",
+    },
+
+    {
+        title: "Iphone 11 64GB Chính Hãng VN/A",
+        imgSrc: img1,
+        discount_price: 13490000,
+        market_price: 13490000,
+        category: "Iphone",
+        features: [
+            "finger",
+            "faceId",
+            "warerProof",
+        ],
+        screen: "mediumScreen",
+    },
+
+    {
+        title: "Samsung Galaxy S22 8/256GB Chính Hãng",
+        imgSrc: img2,
+        discount_price: 13490000,
+        market_price: 13490000,
+        isSale: true,
+        saleText: "Sale ngày 8/3",
+        category: "Samsung",
+        features: [
+            "finger",
+            "faceId",
+            "warerProof",
+            "quickCharge"
+        ],
+        screen: "largeScreen",
+    },
+
+    {
+        title: "Samsung Galaxy A32 6/128GB Chính Hãng",
+        imgSrc: img3,
+        discount_price: 13490000,
+        market_price: 13490000,
+        isSale: true,
+        saleText: "Sale ngày 8/3",
+        category: "Samsung",
+        features: [
+            "finger",
+            "quickCharge"
+        ],
+        screen: "largeScreen",
     },
 
     {
@@ -38,68 +147,25 @@ const phoneList = [
     },
 
     {
-        title: "Iphone 11 64GB Chính Hãng VN/A",
+        title: "Samsung Galaxy S22 8/256GB Chính Hãng",
         imgSrc: img2,
         discount_price: 13490000,
         market_price: 13490000,
         isSale: true,
-        saleText: "Sale ngày 8/3"
+        saleText: "Sale ngày 8/3",
     },
-
     {
-        title: "Iphone 11 64GB Chính Hãng VN/A",
+        title: "Samsung Galaxy A32 6/128GB Chính Hãng",
         imgSrc: img3,
         discount_price: 13490000,
         market_price: 13490000,
+        category: "Samsung",
+        features: [
+            "finger",
+            "quickCharge"
+        ],
+        screen: "largeScreen",
     },
-
-    {
-        title: "Iphone 11 64GB Chính Hãng VN/A",
-        imgSrc: img1,
-        discount_price: 13490000,
-        market_price: 13490000,
-        isSale: true,
-        saleText: "Sale ngày 8/3"
-    },
-
-    {
-        title: "Iphone 11 64GB Chính Hãng VN/A",
-        imgSrc: img2,
-        discount_price: 13490000,
-        market_price: 13490000,
-    },
-
-    {
-        title: "Iphone 11 64GB Chính Hãng VN/A",
-        imgSrc: img3,
-        discount_price: 13490000,
-        market_price: 13490000,
-        isSale: true,
-        saleText: "Sale ngày 8/3"
-    },
-
-
-    {
-        title: "Iphone 11 64GB Chính Hãng VN/A",
-        imgSrc: img1,
-        discount_price: 13490000,
-        market_price: 13490000,
-    },
-
-    {
-        title: "Iphone 11 64GB Chính Hãng VN/A",
-        imgSrc: img2,
-        discount_price: 13490000,
-        market_price: 13490000,
-    },
-
-    {
-        title: "Iphone 11 64GB Chính Hãng VN/A",
-        imgSrc: img3,
-        discount_price: 13490000,
-        market_price: 13490000,
-    },
-
 ];
 
 export default phoneList;

@@ -1,6 +1,6 @@
 import React from "react";
 import "./../assets/css/FilterCard.css";
-function FilterCard({ title, options, idChecked }) {
+function FilterCard({ title, options, idChecked, handleChange }) {
     return (
         <div className="filtercard-container">
             <div className="filter__heading">
@@ -10,8 +10,14 @@ function FilterCard({ title, options, idChecked }) {
                 <form>
                     {options.map((item, idx) => {
                         return (
-                            <div className="filter__form-group">
-                                <input type="checkbox" id={`${item.id}`} defaultChecked = {idx === idChecked} />
+                            <div className="filter__form-group" key={idx}>
+                                <input
+                                    type="checkbox"
+                                    id={`${item.id}`}
+                                    defaultChecked={idx === idChecked}
+                                    onChange={handleChange}
+                                    name={`${item.label}`}
+                                />
                                 <label
                                     htmlFor={`${item.id}`}
                                 >{`${item.label}`}</label>

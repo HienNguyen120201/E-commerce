@@ -27,3 +27,6 @@
 .category__heading > h3 {
     font-size: 1.7rem;
 }
+.category__heading > a {
+    text-decoration: none;
+}

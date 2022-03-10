@@ -1,8 +1,9 @@
-.product-item__info a {
+.product-item__info p {
     text-decoration: none;
     padding-bottom: 1rem;
     color: #333;
     font-weight: 600;
+    cursor: pointer;
 }
 .product-item__info {
     padding-top: 2rem;

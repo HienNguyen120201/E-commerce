@@ -1,21 +1,64 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import "./../assets/css/ShopFilter.css";
 import CategoryCard from "./CategoryCard";
 import FilterCard from "./FilterCard";
 import Slider from "@mui/material/Slider";
 import "./../index.css";
-import Button from './Button'
+// import Button from './Button'
 
 const formatVND = (num) =>{
     return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(num);
 }
 
 function ShopFilter() {
-    const [value, setValue] = useState([10000000, 20000000]);
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
+    /*
+     * ------------------------  HOOK ------------------------------ */
+    const [price, setPrice] = useState([10000000, 20000000]);
+    const [feature, setFeature] = useState([]);
+    const [screen, setScreen] = useState([]);
+    const dispatch = useDispatch();
+
+    /*
+     *------------------------ HANDLE STATE CHANGE ----------------- */
+    const handleSubmitFilter = () =>{
+        const data = {
+            price: price,
+            features: feature,
+            screen: screen,
+        };
+
+        dispatch({
+            type: "SUBMIT_FILTER",
+            payload: data,
+        })
+    }
+    
+    const handleFeatureChange = (e) =>{
+        const {name, checked} = e.target;
+        if(checked){
+            setFeature(prev => [...prev, name])
+        }
+        else {
+            setFeature(feature.filter(e => e !== name))
+        }
+    }
+
+    const handleScreenChange = e =>{
+        const {name, checked} = e.target; 
+        if(checked){
+            setScreen(prev => [...prev, name])
+        }
+        else {
+            setScreen(screen.filter(e => e !== name))
+        }
+    }
+
+    const handlePriceChange = (newValue) => {
+        setPrice(newValue);
     };
+
     return (
         <div className="sf_container" style={{marginTop: "5rem"}}>
             <div className="sf_sidebar_category">
@@ -25,17 +68,22 @@ function ShopFilter() {
             <CategoryCard
                 title="Điện thoại"
                 listCategory={["Iphone","Xiaomi", "Samsung","Oppo", "LG","Khác",]}
-                isOpen={true}
+                category = "Phone"
+                subCategory = {["iphone","xiaomi", "samsung","oppo", "lg", "other_phone",]}
             />
             <CategoryCard
                 title="Laptop"
                 listCategory={["Macbook", "Dell", "HP", "Asus", "Khác"]}
                 isOpen={false}
+                category = "Laptop"
+                subCategory = {["macbook", "dell", "hp", "asus", "other_laptop"]}
             />
             <CategoryCard
                 title="Phụ kiện"
                 listCategory={["Pin dự phòng", "Tai nghe", "Củ sạc, cáp sạc", "Loa Bluetooth","Khác"]}
                 isOpen={false}
+                category = "Accessory"
+                subCategory = {["bacup_charger", "headphone", "charger", "bluetooth_speaker","other_accesory"]}
             />
 
             <div>
@@ -47,8 +95,8 @@ function ShopFilter() {
                     <Slider
                         className="slider_mui"
                         getAriaLabel={() => "Temperature range"}
-                        value={value}
-                        onChange={handleChange}
+                        value={price}
+                        onChange={handlePriceChange}
                         valueLabelDisplay="off"
                         size="medium"
                         min={0}
@@ -56,7 +104,7 @@ function ShopFilter() {
                         step={100000}
                     />
                 </div>
-                <div className="sf_filter_value" style={{paddingLeft: "2rem", paddingRight: "2rem"}}>{`Từ ${formatVND(value[0])}- ${formatVND(value[1])}`}</div>
+                <div className="sf_filter_value" style={{paddingLeft: "2rem", paddingRight: "2rem"}}>{`Từ ${formatVND(price[0])}- ${formatVND(price[1])}`}</div>
 
                 <FilterCard
                     title="Tính năng đặc biệt"
@@ -67,24 +115,22 @@ function ShopFilter() {
                         { id: "quickCharge", label: "Sạc nhanh" },
                         { id: "warerProof", label: "Chống nước chống bụi" },
                     ]}
-                    idChecked={0}
+                    
+                    handleChange = {handleFeatureChange}
                 />
 
                 <FilterCard
                     title="Màn hình"
                     options={[
                         { id: "allScreens", label: "Tất cả" },
-                        { id: "smallScreen", label: "Màn hình nhỏ (dưới 5 inches)" },
-                        { id: "mediumScreen", label: "Màn hình trung bình (từ 5 - 6 inches)" },
-                        { id: "largeScreen", label: "Màn hình rộng (trên 6 inches)" },
+                        { id: "smallScreen", label: "Màn hình nhỏ (dưới 5 in)" },
+                        { id: "mediumScreen", label: "Màn hình trung bình (5 - 6 in)" },
+                        { id: "largeScreen", label: "Màn hình rộng (trên 6 in)" },
                         { id: "foldScreen", label: "Màn hình gập" },
                     ]}
-                    idChecked={0}
+                    handleChange = {handleScreenChange}
                 />
-
-                <Button 
-                    text = "Lọc danh sách"
-                />
+                <button className="btn" onClick={handleSubmitFilter}>Lọc danh sách</button>
             </div>
         </div>
     );
