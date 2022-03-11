@@ -4,6 +4,8 @@
 }
 .filtercard-header h2 {
     font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 .filtercard-header span {
     display: inline-block;

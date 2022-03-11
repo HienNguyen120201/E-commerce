@@ -21,7 +21,7 @@
     flex-shrink: 0;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 2rem;
+    padding: 0rem 2rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid #dee2e6;
 }
@@ -73,11 +73,14 @@
     font-size: 15px;
     color: #555;
     margin-top: 1.5rem;
-    font-weight: 1.6rem;
+    font-size: 1.6rem;
+    margin-bottom: 0;
 }
 .prodModal__details > h2 {
     font-size: 2.5rem;
     font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 .proModal__price {
     margin: 22px 0px;
@@ -184,30 +187,30 @@
     height: 43rem;
 }
 
-.yellow {
+.Yellow {
     background-color: #fff200;
 }
-.white {
+.White {
     background-color: #fff;
 }
-.navy {
+.Navy {
     background-color: #273c75;
 }
-.pink {
+.Pink {
     background-color: #fb9696;
 }
-.orange {
+.Orange {
     background-color: #ffcc8a;
 }
-.green {
+.Green {
     background-color: #6ab04c;
 }
 
-.black {
+.Black {
     background-color: #2d3436;
 }
 
-.blue {
+.Blue {
     background-color: #3498db;
 }
 
