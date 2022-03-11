@@ -1,20 +1,22 @@
-import React from 'react'
-import Header from './Header'
-import { BrowserRouter, Route } from 'react-router-dom'
-import Router from '../routes/Router'
-import Footer from './Footer'
+import React from "react"
+import Header from "./Header"
+import { BrowserRouter, Route } from "react-router-dom"
+import Router from "../routes/Router"
+import Footer from "./Footer"
+import Shop from "../pages/Shop"
 const Layout = () => {
   return (
     <BrowserRouter>
-                <div>
-                    <Header/>
-                    <div className="container">
-                        <div className="main">
-                            <Router/>
-                        </div>
-                    </div>
-                    <Footer/>
-                </div>
+      <div>
+        <Header />
+        <div className="container">
+          <div className="main">
+            <Router />
+            {/* <Shop /> */}
+          </div>
+        </div>
+        <Footer />
+      </div>
     </BrowserRouter>
   )
 }

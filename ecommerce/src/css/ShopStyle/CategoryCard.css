@@ -1,0 +1,33 @@
+.category-container {
+  width: 100%;
+  border-bottom: 1px solid #c8c8c8;
+  padding-bottom: 1rem;
+  padding-top: 7px;
+  color: #333;
+}
+
+.category__dropdown ul li a:hover {
+  color: #d10124;
+}
+
+.category__dropdown ul li a {
+  text-decoration: none;
+  color: #333;
+  line-height: 1.75;
+}
+.category__heading {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 1rem;
+}
+.category__dropdown {
+  margin-left: 2rem;
+}
+
+.category__heading  h3 {
+  font-size: 1.7rem;
+  margin-top: 0;
+}
+.category__heading  a {
+  text-decoration: none;
+}
