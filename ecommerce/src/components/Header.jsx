@@ -49,13 +49,13 @@ const Header = () => {
                                         <li className="nav_li">Trang chủ</li>
                             </Link>
 							<Link to="/Laptop">
-                                        <li className="nav_li">Laptop</li>
+                                        <li className="nav_li">Cửa hàng</li>
                             </Link>
 							<Link to="/Moblie">
-                                        <li className="nav_li">Điện thoại</li>
+                                        <li className="nav_li">Tin tức</li>
                             </Link>
 							<Link to="/Accessory">
-                                        <li className="nav_li">Phụ kiện</li>
+                                        <li className="nav_li">Liên hệ</li>
                             </Link>
 						</ul>
 					</div>
