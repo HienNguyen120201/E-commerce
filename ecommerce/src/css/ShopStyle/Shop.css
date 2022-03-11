@@ -1,0 +1,41 @@
+.filtercard-header {
+    display: flex;
+    gap: 10px;
+}
+.filtercard-header h2 {
+    font-size: 2rem;
+}
+.filtercard-header span {
+    display: inline-block;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 1.4rem;
+    
+}
+
+.filter-tag-item {
+    margin-top: 1rem;
+    display: inline-block;
+    font-size: 1.6rem;
+    background-color: #fff;
+    color: #333;
+    border-radius: 5px;
+    padding: 5px 10px;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+.filter-tag-item > *:last-child {
+    display: inline-block;
+    padding-top: auto;
+    padding-bottom: auto;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.filter-tag-list span {
+    font-size: 1.4rem;
+}
+.filter-tag-list * {
+    margin-right: 5px;
+}

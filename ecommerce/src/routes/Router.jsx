@@ -14,9 +14,10 @@ const Router = () => {
         <Routes>
             <Route path='/' exact component={Home}/>
             <Route path='/catalog/:slug' component={Product}/>
-            <Route path='/Shop' component={Shop}/>
+            <Route path='/shop' element={<Shop />}/>
             <Route path='/Cart' component={Cart}/>
             <Route path='/Login' component={Login}/>
+            <Route path='/Laptop' element={<Shop />}/>
         </Routes>
     )
 }
