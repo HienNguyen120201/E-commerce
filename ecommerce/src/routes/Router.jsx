@@ -12,12 +12,11 @@ import Shop from '../pages/Shop'
 const Router = () => {
     return (
         <Routes>
-            <Route path='/' exact component={Home}/>
-            <Route path='/catalog/:slug' component={Product}/>
-            <Route path='/shop' element={<Shop />}/>
-            <Route path='/Cart' component={Cart}/>
-            <Route path='/Login' component={Login}/>
-            <Route path='/Laptop' element={<Shop />}/>
+            <Route path='/' element={<Home/>}/>
+            <Route path='/catalog/:id' element={<Product/>}/>
+            <Route path='/Shop' element={<Shop/>}/>
+            <Route path='/Cart' element={<Cart/>}/>
+            <Route path='/Login' element={<Login/>}/>
         </Routes>
     )
 }
