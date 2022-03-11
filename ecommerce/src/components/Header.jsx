@@ -48,7 +48,7 @@ const Header = () => {
 							<Link to="/Home">
                                         <li className="nav_li">Trang chủ</li>
                             </Link>
-							<Link to="/Laptop">
+							<Link to="/Shop">
                                         <li className="nav_li">Cửa hàng</li>
                             </Link>
 							<Link to="/Moblie">
