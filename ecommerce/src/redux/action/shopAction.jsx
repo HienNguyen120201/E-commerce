@@ -6,6 +6,13 @@ export const submitFilter = (data) => {
    }
 }
 
+/* action trả về các sản phẩm đã filter */
+export const applyFilter = (data) => {
+   return {
+      type: "APPLY_FILTER",
+      payload: data,
+   }
+}
 /* action thêm 1 sản phẩm vào cart
   const product = {
     id: 1
@@ -43,19 +50,19 @@ export const setProducts = (data) => {
 
 /* action tăng số lượng sản phẩm trong giỏ hàng */
 export const increaseQuantity = (product) => {
-  return {
+   return {
       type: "INCREASE_QUANTITY",
       payload: product,
-  };
-};
+   }
+}
 
 /* action giảm số lượng sản phẩm trong giỏ hàng */
 export const decreaseQuantity = (product) => {
-  return {
+   return {
       type: "DECREASE_QUANTITY",
       payload: product,
-  };
-};
+   }
+}
 
 /* action lấy thông tin sản phẩm đang được chọn */
 export const getSelectedProduct = (id) => {

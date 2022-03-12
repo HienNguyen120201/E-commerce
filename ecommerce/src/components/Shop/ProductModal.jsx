@@ -21,9 +21,11 @@ function TransitionLeft(props) {
 const sizeImg = 350
 
 function ProductModal({ handleClose, openToastSuccess, openToastError, currId }) {
+   /*
+   * --------------------------------  HOOK ----------------------------------- */
+
    const dispatch = useDispatch()
    const curProduct = useSelector((state) => state.shop.selectedProduct)
-
    const [colorIndex, setcolorIndex] = useState(null)
    const [colorCheck, setColorCheck] = useState("")
    const [sizeCheck, setSizeCheck] = useState("")
@@ -31,8 +33,10 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
    const [qty, setQty] = useState(1)
    const [dataReturn, setDataReturn] = useState(false)
 
+   /*
+   * --------------------------------  EVENT HANDLER ------------------------- */
+
    const handleClick = () => {
-      console.log(qty)
       if (colorCheck !== "" && sizeCheck !== "") {
          const product = {
             id: curProduct[0].id,
@@ -42,7 +46,7 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
             color: colorCheck,
             size: sizeCheck,
             qty: qty,
-            thumbnail: curProduct[0].imageList[colorIndex],       
+            thumbnail: curProduct[0].imageList[colorIndex],
          }
          openToastSuccess(TransitionLeft)
          dispatch(addToCart(product))
@@ -63,8 +67,9 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
       setDataReturn(true)
    }, [curProduct])
 
+   /*-------------------------------------------------------------------------- */
+
    if (!dataReturn) {
-      console.log("hihi")
       return <div>loading</div>
    } else {
       let {
@@ -87,8 +92,7 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
       for (let i = 1; i <= dAverage; i++) {
          rating.push(<BsStarFill fontSize="1.6rem" style={ratingStyle} />)
       }
-      if (rating_average1 > dAverage)
-         rating.push(<BsStarHalf fontSize="1.6rem" style={ratingStyle} />)
+      if (rating_average1 > dAverage) rating.push(<BsStarHalf fontSize="1.6rem" style={ratingStyle} />)
 
       return (
          <div className="prodModal-container">
@@ -141,9 +145,7 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
                                     >
                                        <div
                                           className={
-                                             colorIndex === idx
-                                                ? "icon-check"
-                                                : "icon-check hidden-check"
+                                             colorIndex === idx ? "icon-check" : "icon-check hidden-check"
                                           }
                                        >
                                           <BsCheckLg fontSize="2rem" />

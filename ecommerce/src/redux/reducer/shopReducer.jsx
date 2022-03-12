@@ -14,6 +14,7 @@ const initState = {
 export const shopReducer = (state = initState, action) => {
    switch (action.type) {
       case "SUBMIT_FILTER":
+         console.log("submit filter");
          return {
             //* copy lại state ban đầu
             ...state,
@@ -22,11 +23,7 @@ export const shopReducer = (state = initState, action) => {
             category: action.payload.category,
             price: action.payload.price,
             screen: action.payload.screen,
-            filteredTag: [
-               ...action.payload.price,
-               ...action.payload.features,
-               ...action.payload.screen,
-            ],
+            filteredTag: [...action.payload.price, ...action.payload.features, ...action.payload.screen],
          }
       case "ADD_TO_CART":
          const alreadyInCart = state.cart.find((item) =>
@@ -116,6 +113,14 @@ export const shopReducer = (state = initState, action) => {
          return {
             ...state,
             selectedProduct: state.products.filter((item) => item.id === currentId),
+         }
+
+      case "APPLY_FILTER":
+         console.log("applyFilter")
+         console.log(state.products)
+         return {
+            ...state,
+            filteredProducts: [...action.payload]
          }
       default:
          return state
