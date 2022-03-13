@@ -17,11 +17,7 @@ const formatVND = (num) => {
 }
 
 function Shop() {
-  const { price, screen, feature } = useSelector((state) => state.shop)
-  const tagList = ["Iphone"]
-  if (price.length !== 0) tagList.push(`${formatVND(price[0])} - ${formatVND(price[1])}`)
-  if (feature) tagList.push(...feature)
-  if (screen) tagList.push(...screen)
+  
 
   return (
     <>
@@ -39,14 +35,7 @@ function Shop() {
               </div>
               <div className="filter-tag-list">
                 <span>Lọc theo:</span>
-                {tagList.map((item, idx) => {
-                  return (
-                    <div className="filter-tag-item" key={idx}>
-                      <span>{item}</span>
-                      <FaTimes fontSize="16px" />
-                    </div>
-                  )
-                })}
+                
               </div>
             </Card>
           </div>

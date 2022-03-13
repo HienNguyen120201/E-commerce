@@ -12,10 +12,7 @@ import { Provider } from "react-redux"
 import rootReducer from "./redux/reducer/rootReducer.jsx"
 /* ---------------------------------------------------------*/
 
-const store = createStore(
-  rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
+import {store} from "./redux/store"
 
 ReactDOM.render(
   <React.StrictMode>

@@ -7,6 +7,8 @@ import img2 from "./../../img/samsung-galaxy-s22-128gb.jpg"
 import SimpleSlider from "./../Shop/SimpleSlider"
 import { useState } from "react"
 import Slide from "@mui/material/Slide"
+import {addItem} from "../../redux/shop-cart/cartItem"
+import { useDispatch } from 'react-redux'
 
 const formatVND = (num) => {
   return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(num)
@@ -15,7 +17,6 @@ const formatVND = (num) => {
 function TransitionLeft(props) {
   return <Slide {...props} direction="left" />
 }
-
 const listImg = [img, img2, img, img2]
 const listThums = [img, img2, img, img2]
 const sizeImg = 350
@@ -23,6 +24,7 @@ const listColor = ["navy", "yellow", "pink", "green"]
 const listSize = ["64GB", "128GB", "256GB"]
 
 function ProductModal({ handleClose, openToastSuccess, openToastError }) {
+  const dispatch = useDispatch()
   const [colorIndex, setcolorIndex] = useState(null)
   const [color, setColor] = useState("")
   const [size, setSize] = useState("")
@@ -31,16 +33,33 @@ function ProductModal({ handleClose, openToastSuccess, openToastError }) {
 
   const handleClick = () => {
     if (color !== "" && size !== "") {
-      openToastSuccess(TransitionLeft)
+      return true
     } else {
       let msg = ""
       if (color === "" && size === "") msg = "Bạn cần chọn màu và dung lượng"
       else if (color === "") msg = "Bạn cần chọn màu"
       else msg = "Bạn cần chọn dung lượng"
       openToastError(TransitionLeft, msg)
+      return false
     }
   }
-
+const addToCart = () => {
+        if (handleClick()) {
+            let newItem = {
+              productId: 1,
+                unitPrice: 200000,
+                quantity: 1,
+                name:"Iphone11",
+                color: color,
+                size: size
+            }
+            if (dispatch(addItem(newItem))) {
+                alert('Success')
+            } else {
+                alert('Fail')
+            }
+        }
+    }
   return (
     <div className="prodModal-container">
       <div className="prodModal__header">
@@ -166,7 +185,7 @@ function ProductModal({ handleClose, openToastSuccess, openToastError }) {
 
               <div className="prodModal__action">
                 <div className="prodModal_add">
-                  <button className="btn" onClick={handleClick}>
+                  <button className="btn" onClick={() => addToCart()}>
                     Thêm vào giỏ
                   </button>
                 </div>

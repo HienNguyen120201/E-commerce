@@ -31,10 +31,10 @@ const Header = () => {
                     <div className="col-md-3 clearfix">
                         <div className="header-ctn">
                           	<div>
-                                <a href="Payment.html">
+                                <Link to="/Cart">
                                     <i className="fa fa-shopping-cart"></i>
                                    	<span>Giỏ hàng</span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
