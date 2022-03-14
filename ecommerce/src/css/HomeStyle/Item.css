@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+* {
+    padding: 0; margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.item {
+    padding: 2rem 0 1.5rem;
+    display: flex; 
+    flex-direction: column;
+    border: 2px solid #EBECF1;
+    align-items: center;
+    text-transform: uppercase;
+    width: 98%;
+    text-align: center;
+
+}
+
+.item .item-img{
+    max-width: 200px;
+    min-width: 150px;
+}
+
+.item .item-img img {
+    width: 90%;
+    object-fit: cover;
+}
+
+.item .device {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    margin-top: 33px; 
+    margin-bottom: 8px;
+    /* identical to box height */
+
+    color: #8D99AE; 
+}
+
+.item .device-name { 
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    /* identical to box height */
+    color: #2B2D42;
+    padding: 0 1rem 0;
+}
+
+
+.item .price { 
+    /* VND */
+font-style: normal;
+font-weight: 700;
+/* identical to box height */
+margin-top: 15px; 
+margin-bottom: 10px;
+
+color: #2B2D42;
+}
+
+.item .price span {
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+
+    color: #D43031;
+}
+
+.item .old-price {
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    /* identical to box height */
+    text-decoration-line: line-through;
+    margin: 0 0 20px;
+    color: #333333;
+}
+
+.item .rating {
+    display: flex; 
+    align-items: center; 
+    gap: 1px;
+    width: 100%;
+}
+
+.item .rating .stars{
+    color: #D43031;
+}
+
+.item .rating .horizontal-line {
+    border-top: 1px solid #F1F3F6;
+    flex: 1 1;
+}
+
+
+
+
+
+
+
+
+    

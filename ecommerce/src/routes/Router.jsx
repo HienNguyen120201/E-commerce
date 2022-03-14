@@ -13,7 +13,9 @@ import Search from '../pages/Search'
 const Router = () => {
     return (
         <Routes>
-            <Route path='/' exact component={Home}/>
+            <Route path='/Home' element={<Home/>}/>
+
+            {/* <Route path='/' exact component={Home}/> */}
             <Route path='/catalog/:slug' component={Product}/>
             <Route path='/shop' element={<Shop />}/>
             <Route path='/Cart' component={Cart}/>
