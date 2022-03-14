@@ -1,7 +1,7 @@
 import React from "react";
 import "./../../css/ShopStyle/FilterCard.css";
 
-function FilterCard({ title, options, idChecked, handleChange }) {
+function FilterCard({ title, options, handleChange, optionCheck }) {
     return (
         <div className="filtercard-container">
             <div className="filter__heading">
@@ -10,12 +10,13 @@ function FilterCard({ title, options, idChecked, handleChange }) {
             <div className="filter__options">
                 <form>
                     {options.map((item, idx) => {
+                        const a = item.id;
                         return (
                             <div className="filter__form-group" key={idx}>
                                 <input
                                     type="checkbox"
                                     id={`${item.id}`}
-                                    defaultChecked={idx === idChecked}
+                                    checked={optionCheck[a]}
                                     onChange={handleChange}
                                     name={`${item.label}`}
                                 />

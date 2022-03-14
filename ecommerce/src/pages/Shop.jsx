@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import ShopFilter from "./../components/Shop/ShopFilter"
 import Grid from "@mui/material/Grid"
 import ProductList from "./../components/Shop/ProductList"
@@ -6,50 +6,77 @@ import Card from "./../components/Shop/Card"
 import "./../css/ShopStyle/Shop.css"
 import { FaTimes } from "react-icons/fa"
 import { useSelector } from "react-redux"
-
-const formatVND = (num) => {
-   return new Intl.NumberFormat("vi-VN", {
-      style: "currency",
-      currency: "VND",
-   }).format(num)
-}
+import ShopSkeleton from "../components/Shop/ShopSkeleton"
 
 function Shop() {
-   const { price, screen, feature } = useSelector((state) => state.shop)
-   const tagList = ["Iphone"]
-   if (price.length !== 0) tagList.push(`${formatVND(price[0])} - ${formatVND(price[1])}`)
-   if (feature) tagList.push(...feature)
-   if (screen) tagList.push(...screen)
+   const currentUrl = window.location.pathname.substring(1)
+   const { products } = useSelector((state) => state.shop)
+   const tagList = useSelector((state) => state.shop.filteredTag)
+   // console.log(tagList, "hehehe")
+   let category = -1;
+   let title;
+   if (currentUrl === "Mobile") {
+      category = 1
+      title = "Điện thoại"
+   }
+   else if (currentUrl === "Laptop") {
+      category = 2
+      title = "Laptop"
+   }
+   else if (currentUrl === "Accessory") {
+      category = 3
+      title = "Phụ kiện"
+   }
+
+   window.onpopstate = function () {
+      window.location.reload()
+      handleLoading(false)
+   }
+   const [loading, setLoading] = useState(true)
+   const handleLoading = (value) => {
+      setLoading(value)
+   }
+   const [tag, setTag] = useState([])
+   const handleSetTag = (value) => {
+      setTag(value);
+   }
+   console.log(tag)
+   // let resTag = (tagList.length > 0) ? tagList: tag
 
    return (
       <>
          <Grid container style={{ marginBottom: "5rem" }}>
             <Grid item xl={3}>
-               <ShopFilter />
+               <ShopFilter pathname={currentUrl} handleLoading={handleLoading} cate={category} handleSetTag={handleSetTag} />
             </Grid>
 
             <Grid item xl={9} style={{ paddingLeft: "5rem" }}>
-               <div className="filter-result" style={{ marginTop: "3rem" }}>
-                  <Card>
-                     <div className="filtercard-header">
-                        <h2>Điện thoại</h2>
-                        <span>(12 sản phẩm)</span>
+               {loading ? (
+                  <ShopSkeleton />
+               ) : (
+                  <>
+                     <div className="filter-result" style={{ marginTop: "3rem" }}>
+                        <Card>
+                           <div className="filtercard-header">
+                              <h2>{title}</h2>
+                              <span>{`(${products.length} sản phẩm)`}</span>
+                           </div>
+                           <div className="filter-tag-list">
+                              <span>Lọc theo:</span>
+                              {tag.map((item, idx) => {
+                                 return (
+                                    <div className="filter-tag-item" key={idx}>
+                                       <span>{item}</span>
+                                       <FaTimes fontSize="16px" />
+                                    </div>
+                                 )
+                              })}
+                           </div>
+                        </Card>
                      </div>
-                     <div className="filter-tag-list">
-                        <span>Lọc theo:</span>
-                        {tagList.map((item, idx) => {
-                           return (
-                              <div className="filter-tag-item" key={idx}>
-                                 <span>{item}</span>
-                                 <FaTimes fontSize="16px" />
-                              </div>
-                           )
-                        })}
-                     </div>
-                  </Card>
-               </div>
-
-               <ProductList />
+                     <ProductList />
+                  </>
+               )}
             </Grid>
          </Grid>
       </>

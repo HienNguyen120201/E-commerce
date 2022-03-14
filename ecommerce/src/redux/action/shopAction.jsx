@@ -71,3 +71,11 @@ export const getSelectedProduct = (id) => {
       payload: id,
    }
 }
+
+/* action đẩy từ khoá lên store */
+export const searchProduct = (keyword) => {
+   return {
+      type: "SEARCH_PRODUCT",
+      payload: keyword 
+   }
+}

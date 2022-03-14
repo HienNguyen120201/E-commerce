@@ -8,112 +8,163 @@ import "./../../css/ShopStyle/components.css"
 import axiosClient from "../../api/axiosClient"
 import { applyFilter } from "./../../redux/action/shopAction"
 import { useNavigate } from "react-router-dom"
+import queryString from "query-string"
 
 const formatVND = (num) => {
    return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(num)
 }
 
-function ShopFilter() {
+function ShopFilter({ pathname, handleLoading, cate, handleSetTag }) {
    let navigate = useNavigate()
+   const dispatch = useDispatch()
+
    /*
     * ------------------------  HOOK ------------------------------ */
-   const [price, setPrice] = useState([10000000, 20000000])
-   const [feature, setFeature] = useState([])
-   const [screen, setScreen] = useState([])
-   const dispatch = useDispatch()
-   const [query, setQuery] = useState(() => {
-      const params = window.location.search.substring(1)
-      console.log(params)
-      return params
+   const [price, setPrice] = useState([1000, 50000000])
+   const [optionScreen, setOptionScreen] = useState({
+      allScreens: false,
+      smallScreen: false,
+      mediumScreen: false,
+      largeScreen: false,
    })
-   // const filteredTag = useSelector((state) => state.shop.filteredTag)
+   const [query, setQuery] = useState(window.location.search.substring(1))
+   const [optionFeature, setOptionFeature] = useState({
+      allFeatrues: false,
+      finger: false,
+      faceId: false,
+      quickCharge: false,
+      waterProof: false,
+   })
+
+   /* update filter tag theo url params */
+   const arrPrams = query.split("&")
+   let listTags = []
+   if (arrPrams.length >= 2) {
+      listTags.push("Giá từ " + arrPrams[0].split("=")[1] + " đến " + arrPrams[1].split("=")[1])
+      for (let i = 2; i < arrPrams.length; i++) {
+         listTags.push(decodeURI(arrPrams[i].split("=")[1]))
+      }
+      //console.log(listTags)
+   }
+
    /*
     *------------------------ HANDLE STATE CHANGE ----------------- */
 
    const applyFilter1 = (query) => {
       return (dispatch) => {
-         axiosClient.get(`/products?${query}`).then((res) => {
+         axiosClient.get(`/categories/${cate}/products?${query}`).then((res) => {
             dispatch(applyFilter(res.data))
+            handleLoading(false)
+            handleSetTag(listTags)
          })
       }
    }
 
    const handleSubmitFilter = () => {
-      const data = {
-         price: price,
-         features: feature,
-         screen: screen,
+      let queryParam = ""
+      if (price[0]) queryParam += `discount_price_gte=${price[0]}&discount_price_lte=${price[1]}`
+      delete optionScreen.undefined
+
+      for (const [key, value] of Object.entries(optionScreen)) {
+         if (value) {
+            queryParam += `&screen=${key}`
+         }
       }
+      queryParam = queryParam[0] === "&" ? queryParam.substring(1) : queryParam
 
-      dispatch({
-         type: "SUBMIT_FILTER",
-         payload: data,
-      })
-
-      navigate(`?discount_price_gte=${price[0]}&discount_price_lte=${price[1]}`)
-      setQuery(`discount_price_gte=${price[0]}&discount_price_lte=${price[1]}`)
+      navigate(`?${queryParam}`)
+      setQuery(queryParam)
+      dispatch(applyFilter1(queryParam))
    }
 
    const handleFeatureChange = (e) => {
-      const { name, checked } = e.target
-      if (checked) {
-         setFeature((prev) => [...prev, name])
-      } else {
-         setFeature(feature.filter((e) => e !== name))
-      }
+      const { id, checked } = e.target
+      setOptionFeature((prev) => ({ ...prev, [id]: checked }))
    }
 
    const handleScreenChange = (e) => {
-      const { name, checked } = e.target
-      if (checked) {
-         setScreen((prev) => [...prev, name])
-      } else {
-         setScreen(screen.filter((e) => e !== name))
-      }
+      const { checked, id } = e.target
+      setOptionScreen((prev) => ({ ...prev, [id]: checked }))
    }
 
-   const handlePriceChange = (newValue) => {
+   const handlePriceChange = (event, newValue) => {
       setPrice(newValue)
    }
+   /*
+    *--------------------------- DISPATCH TO PUSH FILTERED PRODUCTS TO STORE ----------------------- */
+   //* dispatch cho lần render đầu tiên
+   useEffect((e) => {
+      let paramsList = queryString.parse(window.location.search)
 
+      if (paramsList["discount_price_gte"])
+         handlePriceChange(e, [
+            Number.parseInt(paramsList["discount_price_gte"]),
+            Number.parseInt(paramsList["discount_price_lte"]),
+         ])
+      let screenList = paramsList["screen"]
+      if (!Array.isArray(screenList)) {
+         screenList = [screenList]
+      }
+      if (screenList.length > 0) {
+         screenList.forEach((item) => {
+            if (item) {
+               console.log(item)
+               setOptionScreen((prev) => ({ ...prev, [item]: true }))
+            }
+         })
+      }
+      handleSetTag(listTags)
+   }, [])
+
+   //* dispatch khi có sự thay đổi các dependencies
    useEffect(() => {
-      console.log("url change")
       dispatch(applyFilter1(query))
-   }, [query])
+   }, [query, cate, optionScreen, optionFeature])
+
+   let category = {}
+   if (pathname === "Mobile") {
+      category = (
+         <CategoryCard
+            title="Điện thoại"
+            listCategory={["Iphone", "Xiaomi", "Samsung", "Oppo", "LG", "Khác"]}
+            category="Mobile"
+            subCategory={["iphone", "xiaomi", "samsung", "oppo", "lg", "other_phone"]}
+            isOpen={true}
+         />
+      )
+   } else if (pathname === "Laptop") {
+      category = (
+         <CategoryCard
+            title="Laptop"
+            listCategory={["Macbook", "Dell", "HP", "Asus", "Khác"]}
+            isOpen={true}
+            category="Laptop"
+            subCategory={["macbook", "dell", "hp", "asus", "other_laptop"]}
+         />
+      )
+   } else {
+      category = (
+         <CategoryCard
+            title="Phụ kiện"
+            listCategory={["Pin dự phòng", "Tai nghe", "Củ sạc, cáp sạc", "Loa Bluetooth", "Khác"]}
+            isOpen={true}
+            category="Accessory"
+            subCategory={["bacup_charger", "headphone", "charger", "bluetooth_speaker", "other_accesory"]}
+         />
+      )
+   }
 
    return (
       <div className="sf_container" style={{ marginTop: "5rem" }}>
          <div className="sf_sidebar_category">
             <h4 className="sf_category_title">Danh mục</h4>
          </div>
-
-         <CategoryCard
-            title="Điện thoại"
-            listCategory={["Iphone", "Xiaomi", "Samsung", "Oppo", "LG", "Khác"]}
-            category="Phone"
-            subCategory={["iphone", "xiaomi", "samsung", "oppo", "lg", "other_phone"]}
-         />
-         <CategoryCard
-            title="Laptop"
-            listCategory={["Macbook", "Dell", "HP", "Asus", "Khác"]}
-            isOpen={false}
-            category="Laptop"
-            subCategory={["macbook", "dell", "hp", "asus", "other_laptop"]}
-         />
-         <CategoryCard
-            title="Phụ kiện"
-            listCategory={["Pin dự phòng", "Tai nghe", "Củ sạc, cáp sạc", "Loa Bluetooth", "Khác"]}
-            isOpen={false}
-            category="Accessory"
-            subCategory={["bacup_charger", "headphone", "charger", "bluetooth_speaker", "other_accesory"]}
-         />
-
+         {category}
          <div>
             <div className="sf_filter_price">
                <h4 className="sf_filter_title">Lọc theo giá</h4>
             </div>
             <div style={{ paddingLeft: "2rem", paddingRight: "2rem" }}>
-               {" "}
                <Slider
                   className="slider_mui"
                   getAriaLabel={() => "Temperature range"}
@@ -137,21 +188,23 @@ function ShopFilter() {
                   { id: "finger", label: "Bảo mật vân tay" },
                   { id: "faceId", label: "Nhận diện khuôn mặt" },
                   { id: "quickCharge", label: "Sạc nhanh" },
-                  { id: "warerProof", label: "Chống nước chống bụi" },
+                  { id: "waterProof", label: "Chống nước chống bụi" },
                ]}
                handleChange={handleFeatureChange}
+               optionCheck={optionFeature}
             />
 
             <FilterCard
                title="Màn hình"
                options={[
-                  { id: "allScreens", label: "Tất cả" },
-                  { id: "smallScreen", label: "Màn hình nhỏ (dưới 5 in)" },
-                  { id: "mediumScreen", label: "Màn hình trung bình (5 - 6 in)" },
-                  { id: "largeScreen", label: "Màn hình rộng (trên 6 in)" },
-                  { id: "foldScreen", label: "Màn hình gập" },
+                  { id: "Tất cả", label: "Tất cả" },
+                  { id: "Màn hình nhỏ", label: "Màn hình nhỏ" },
+                  { id: "Màn hình trung bình", label: "Màn hình trung bình" },
+                  { id: "Màn hình lớn", label: "Màn hình rộng" },
+                  { id: "Màn hình gập", label: "Màn hình gập" },
                ]}
                handleChange={handleScreenChange}
+               optionCheck={optionScreen}
             />
             <button className="btn1" onClick={handleSubmitFilter}>
                Lọc danh sách

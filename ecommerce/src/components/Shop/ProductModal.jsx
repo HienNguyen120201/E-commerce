@@ -72,6 +72,7 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
    if (!dataReturn) {
       return <div>loading</div>
    } else {
+      console.log(curProduct[0])
       let {
          name,
          type,

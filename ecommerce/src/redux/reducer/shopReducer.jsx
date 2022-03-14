@@ -1,11 +1,10 @@
 const initState = {
-   search: "",
+   searchKeywords: "",
    category: "",
    price: [],
    features: [],
    screen: [],
    filteredTag: [],
-   filteredProducts: [],
    cart: [],
    products: [],
    selectedProduct: {},
@@ -14,16 +13,16 @@ const initState = {
 export const shopReducer = (state = initState, action) => {
    switch (action.type) {
       case "SUBMIT_FILTER":
-         console.log("submit filter");
+         const res = []
+         const option = action.payload
+         for (const [key, value] of Object.entries(option)) {
+            if(value){
+               res.push(key)
+            }
+         }
          return {
-            //* copy lại state ban đầu
             ...state,
-            //* thay đổi những trường dữ liệu của action gửi lên so với state ban đầu
-            search: action.payload.search,
-            category: action.payload.category,
-            price: action.payload.price,
-            screen: action.payload.screen,
-            filteredTag: [...action.payload.price, ...action.payload.features, ...action.payload.screen],
+            filteredTag: [...res]
          }
       case "ADD_TO_CART":
          const alreadyInCart = state.cart.find((item) =>
@@ -116,12 +115,19 @@ export const shopReducer = (state = initState, action) => {
          }
 
       case "APPLY_FILTER":
-         console.log("applyFilter")
-         console.log(state.products)
          return {
             ...state,
-            filteredProducts: [...action.payload]
+            products: [...action.payload],
          }
+
+      case "SEARCH_PRODUCT":
+         console.log(action.payload)
+         return {
+            ...state,
+            searchKeywords: action.payload,
+            // products: [...action.payload.data]
+         }
+
       default:
          return state
    }

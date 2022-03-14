@@ -1,4 +1,4 @@
-import React, {} from "react"
+import React from "react"
 import ProductItem from "./ProductItem"
 import Grid from "@mui/material/Grid"
 import { useSelector } from "react-redux"
@@ -11,20 +11,11 @@ const formatVND = (num) => {
 }
 
 function ProductList() {
-
-   /**------------------------------------------ HOOKS ----------------------------------------------- */
-
    const products = useSelector((state) => state.shop.products)
-   const filteredProducts = useSelector((state) => state.shop.filteredProducts)
-   console.log(filteredProducts)
-   const list = filteredProducts.length > 0 ? filteredProducts : products
-   
-   /**------------------------------------------------------------------------------------------------ */
-
    return (
       <>
          <Grid container style={{ marginTop: "5rem" }}>
-            {list.map((item, idx) => {
+            {products.map((item, idx) => {
                const sale = item.market_price - item.discount_price
                const sale_text = item.market_price > item.discount_price ? `Giảm ${formatVND(sale)}` : null
                return (
