@@ -13,33 +13,25 @@
 {
     width: 40px;
     height: 40px;
-    fill: #FFC312;
-    position: absolute;
-    right: 700px;
-    top: 300px;
+    float: right;
+    margin-right: 20px;
 }
 .gg
 {
     
         width: 40px;
         height: 40px;
-        fill: #FFC312;
-        position: absolute;
-        right: 650px;
-    top: 300px;
-    
+        float: right;
+        margin-right: 20px;
 } 
 
 .tw
 {
     width: 40px;
     height: 40px;
-    fill: #FFC312;
-    position: absolute;
-    right: 600px;
-    top: 300px;
+    float: right;
+    margin-right: 20px;
 }
-
 .login_page
 {
     width: 400px;

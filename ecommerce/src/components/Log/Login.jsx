@@ -17,9 +17,24 @@ function Login_compo()
 
         <div className="login_page">
 
-        <img className="fb" src={fb_icon} alt="1" />
-        <img className="gg" src={gg_icon} alt="2" />
+        <a className="tw_link" href="" target="_blank">
         <img className="tw" src={tw_icon} alt="3" />
+        </a>
+
+        <a className="gg_link" href="" target="_blank">
+        <img className="gg" src={gg_icon} alt="2" />
+        </a>
+
+        <a className="fb_link" href="" target="_blank">
+        <img className="fb" src={fb_icon} alt="1" />
+        </a>
+
+       
+
+        
+
+<br />
+
                 <div className="Login_frame">
                     <div className="logtext">Đăng Nhập</div>
 
