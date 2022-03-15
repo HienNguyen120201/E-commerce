@@ -7,6 +7,7 @@ import Grow from "@mui/material/Grow"
 import Dialog from "@mui/material/Dialog"
 import DialogContent from "@mui/material/DialogContent"
 import ProductModal from "./ProductModal"
+
 const formatVND = (num) => {
   return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(num)
 }
@@ -21,7 +22,6 @@ function ProductItem(props) {
     isSale,
     saleText,
   } = props
-
   const [open, setOpen] = React.useState(false)
   const [scroll, setScroll] = React.useState("paper")
   const [transition, setTransition] = React.useState(undefined)
@@ -72,7 +72,7 @@ function ProductItem(props) {
       }
     }
   }, [open])
-  
+
   return (
     <div className="product-item">
       <div className="product-item__image">
