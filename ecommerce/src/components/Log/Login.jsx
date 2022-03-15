@@ -6,6 +6,7 @@ import tw_icon from "../../img/tw_icon.png";
 import { Link } from 'react-router-dom'
 
 
+
 function Login_compo()
 {
 
@@ -17,6 +18,9 @@ function Login_compo()
 
         <div className="login_page">
 
+
+
+
         <a className="tw_link" href="" target="_blank">
         <img className="tw" src={tw_icon} alt="3" />
         </a>
@@ -25,8 +29,8 @@ function Login_compo()
         <img className="gg" src={gg_icon} alt="2" />
         </a>
 
-        <a className="fb_link" href="" target="_blank">
-        <img className="fb" src={fb_icon} alt="1" />
+        <a className="fb_link" href="" target="_blank" onclick="myFunction(this)">
+             <img className="fb" src={fb_icon} alt="1" />
         </a>
 
        
