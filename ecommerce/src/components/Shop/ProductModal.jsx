@@ -8,7 +8,7 @@ import Slide from "@mui/material/Slide"
 import { useSelector, useDispatch } from "react-redux"
 import { getSelectedProduct } from "./../../redux/action/shopAction"
 import "./../../css/ShopStyle/components.css"
-import { addToCart } from "./../../redux/action/shopAction"
+import { addItem } from "../../redux/shop-cart/CartItemsSlide"
 
 const formatVND = (num) => {
    return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(num)
@@ -39,17 +39,16 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
    const handleClick = () => {
       if (colorCheck !== "" && sizeCheck !== "") {
          const product = {
-            id: curProduct[0].id,
+            productId: curProduct[0].id,
             name: curProduct[0].name,
-            market_price: curProduct[0].market_price,
-            discount_price: curProduct[0].discount_price,
+            unitPrice: curProduct[0].discount_price,
             color: colorCheck,
             size: sizeCheck,
-            qty: qty,
-            thumbnail: curProduct[0].imageList[colorIndex],
+            quantity: qty,
+            image1: curProduct[0].imageList[colorIndex],
          }
          openToastSuccess(TransitionLeft)
-         dispatch(addToCart(product))
+         dispatch(addItem(product))
       } else {
          let msg = ""
          if (colorCheck === "" && sizeCheck === "") msg = "Bạn cần chọn màu và dung lượng"
