@@ -33,7 +33,10 @@ function Login_compo()
              <img className="fb" src={fb_icon} alt="1" />
         </a>
 
-       
+
+
+
+
 
         
 
