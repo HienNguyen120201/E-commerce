@@ -12,7 +12,16 @@ const formatVND = (num) => {
   return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(num)
 }
 
-function ProductItem({ title, imgSrc, discount_price, market_price, isSale, saleText }) {
+function ProductItem(props) {
+  const {
+    id,
+    title,
+    imgSrc,
+    discount_price,
+    market_price,
+    isSale,
+    saleText,
+  } = props
   const [open, setOpen] = React.useState(false)
   const [scroll, setScroll] = React.useState("paper")
   const [transition, setTransition] = React.useState(undefined)
@@ -95,6 +104,7 @@ function ProductItem({ title, imgSrc, discount_price, market_price, isSale, sale
               handleClose={handleClose}
               openToastSuccess={handleClickToastSuccess}
               openToastError={handleClickToastError}
+              currId = {id}
             />
           </DialogContent>
         </Dialog>
