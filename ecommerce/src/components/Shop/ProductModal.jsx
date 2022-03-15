@@ -9,6 +9,8 @@ import { useSelector, useDispatch } from "react-redux"
 import { getSelectedProduct } from "./../../redux/action/shopAction"
 import "./../../css/ShopStyle/components.css"
 import { addToCart } from "./../../redux/action/shopAction"
+import {addItem} from "../../redux/shop-cart/cartItem"
+import { useDispatch } from 'react-redux'
 
 const formatVND = (num) => {
    return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(num)
@@ -17,7 +19,6 @@ const formatVND = (num) => {
 function TransitionLeft(props) {
    return <Slide {...props} direction="left" />
 }
-
 const sizeImg = 350
 
 function ProductModal({ handleClose, openToastSuccess, openToastError, currId }) {

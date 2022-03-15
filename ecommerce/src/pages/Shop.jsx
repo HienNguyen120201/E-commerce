@@ -42,7 +42,6 @@ function Shop() {
    }
    console.log(tag)
    // let resTag = (tagList.length > 0) ? tagList: tag
-
    return (
       <>
          <Grid container style={{ marginBottom: "5rem" }}>
