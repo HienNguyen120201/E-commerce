@@ -5,14 +5,18 @@ import { useDispatch } from "react-redux"
 import { searchProduct } from "./../redux/action/shopAction"
 
 const Header = () => {
+   const arr = decodeURI(window.location.pathname).split("/")
+   const v = arr.length > 2? arr.pop(): ""
    let navigate = useNavigate()
    const dispatch = useDispatch()
-   const [keyword, setKeyword] = useState("")
-
+   const [keyword, setKeyword] = useState(v)
+   // console.log(decodeURI(window.location.pathname).split("/").pop())
    const handleSearch = (e) => {
       e.preventDefault()
+      console.log(keyword)
       dispatch(searchProduct(keyword))
       navigate(`/Search/${keyword}`)
+
    }
 
    return (

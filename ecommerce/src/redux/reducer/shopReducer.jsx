@@ -16,13 +16,13 @@ export const shopReducer = (state = initState, action) => {
          const res = []
          const option = action.payload
          for (const [key, value] of Object.entries(option)) {
-            if(value){
+            if (value) {
                res.push(key)
             }
          }
          return {
             ...state,
-            filteredTag: [...res]
+            filteredTag: [...res],
          }
       case "ADD_TO_CART":
          const alreadyInCart = state.cart.find((item) =>

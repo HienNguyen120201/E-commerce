@@ -11,19 +11,20 @@ import ShopSkeleton from "../components/Shop/ShopSkeleton"
 function Shop() {
    const currentUrl = window.location.pathname.substring(1)
    const { products } = useSelector((state) => state.shop)
-   const tagList = useSelector((state) => state.shop.filteredTag)
+   // const tagList = useSelector((state) => state.shop.filteredTag)
    // console.log(tagList, "hehehe")
+   // console.log(currentUrl)
    let category = -1;
    let title;
-   if (currentUrl === "Mobile") {
+   if (currentUrl.includes("Mobile")) {
       category = 1
       title = "Điện thoại"
    }
-   else if (currentUrl === "Laptop") {
+   else if (currentUrl.includes("Laptop")) {
       category = 2
       title = "Laptop"
    }
-   else if (currentUrl === "Accessory") {
+   else if (currentUrl.includes("Accessory")) {
       category = 3
       title = "Phụ kiện"
    }
@@ -40,7 +41,7 @@ function Shop() {
    const handleSetTag = (value) => {
       setTag(value);
    }
-   console.log(tag)
+   // console.log(tag)
    // let resTag = (tagList.length > 0) ? tagList: tag
 
    return (

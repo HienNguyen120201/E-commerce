@@ -1,3 +1,5 @@
+import axiosClient from "../../api/axiosClient"
+
 /* action trả về các tag đã fill */
 export const submitFilter = (data) => {
    return {
@@ -76,6 +78,6 @@ export const getSelectedProduct = (id) => {
 export const searchProduct = (keyword) => {
    return {
       type: "SEARCH_PRODUCT",
-      payload: keyword 
+      payload: keyword,
    }
 }

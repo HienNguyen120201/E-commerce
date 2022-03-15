@@ -36,16 +36,31 @@ function ShopFilter({ pathname, handleLoading, cate, handleSetTag }) {
       waterProof: false,
    })
 
-   /* update filter tag theo url params */
+   const handleSelectType = (e) => {
+      let x = e.target.innerHTML
+      setType(x)
+      console.log(e.target.innerHTML)
+      setQuery(`type=${x}&`)
+   }
+
    const arrPrams = query.split("&")
    let listTags = []
-   if (arrPrams.length >= 2) {
-      listTags.push("Giá từ " + arrPrams[0].split("=")[1] + " đến " + arrPrams[1].split("=")[1])
-      for (let i = 2; i < arrPrams.length; i++) {
+   let urlPath = window.location.pathname.split("/")
+   if (urlPath.length > 2) {
+      listTags.push(urlPath.pop())
+   }
+   // console.log(arrPrams)
+   if (arrPrams.length > 2) {
+      let i = 0
+      for (i = 0; i < arrPrams.length; i++) if (arrPrams[i].includes("price")) break
+      listTags.push("Giá từ " + arrPrams[i].split("=")[1] + " đến " + arrPrams[i+= 1].split("=")[1])
+      i++;
+      for (i; i < arrPrams.length; i++) {
          listTags.push(decodeURI(arrPrams[i].split("=")[1]))
       }
-      //console.log(listTags)
+      // console.log(listTags)
    }
+   const [type, setType] = useState("")
 
    /*
     *------------------------ HANDLE STATE CHANGE ----------------- */
@@ -75,6 +90,7 @@ function ShopFilter({ pathname, handleLoading, cate, handleSetTag }) {
       navigate(`?${queryParam}`)
       setQuery(queryParam)
       dispatch(applyFilter1(queryParam))
+      window.location.reload()
    }
 
    const handleFeatureChange = (e) => {
@@ -95,7 +111,12 @@ function ShopFilter({ pathname, handleLoading, cate, handleSetTag }) {
    //* dispatch cho lần render đầu tiên
    useEffect((e) => {
       let paramsList = queryString.parse(window.location.search)
+      let urlPath = window.location.pathname.split("/")
 
+      if (urlPath.length > 2) {
+         setType(urlPath.pop())
+      }
+      console.log(type)
       if (paramsList["discount_price_gte"])
          handlePriceChange(e, [
             Number.parseInt(paramsList["discount_price_gte"]),
@@ -108,38 +129,47 @@ function ShopFilter({ pathname, handleLoading, cate, handleSetTag }) {
       if (screenList.length > 0) {
          screenList.forEach((item) => {
             if (item) {
-               console.log(item)
+               // console.log(item)
                setOptionScreen((prev) => ({ ...prev, [item]: true }))
             }
          })
       }
       handleSetTag(listTags)
+      // console.log("hihi")
    }, [])
 
    //* dispatch khi có sự thay đổi các dependencies
    useEffect(() => {
+      let urlPath = window.location.pathname.split("/")
+      let param = decodeURI(window.location.search.substring(1))
+      if (urlPath.length > 2) {
+         setQuery(`type=${urlPath.pop()}&${param}`)
+         // console.log("oke")
+      }
       dispatch(applyFilter1(query))
    }, [query, cate, optionScreen, optionFeature])
 
    let category = {}
-   if (pathname === "Mobile") {
+   if (pathname.includes("Mobile")) {
       category = (
          <CategoryCard
             title="Điện thoại"
             listCategory={["Iphone", "Xiaomi", "Samsung", "Oppo", "LG", "Khác"]}
             category="Mobile"
-            subCategory={["iphone", "xiaomi", "samsung", "oppo", "lg", "other_phone"]}
+            subCategory={["Iphone", "Xiaomi", "Samsung", "Oppo", "Lg", "Other_phone"]}
             isOpen={true}
+            handleClickType={handleSelectType}
          />
       )
-   } else if (pathname === "Laptop") {
+   } else if (pathname.includes("Laptop")) {
       category = (
          <CategoryCard
             title="Laptop"
-            listCategory={["Macbook", "Dell", "HP", "Asus", "Khác"]}
+            listCategory={["Macbook", "Dell", "Lenovo", "Asus", "Khác"]}
             isOpen={true}
             category="Laptop"
-            subCategory={["macbook", "dell", "hp", "asus", "other_laptop"]}
+            subCategory={["Macbook", "Dell", "Lenovo", "Asus", "other_laptop"]}
+            handleClickType={handleSelectType}
          />
       )
    } else {
@@ -149,7 +179,8 @@ function ShopFilter({ pathname, handleLoading, cate, handleSetTag }) {
             listCategory={["Pin dự phòng", "Tai nghe", "Củ sạc, cáp sạc", "Loa Bluetooth", "Khác"]}
             isOpen={true}
             category="Accessory"
-            subCategory={["bacup_charger", "headphone", "charger", "bluetooth_speaker", "other_accesory"]}
+            subCategory={["pin-du-phong", "tai-nghe", "cap-sac", "loa-bluetooth", "other_accesory"]}
+            handleClickType={handleSelectType}
          />
       )
    }

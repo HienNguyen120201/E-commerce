@@ -23,6 +23,7 @@ function Search() {
    const urlSearchPath = decodeURI(x[x.length - 1])
 
    const searchResult = (keyword) => {
+      console.log(keyword)
       return (dispatch) => {
          axiosClient.get(`/products?q=${keyword}`).then((response) => {
             dispatch(setProducts(response.data))
@@ -44,6 +45,7 @@ function Search() {
 
    /* */
    useEffect(() => {
+      
       dispatch(searchResult(urlSearchPath))
       setLoading(true)
    }, [])
@@ -56,7 +58,6 @@ function Search() {
       window.location.reload()
 
    }
-
    return (
       <div>
          {loading ? (
