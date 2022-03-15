@@ -96,6 +96,7 @@
     border-radius: 5px;
     background-color: #DFDCDC;
     border: none;
+    padding: 15px;
     
 }
 
@@ -109,6 +110,7 @@
     border-radius: 5px;
     background-color: #DFDCDC;
     border: none;
+    padding: 15px;
     
 }
 .pass::placeholder
@@ -131,6 +133,9 @@
 
 
 
+
+
+
 .login_text
 {
     width: 110px;
@@ -141,9 +146,14 @@
     font-size: 14px;
     margin-top: 15px;
     color: black;
-    float: left;
-    margin-left: 15px;
+    float: right;
+    margin-right: 15px;
     background-color: #FFC312;
+    transition: all 0.4s ease-in;
+}
+.login_text:hover
+{
+    background-color: #fddf86;
 }
 .back_text
 {
@@ -155,10 +165,17 @@
         font-family: "Montserrat", sans-serif !important;
         font-size: 14px;
         color: black;
-        float: right;
-        margin-right: 15px;
+        float: left;
+        margin-left: 15px;
         background-color: #FFC312;
+        transition: all 0.4s ease-in;
     
+}
+
+.back_text:hover
+{
+    background-color: #fddf86;
+
 }
 
 

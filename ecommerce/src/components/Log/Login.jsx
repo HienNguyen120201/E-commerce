@@ -1,9 +1,9 @@
 import React from "react";
-import "../css/Login.css";
-import background from "../img/background.jpeg";
-import fb_icon from "../img/fb_icon.png";
-import gg_icon from "../img/gg_icon.png";
-import tw_icon from "../img/tw_icon.png";
+import "../../css/LogStyle/Login.css";
+import fb_icon from "../../img/fb_icon.png";
+import gg_icon from "../../img/gg_icon.png";
+import tw_icon from "../../img/tw_icon.png";
+import { Link } from 'react-router-dom'
 
 
 function Login_compo()
@@ -28,17 +28,18 @@ function Login_compo()
                         <input
                             className="username"
                             type="text"
-                            placeholder="   Tên tài khoản"
+                            placeholder="Tên tài khoản"
                         />
                         <br />
 
                         <input
                             className="pass"
                             type="password"
-                            placeholder="   Mật khẩu"
+                            placeholder="Mật khẩu"
                         />
-
+                        <Link to="/Home">
                         <button className="back_text">Trở lại</button>
+                        </Link>
                         <button className="login_text">Đăng nhập</button>
                     </div>
 
@@ -52,13 +53,18 @@ function Login_compo()
 
                 <div className="SignUp">
                     <p className="signuptext">Bạn chưa có tài khoản?</p>
+                    <Link to="/Register">
                     <a className="signuplink" href="">
                         Đăng ký
                     </a>
+                    </Link>
                     <hr />
+
+                    <Link to="/Resetpass">
                     <a className="lostpasstext" href="">
                             Quên mật khẩu
                     </a>
+                    </Link>
                 </div>
         </div>
 
