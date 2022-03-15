@@ -1,0 +1,40 @@
+.discountCode-field {
+    height: 20px;
+    padding: 10px;
+    display: inline-block;
+    border: none;
+    border-radius: 5px;
+    background: rgb(227, 230, 240);
+}
+
+.order-summary {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.apply {
+    width: 80px;
+    height: 40px;
+    color: #3182CE;
+    border: 1px solid #3182CE;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.discount, .quantity {
+    display: flex;
+    justify-content: space-between;
+}
+
+.top_1 {
+    margin-left: 35px;
+    margin-right: 30px;
+}
+
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    opacity: 0.4;
+}

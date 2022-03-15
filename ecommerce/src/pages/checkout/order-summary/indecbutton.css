@@ -1,0 +1,30 @@
+.indec-message {
+    width: 20px;
+    padding: 5px;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+.indec-group {
+    width: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.indec-group Button {
+    background-color: rgb(206, 210, 224);
+    color: white;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+.op {
+    color: #718096;
+    font-size: larger;
+}
