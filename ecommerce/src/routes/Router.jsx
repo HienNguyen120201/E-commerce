@@ -16,8 +16,8 @@ const Router = () => {
             <Route path='/' exact component={Home}/>
             <Route path='/catalog/:slug' component={Product}/>
             <Route path='/shop' element={<Shop />}/>
-            <Route path='/Cart' component={Cart}/>
-            <Route path='/Login' component={Login}/>
+            <Route path='/Cart' element={<Cart/>}/>
+            <Route path='/Login' element={<Login/>}/>
             <Route path='/Laptop' element={<Shop />}/>
             <Route path='/Mobile' element={<Shop />}/>
             <Route path='/Accessory' element={<Shop />}/>
