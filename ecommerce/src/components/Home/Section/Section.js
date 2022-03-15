@@ -17,7 +17,7 @@ function SampleNextArrow(props) {
     textAlign: "center",
     color: 'black', 
     position: "absolute", 
-    bottom: "-3rem", 
+    bottom: "-4.2rem", 
     right: "2rem",
     display: "flex",
     padding: ".15rem"
@@ -43,8 +43,8 @@ function SamplePrevArrow(props) {
     textAlign: "center",
     color: 'black', 
     position: "absolute", 
-    bottom: "-3rem",
-    right: "4rem",
+    bottom: "-4.2rem",
+    right: "4.6rem",
     display: "flex",
     padding: ".15rem",
   }

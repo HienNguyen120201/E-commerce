@@ -1,7 +1,7 @@
 .sale,
 .newProduct,
 .bestSeller {
-  padding-bottom: 4rem;
+  padding-bottom: 6rem;
   border-bottom: 1px solid #e4e7ed;
   width: 100%;
 }
@@ -56,8 +56,8 @@
 .countdown-seconds {
   background-color: #d33037;
   border-radius: 50%;
-  height: 5rem;
-  width: 5rem;
+  height: 10rem;
+  width: 10rem;
   color: white;
   padding: 1rem;
   margin: 0.46875rem;
