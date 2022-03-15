@@ -1,15 +1,15 @@
 import React from 'react';
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaCartPlus, FaHeart } from "react-icons/fa";
 // FaStar
 import '../../../css/HomeStyle/Item.css'
 
-const img = 'https://i.ibb.co/Tmzp5pF/13-pro-black-copy.jpg';
 
 class Item extends React.Component {
 
     render() {
         return (
             <div className="item">
+
                 <div className="item-img">
                     <img src={this.props.imageLink} alt="product">
                     </img>
@@ -37,7 +37,10 @@ class Item extends React.Component {
                         </span>
                         <div className="horizontal-line"></div>
                     </div>
-            
+                    <div className="itemBtn">
+                        <FaCartPlus className="cartBtn" />
+                        <FaHeart className="heartBtn" />
+                    </div>
             </div>
 
         )
