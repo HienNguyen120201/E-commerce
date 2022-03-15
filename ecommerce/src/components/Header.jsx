@@ -11,7 +11,10 @@ const Header = () => {
 					<li className="href"><i className="fa fa-map-marker"></i> Ho Chi Minh</li>
 				</ul>
 				<ul className="header-links pull-right">
-					<li className="href"><i className="fa fa-user"></i>Đăng nhập</li>
+					{/* <li className="href"><i className="fa fa-user"></i>Đăng nhập</li> */}
+               <Link to="/Login">
+                  <li className="href"><i className="fa fa-user"></i>Đăng nhập</li>
+               </Link>
 				</ul>
 			</div>
 		</div>
