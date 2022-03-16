@@ -7,13 +7,16 @@
 .reset_page
 {
     width: 400px;
-    height: 400px;
+    height: 250px;
    margin: auto;
     margin-top: 100px;
-    
+    margin-bottom: 150px;
     text-align: center;
    
-    background-color: rgba(0,0,0,0.0);
+    background-color: #f8f9fd;
+    padding-top: 20px;
+    box-shadow: 8px 8px 8px 10px #DFDCDC;
+    border-radius: 12px;
     
    
 }
@@ -108,7 +111,7 @@
         float: left;
         margin-left: 15px;
         background-color: #FFC312;
-        transition: all 0.4s ease-in;
+        transition: all 0.15s ease-in;
     
 }
 .back_text:hover
@@ -129,7 +132,7 @@
     float: right;
     margin-right: 15px;
     background-color: #FFC312;
-    transition: all 0.4s ease-in;
+    transition: all 0.15s ease-in;
 }
 
 .SendEmail:hover
