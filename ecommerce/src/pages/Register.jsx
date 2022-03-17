@@ -1,8 +1,10 @@
 import React from 'react'
+import Regist_compo from '../components/Log/Register.jsx'
 
 const Register = () => {
   return (
-    <div>Register</div>
+    
+   <Regist_compo/>
   )
 }
 

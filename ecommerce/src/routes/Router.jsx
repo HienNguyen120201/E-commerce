@@ -8,6 +8,8 @@ import Cart from '../pages/Cart'
 import Login from '../pages/Login'
 import Product from '../pages/Product'
 import Shop from '../pages/Shop'
+import Register from '../pages/Register'
+import ResetPass from '../pages/ResetPass'
 import Search from '../pages/Search'
 
 const Router = () => {
@@ -18,6 +20,8 @@ const Router = () => {
             <Route path='/shop' element={<Shop />}/>
             <Route path='/Cart' element={<Cart/>}/>
             <Route path='/Login' element={<Login/>}/>
+           <Route path='/Register' element={<Register/>}/>
+            <Route path='/ResetPass'element={<ResetPass/>}/>
             <Route path='/Laptop' element={<Shop />}/>
             <Route path='/Mobile' element={<Shop />}/>
             <Route path='/Accessory' element={<Shop />}/>

@@ -1,8 +1,12 @@
 import React from 'react'
+import Login_compo from '../components/Log/Login.jsx'
+import background from '../css/LogStyle/background.css'
+
 
 const Login = () => {
   return (
-    <div>Login</div>
+    
+      <Login_compo/>
   )
 }
 
