@@ -98,6 +98,7 @@ ul, ol {
     text-align: center !important;
     -webkit-transition: 0.2s all !important;
     transition: 0.2s all !important;
+    margin-left: 30px;
 }
 
     .my-1:hover, .my-1:focus {
@@ -1795,35 +1796,19 @@ textarea.input {
 .order-summary {
     margin: 15px 0px;
 }
+.order-summary {
+    margin: 15px 0px;
+}
 
-    .order-summary .order-col {
-        display: table;
-        width: 100%;
-    }
-
-        .order-summary .order-col:after {
-            content: "";
-            display: block;
-            clear: both;
-        }
-
-        .order-summary .order-col > div {
-            display: table-cell;
-            padding: 10px 0px;
-        }
-
-            .order-summary .order-col > div:first-child {
-                width: 150px !important;
-            }
-
-            .order-summary .order-col > div:last-child {
-                text-align: right;
-            }
-
-        .order-summary .order-col .order-total {
-            font-size: 24px;
-            color: #D10024;
-        }
+.order-total {
+    font-size: 30px;
+    color: #D10024;
+}
+.order-sum{
+    font-size: 25px;
+    font-family: 'Times New Roman', Times, serif;
+    color:blue;
+}
 
 .order-details .payment-method {
     margin: 30px 0px;
@@ -2126,6 +2111,36 @@ input:focus {
     .links a {
         margin-left: 4px;
     }
-/******************************************************************/
-/*************************** LOGIN PAGE ***************************/
+.priceStyle{
+    width: 30px;
+    margin-right: 50px;
+}
+.nameStyle{
+    font-size: 20px;
+    margin-left: 50px;
+    max-width: 50px;
+}
+
+.quantity{
+    height: 25px;
+    width: 70px;
+    border-radius: 5px;
+    border: #15161D;
+    border-style:dashed;
+}
+.quantity-btn{
+    width: 25px;
+    height: 25px;
+    border: 2px solid ;
+    border-radius: 3px;
+    cursor: pointer;
+    
+}
+.quantity1{
+    display: flex;
+    text-align: center;
+    flex-wrap:wrap-reverse;
+    align-content: center;
+    margin-left: 50px;
+}
 

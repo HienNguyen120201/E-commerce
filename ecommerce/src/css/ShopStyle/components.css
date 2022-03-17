@@ -36,7 +36,7 @@
   ); /* Chrome 10-25, Safari 5.1-6 */
 }
 
-.btn {
+.btn1 {
   z-index: 1;
   position: relative;
   font-size: inherit;
@@ -47,7 +47,7 @@
   background-color: hsl(236, 32%, 26%);
 }
 
-.btn::before {
+.btn1::before {
   content: "";
   z-index: -1;
   position: absolute;
@@ -61,16 +61,16 @@
   transition: transform 0.25s ease-in-out;
 }
 
-.btn:hover {
+.btn1:hover {
   cursor: pointer;
 }
 
-.btn:hover::before {
+.btn1:hover::before {
   transform-origin: center left;
   transform: scaleX(1);
 }
 
-.btn{
+.btn1{
   margin-top: 4rem;
   display: inline-block;
   margin-left: auto;
