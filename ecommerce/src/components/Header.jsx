@@ -31,9 +31,12 @@ const Header = () => {
                   </li>
                </ul>
                <ul className="header-links pull-right">
-                  <li className="href">
+                  <Link to="/Login">
+                     <li className="href">
                      <i className="fa fa-user"></i>Đăng nhập
                   </li>
+                  </Link>
+                  
                </ul>
             </div>
          </div>
