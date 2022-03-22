@@ -1,8 +1,9 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { searchProduct } from "./../redux/action/shopAction"
+import LoginUser from "../components/Log/LoginUser"
 
 const Header = () => {
    let navigate = useNavigate()
@@ -14,7 +15,10 @@ const Header = () => {
       dispatch(searchProduct(keyword))
       navigate(`/Search/${keyword}`)
    }
-
+   const isLogin = useSelector((state) => state.login.isLogin)
+   const user = useSelector((state)=>state.login.userInfo)
+   console.log(isLogin)
+   console.log(user)
    return (
       <div>
          <div id="top-header">
@@ -31,12 +35,14 @@ const Header = () => {
                   </li>
                </ul>
                <ul className="header-links pull-right">
-                  <Link to="/Login">
+                  {
+                     isLogin ? <LoginUser user={user}/>:
+                     <Link to="/Login">
                      <li className="href">
                      <i className="fa fa-user"></i>Đăng nhập
-                  </li>
-                  </Link>
-                  
+                     </li>
+                     </Link>
+                  }         
                </ul>
             </div>
          </div>

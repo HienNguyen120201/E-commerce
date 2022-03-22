@@ -16,7 +16,6 @@ const Cart = () => {
         setProductCart(cartItems)
         setTotalPrice(cartItems.reduce((total, item) => total + (Number(item.quantity) * Number(item.unitPrice)), 0))
     }, [cartItems])
-	console.log('TotalPrice là: ',totalPrice)
   return (
     <div className="container">
 <div className="section">

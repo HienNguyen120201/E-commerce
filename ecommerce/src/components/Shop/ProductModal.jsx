@@ -1,5 +1,6 @@
 import "./../../css/ShopStyle/ProductModal.css"
 import Grid from "@mui/material/Grid"
+import axios from 'axios';
 import { AiOutlineClose } from "react-icons/ai"
 import { BsStarFill, BsCheckLg, BsStarHalf } from "react-icons/bs"
 import SimpleSlider from "./../Shop/SimpleSlider"
@@ -35,10 +36,29 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
 
    /*
    * --------------------------------  EVENT HANDLER ------------------------- */
-
-   const handleClick = () => {
-      if (colorCheck !== "" && sizeCheck !== "") {
-         const product = {
+   const isLogin = useSelector((state) => state.login.isLogin)
+   const user = useSelector((state)=>state.login.userInfo)
+   console.log(isLogin)
+   console.log(user)
+   const handleClick = async () => {
+      if(isLogin)
+         {
+            const product = {
+            productId: curProduct[0].id,
+            name: curProduct[0].name,
+            unitPrice: curProduct[0].discount_price,
+            color: colorCheck,
+            size: sizeCheck,
+            quantity: qty,
+            image1: curProduct[0].imageList[colorIndex],
+            }
+            var UserName = {UserName:user}
+            var cartproduct = {...product,...UserName}
+            console.log(cartproduct)
+            axios.post("https://localhost:44306/api/Product",cartproduct);
+         }
+      else if (colorCheck !== "" && sizeCheck !== "") {
+            const product = {
             productId: curProduct[0].id,
             name: curProduct[0].name,
             unitPrice: curProduct[0].discount_price,
@@ -48,8 +68,9 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
             image1: curProduct[0].imageList[colorIndex],
          }
          openToastSuccess(TransitionLeft)
-         dispatch(addItem(product))
-      } else {
+            dispatch(addItem(product))
+         
+         } else {
          let msg = ""
          if (colorCheck === "" && sizeCheck === "") msg = "Bạn cần chọn màu và dung lượng"
          else if (colorCheck === "") msg = "Bạn cần chọn màu"
@@ -71,7 +92,6 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
    if (!dataReturn) {
       return <div>loading</div>
    } else {
-      console.log(curProduct[0])
       let {
          name,
          type,
