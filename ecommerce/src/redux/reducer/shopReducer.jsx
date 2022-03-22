@@ -8,6 +8,10 @@ const initState = {
    cart: [],
    products: [],
    selectedProduct: {},
+   isLoaded: false,
+   filterProducts: [],
+   isFilter: false,
+   
 }
 
 export const shopReducer = (state = initState, action) => {
@@ -101,17 +105,59 @@ export const shopReducer = (state = initState, action) => {
          }
 
       case "SET_PRODUCTS":
+         const [productList, colors, sizes, tags, featureList] = action.payload
+         // console.log(productList)
+         const colorList = (id) => {
+            return colors
+               .map((item) => {
+                  return item.productId === id ? item.productColor : null
+               })
+               .filter((item) => item !== null)
+         }
+
+         const sizeList = (id) => {
+            return sizes
+               .map((item) => {
+                  return item.productId === id ? item.productSize : null
+               })
+               .filter((item) => item !== null)
+         }
+
+         const tagList = (id) => {
+            return tags
+               .map((item) => {
+                  return item.productId === id ? item.productTag : null
+               })
+               .filter((item) => item !== null)
+         }
+
+         const featureLists = (id) => {
+            return featureList
+               .map((item) => {
+                  return item.productId === id ? item.productFeature : null
+               })
+               .filter((item) => item !== null)
+         }
+
+         productList.forEach((item) => {
+            item.colors = colorList(item.productId)
+            item.sizes = sizeList(item.productId)
+            item.tags = tagList(item.productId)
+            item.features = featureLists(item.productId)
+         })
+
          return {
             ...state,
-            products: action.payload,
+            products: productList,
+            isLoaded: true,
          }
 
       case "SELECTED_PRODUCT":
-         // console.log(action.payload)
+         console.log(action.payload)
          const currentId = action.payload
          return {
             ...state,
-            selectedProduct: state.products.filter((item) => item.id === currentId),
+            selectedProduct: state.products.filter((item) => item.productId === currentId),
          }
 
       case "APPLY_FILTER":
@@ -121,11 +167,50 @@ export const shopReducer = (state = initState, action) => {
          }
 
       case "SEARCH_PRODUCT":
-         console.log(action.payload)
          return {
             ...state,
             searchKeywords: action.payload,
             // products: [...action.payload.data]
+         }
+
+      case "FILTER":
+         // console.log(action.payload)
+         const query = action.payload.split("&")
+         let filteredProducts = []
+         let check = false;
+         query.forEach((item) => {
+            if (item.includes("type")) {
+               console.log(item)
+               const value = item.split("=")[1].toLowerCase()
+               filteredProducts = state.products.filter((p) => p.tags[0] === value)
+               check = true
+            } else if (item.includes("discount_price_gte")) {
+               const value = Number.parseInt(item.split("=")[1])
+               if (filteredProducts.length === 0 && !check) {
+                  filteredProducts = state.products.filter((p) => Number.parseInt(p.unitPrice) >= value)
+                  
+               } else {
+                  filteredProducts = filteredProducts.filter((p) => Number.parseInt(p.unitPrice) >= value)
+               }
+            } else if (item.includes("discount_price_lte")) {
+               const value = Number.parseInt(item.split("=")[1])
+               if (filteredProducts.length === 0 && !check) {
+                  filteredProducts = state.products.filter((p) => Number.parseInt(p.unitPrice) <= value)
+               } else {
+                  filteredProducts = filteredProducts.filter((p) => Number.parseInt(p.unitPrice) <= value)
+               }
+            }
+            console.log(filteredProducts)
+         })
+        
+         return {
+            ...state,
+            filterProducts: filteredProducts,
+         }
+      case "SET_FILTER":
+         return {
+            ...state,
+            isFilter: action.payload,
          }
 
       default:

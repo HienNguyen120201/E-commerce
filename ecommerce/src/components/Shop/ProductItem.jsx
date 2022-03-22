@@ -13,7 +13,7 @@ const formatVND = (num) => {
 
 function ProductItem(props) {
    const { id, title, imgSrc, discount_price, market_price, isSale, saleText } = props
-
+   // console.log(id)
    const [open, setOpen] = React.useState(false)
    const [scroll, setScroll] = React.useState("paper")
    const [transition, setTransition] = React.useState(undefined)

@@ -58,10 +58,11 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
          openToastError(TransitionLeft, msg)
       }
    }
+   console.log(currId)
 
    useEffect(() => {
       dispatch(getSelectedProduct(currId))
-   }, [])
+   }, [dispatch])
 
    useEffect(() => {
       setDataReturn(true)
@@ -72,26 +73,26 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
    if (!dataReturn) {
       return <div>loading</div>
    } else {
-      console.log(curProduct[0])
+
       let {
          name,
          type,
-         market_price,
-         discount_price,
-         colorList,
-         sizeList,
-         short_description,
-         rating_average,
+         oldPrice,
+         unitPrice,
+         colors,
+         sizes,
+         description,
+         rating,
          review_count,
          sell_count,
-         imageList,
       } = curProduct[0]
 
-      let rating_average1 = Math.floor(rating_average * 2 + 0.5) / 2
+      const imageList = [curProduct[0].imgUrl1, curProduct[0].imgUrl2, curProduct[0].imgUrl3];
+      let rating_average1 = Math.floor(rating * 2 + 0.5) / 2
       const dAverage = Math.floor(rating_average1)
-      const rating = []
+      const rating1 = []
       for (let i = 1; i <= dAverage; i++) {
-         rating.push(<BsStarFill fontSize="1.6rem" style={ratingStyle} />)
+         rating1.push(<BsStarFill fontSize="1.6rem" style={ratingStyle} />)
       }
       if (rating_average1 > dAverage) rating.push(<BsStarHalf fontSize="1.6rem" style={ratingStyle} />)
 
@@ -112,29 +113,29 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
                         <h2>{name}</h2>
 
                         <div className="prodRating-wrap">
-                           <div className="prodRating__star">{rating}</div>
-                           <div className="prodRaing__digit">{rating_average}</div>
+                           <div className="prodRating__star">{rating1}</div>
+                           <div className="prodRaing__digit">{rating}</div>
                            <div className="proRating__stat">
                               <span>{review_count} Nhận xét</span>
                               <span>{sell_count} Đã mua</span>
                            </div>
                         </div>
 
-                        <p>{short_description}</p>
+                        <p>{description}</p>
 
                         <div className="proModal__price">
                            <span className="new_price">
-                              {formatVND((discount_price + 1000000 * sizeIndex) * qty)}
+                              {formatVND((unitPrice + 1000000 * sizeIndex) * qty)}
                            </span>
                            <span className="market_price">
-                              {formatVND((market_price + 1000000 * sizeIndex) * qty)}
+                              {formatVND((oldPrice + 1000000 * sizeIndex) * qty)}
                            </span>
                         </div>
 
                         <div className="proModal__color">
                            <p>Màu sắc: {colorCheck}</p>
                            <ul>
-                              {colorList.map((item, idx) => {
+                              {colors.map((item, idx) => {
                                  return (
                                     <li
                                        className={item}
@@ -160,7 +161,7 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
                         <div className="proModal__size">
                            <p>Dung lượng</p>
                            <ul>
-                              {sizeList.map((item, idx) => {
+                              {sizes.map((item, idx) => {
                                  return (
                                     <li
                                        key={idx}

@@ -3,20 +3,23 @@ import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { searchProduct } from "./../redux/action/shopAction"
-
+import { setFilters } from "./../redux/action/shopAction"
 const Header = () => {
    const arr = decodeURI(window.location.pathname).split("/")
-   const v = arr.length > 2? arr.pop(): ""
+   const v = arr.includes("Search") ? arr.pop() : ""
    let navigate = useNavigate()
    const dispatch = useDispatch()
    const [keyword, setKeyword] = useState(v)
-   // console.log(decodeURI(window.location.pathname).split("/").pop())
    const handleSearch = (e) => {
       e.preventDefault()
-      console.log(keyword)
       dispatch(searchProduct(keyword))
       navigate(`/Search/${keyword}`)
+   }
 
+   const handleSelectCategory = (category) => {
+      console.log(category)
+      // dispatch(fetchProductsData())
+      // window.location.reload()
    }
 
    return (
@@ -80,13 +83,13 @@ const Header = () => {
                      <Link to="/Home">
                         <li className="nav_li">Trang chủ</li>
                      </Link>
-                     <Link to="/Laptop" >
+                     <Link to="/Laptop" onClick={() => dispatch(setFilters(false))}>
                         <li className="nav_li">Laptop</li>
                      </Link>
-                     <Link to="/Mobile">
+                     <Link to="/Mobile" onClick={() => dispatch(setFilters(false))}>
                         <li className="nav_li">Điện thoại</li>
                      </Link>
-                     <Link to="/Accessory">
+                     <Link to="/Accessory" onClick={() => dispatch(setFilters(false))}>
                         <li className="nav_li">Phụ kiện</li>
                      </Link>
                   </ul>

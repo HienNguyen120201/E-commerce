@@ -81,3 +81,30 @@ export const searchProduct = (keyword) => {
       payload: keyword,
    }
 }
+
+export const fetchProductsData = () => {
+   return async (dispatch) => {
+      const data = await Promise.all([
+         await (await axiosClient.get("/products")).data,
+         await (await axiosClient.get("/colors")).data,
+         await (await axiosClient.get("/sizes")).data,
+         await (await axiosClient.get("/tags")).data,
+         await (await axiosClient.get("/features")).data,
+      ])
+      dispatch(setProducts(data))
+   }
+}
+
+export const filter = (data) =>{
+   return {
+      type: "FILTER",
+      payload: data,
+   }
+}
+
+export const setFilters = (data) =>{
+   return {
+      type: "SET_FILTER",
+      payload: data,
+   }
+}
