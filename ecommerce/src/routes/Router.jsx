@@ -6,8 +6,9 @@ import { Route, Routes } from 'react-router-dom'
 import Home from '../pages/Home'
 import Cart from '../pages/Cart'
 import Login from '../pages/Login'
-import Product from '../pages/Product'
 import Shop from '../pages/Shop'
+import Register from '../pages/Register'
+import ResetPass from '../pages/ResetPass'
 import Search from '../pages/Search'
 
 const Router = () => {
