@@ -1,0 +1,258 @@
+
+.img
+{
+    float: left;
+    padding: 0px;
+    margin-left: 0px;
+    width: 1000px;
+}
+
+
+
+.fb
+{
+    width: 40px;
+    height: 40px;
+    float: right;
+    margin-right: 20px;
+    
+}
+
+
+
+.fb
+{
+    box-shadow: 0 0 0 4px rgba(255,255,255,1);
+    transition: background 0.15s, color 0.15s;
+}
+.gg
+{
+    
+        width: 40px;
+        height: 40px;
+        float: right;
+        margin-right: 20px;
+} 
+
+.tw
+{
+    width: 40px;
+    height: 40px;
+    float: right;
+    margin-right: 20px;
+}
+.login_page
+{
+    width: 400px;
+    height: 410px;
+    margin: auto;
+    margin-top: 100px;
+    text-align: center;
+   
+    margin-bottom: 100px;
+    background-color: #f8f9fd;
+    padding-top: 20px;
+    box-shadow: 8px 8px 8px 10px #DFDCDC;
+    border-radius: 12px;
+    
+   
+}
+
+.Login_frame
+{
+    width: 400px;
+    height: 250px;
+    margin-top: 16px;
+    margin-left: 0px;
+   
+    
+}
+
+
+
+.logtext
+{
+  font-size: 24px;
+  font-family: sans-serif;
+  font-weight: bold;
+  width: 370px;
+  height: 35px;
+  font-family: "Montserrat", sans-serif !important;
+  text-align: left;
+  margin: auto;
+}
+
+.login_box
+{
+    width: 400px;
+    height: 217px;
+    margin-top: 23px;
+}
+
+
+.username
+{
+    margin-left: 5px;
+    margin: auto;
+    width: 370px;
+    height: 40px;
+    margin-top: 12px;
+    border-radius: 5px;
+    background-color: #DFDCDC;
+    border: none;
+    padding: 15px;
+    
+}
+
+.pass
+{
+    
+    margin: auto;
+    width: 370px;
+    height: 40px;
+    margin-top: 15px;
+    border-radius: 5px;
+    background-color: #DFDCDC;
+    border: none;
+    padding: 15px;
+    
+}
+.pass::placeholder
+{
+    color: #A8A7A7;
+    font-size: 14px;
+    text-align: left;
+    font-family: "Montserrat", sans-serif !important;
+    
+}
+
+.username::placeholder
+{
+        color: #A8A7A7;
+        font-size: 14px;
+        text-align: left;
+        font-family: "Montserrat", sans-serif !important;
+    
+}
+
+
+
+
+
+
+.login_text
+{
+    width: 110px;
+    height: 34px;
+    border: none;
+    border-radius: 5px;
+    font-family: "Montserrat", sans-serif !important;
+    font-size: 14px;
+    margin-top: 15px;
+    color: black;
+    float: right;
+    margin-right: 15px;
+    background-color: #FFC312;
+    transition: all 0.15s ease-in;
+}
+.login_text:hover
+{
+    background-color: #fddf86;
+}
+.back_text
+{
+        margin-top: 15px;
+        width: 110px;
+        height: 34px;
+        border: none;
+        border-radius: 5px;
+        font-family: "Montserrat", sans-serif !important;
+        font-size: 14px;
+        color: black;
+        float: left;
+        margin-left: 15px;
+        background-color: #FFC312;
+        transition: all 0.15s ease-in;
+    
+}
+
+.back_text:hover
+{
+    background-color: #fddf86;
+
+}
+
+
+
+
+
+hr
+{
+    margin-left: 18px;
+}
+
+
+
+.login3rd
+{
+ 
+    width: 355px;
+    height: 88px;
+    margin: 0 auto;
+}
+
+
+.SignUp
+
+{
+    width: 400px;
+    height: 94px;
+    margin: 0 auto;
+}
+
+.signuptext
+{
+    font-family: "Montserrat", sans-serif !important;
+    font-size: 17px;
+    color: #5B5959;
+    float: left;
+    text-align: center;
+    margin-bottom: 0px;
+    margin-left: 50px;
+}
+
+.signuplink
+{
+    font-family: "Montserrat", sans-serif !important;
+    font-size: 17px;
+    color: red;
+    float: right;
+    margin-right: 50px;
+    text-align: center;
+    align-items: center;
+}
+
+.lostpasstext
+{
+    font-family: "Montserrat", sans-serif !important;
+    font-size: 15px;
+    color: red;
+    text-align: center;
+   
+}
+.LoginUser{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: red;
+    font-size: 15px;
+}
+.Logout{
+    display: flex;
+}
+.LoginUser1{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: red;
+    font-size: 15px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+

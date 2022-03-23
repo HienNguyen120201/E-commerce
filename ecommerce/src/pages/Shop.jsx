@@ -33,7 +33,6 @@ function Shop() {
       title = "Phụ kiện"
       cate = "Accessory"
    }
-
    window.onpopstate = function () {
       window.location.reload()
       handleLoading(false)
@@ -57,7 +56,6 @@ function Shop() {
          setLoading(false)
       }
    }, [products])
-   
    return (
       <>
          <Grid container style={{ marginBottom: "5rem" }}>
@@ -95,6 +93,7 @@ function Shop() {
                         </Card>
                      </div>
                      <ProductList cate={cate} />
+
                   </>
                )}
             </Grid>

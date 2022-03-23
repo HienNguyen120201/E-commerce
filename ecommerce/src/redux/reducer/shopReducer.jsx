@@ -11,7 +11,6 @@ const initState = {
    isLoaded: false,
    filterProducts: [],
    isFilter: false,
-   
 }
 
 export const shopReducer = (state = initState, action) => {
@@ -167,12 +166,7 @@ export const shopReducer = (state = initState, action) => {
          }
 
       case "SEARCH_PRODUCT":
-         return {
-            ...state,
-            searchKeywords: action.payload,
-            // products: [...action.payload.data]
-         }
-
+         console.log(action.payload)
       case "FILTER":
          // console.log(action.payload)
          const query = action.payload.split("&")
