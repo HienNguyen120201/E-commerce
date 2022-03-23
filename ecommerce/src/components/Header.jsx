@@ -1,27 +1,24 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { searchProduct } from "./../redux/action/shopAction"
-import { setFilters } from "./../redux/action/shopAction"
+import LoginUser from "../components/Log/LoginUser"
+
 const Header = () => {
-   const arr = decodeURI(window.location.pathname).split("/")
-   const v = arr.includes("Search") ? arr.pop() : ""
    let navigate = useNavigate()
    const dispatch = useDispatch()
-   const [keyword, setKeyword] = useState(v)
+   const [keyword, setKeyword] = useState("")
+
    const handleSearch = (e) => {
       e.preventDefault()
       dispatch(searchProduct(keyword))
       navigate(`/Search/${keyword}`)
    }
-
-   const handleSelectCategory = (category) => {
-      console.log(category)
-      // dispatch(fetchProductsData())
-      // window.location.reload()
-   }
-
+   const isLogin = useSelector((state) => state.login.isLogin)
+   const user = useSelector((state)=>state.login.userInfo)
+   console.log(isLogin)
+   console.log(user)
    return (
       <div>
          <div id="top-header">
@@ -38,9 +35,14 @@ const Header = () => {
                   </li>
                </ul>
                <ul className="header-links pull-right">
-                  <li className="href">
+                  {
+                     isLogin ? <LoginUser user={user}/>:
+                     <Link to="/Login">
+                     <li className="href">
                      <i className="fa fa-user"></i>Đăng nhập
-                  </li>
+                     </li>
+                     </Link>
+                  }         
                </ul>
             </div>
          </div>
@@ -66,10 +68,10 @@ const Header = () => {
                   <div className="col-md-3 clearfix">
                      <div className="header-ctn">
                         <div>
-                           <a href="Payment.html">
+                           <Link to="/Cart">
                               <i className="fa fa-shopping-cart"></i>
                               <span>Giỏ hàng</span>
-                           </a>
+                           </Link>
                         </div>
                      </div>
                   </div>
@@ -83,13 +85,13 @@ const Header = () => {
                      <Link to="/Home">
                         <li className="nav_li">Trang chủ</li>
                      </Link>
-                     <Link to="/Laptop" onClick={() => dispatch(setFilters(false))}>
+                     <Link to="/Laptop" >
                         <li className="nav_li">Laptop</li>
                      </Link>
-                     <Link to="/Mobile" onClick={() => dispatch(setFilters(false))}>
+                     <Link to="/Mobile">
                         <li className="nav_li">Điện thoại</li>
                      </Link>
-                     <Link to="/Accessory" onClick={() => dispatch(setFilters(false))}>
+                     <Link to="/Accessory">
                         <li className="nav_li">Phụ kiện</li>
                      </Link>
                   </ul>
