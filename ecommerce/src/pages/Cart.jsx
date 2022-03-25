@@ -2,6 +2,7 @@ import { ConstructionOutlined } from '@mui/icons-material'
 import React, { useEffect, useState } from 'react'
 import CartItem from '../components/Cart/CartItem'
 import numberWithCommas from '../utils/numberWithCommas'
+import { Link } from "react-router-dom"
 
 import { useSelector } from 'react-redux'
 
@@ -92,7 +93,7 @@ const Cart = () => {
 						</div>
 						<div  className="text-right">
 						<button className=" btn-success my-1" >Tiếp tục mua hàng</button>
-						<button className=" btn-success my-1">Đặt hàng</button>
+						<Link to={'/Checkout'}><button className=" btn-success my-1">Đặt hàng</button></Link>
 						</div>
 				</div>
 			</div>

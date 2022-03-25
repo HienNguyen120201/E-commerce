@@ -1,0 +1,5 @@
+
+.list-products-grid {
+    display: flex;
+    justify-content: space-between;
+}

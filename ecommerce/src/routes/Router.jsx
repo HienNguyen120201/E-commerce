@@ -11,6 +11,8 @@ import Shop from '../pages/Shop'
 import Register from '../pages/Register'
 import ResetPass from '../pages/ResetPass'
 import Search from '../pages/Search'
+import Payment from '../pages/Payment'
+import QRCodePayment from '../components/Payment/ScanQR'
 
 const Router = () => {
     return (
@@ -26,6 +28,8 @@ const Router = () => {
             <Route path='/Mobile' element={<Shop />}/>
             <Route path='/Accessory' element={<Shop />}/>
             <Route path='/Search/*' element={<Search />}/>
+            <Route path='/Checkout' element={<Payment />}/>
+            <Route path='/Checkout/Payment' element={<QRCodePayment />}/>
         </Routes>
     )
 }
