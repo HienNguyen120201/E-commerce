@@ -25,12 +25,6 @@ function ShopFilter({ pathname }) {
    const products = useSelector((state) => state.shop.products)
    const filteredTag = useSelector((state) => state.shop.filteredTag)
    const [price, setPrice] = useState([1000, 50000000])
-   const [optionScreen, setOptionScreen] = useState({
-      allScreens: false,
-      smallScreen: false,
-      mediumScreen: false,
-      largeScreen: false,
-   })
    const [query, setQuery] = useState(window.location.search.substring(1))
    const [optionFeature, setOptionFeature] = useState({
       allFeatrues: false,
@@ -80,13 +74,6 @@ function ShopFilter({ pathname }) {
    
       queryParam += filteredTag.length !== 0 ? `type=${filteredTag[0]}&`: ""
       if (price[0]) queryParam += `discount_price_gte=${price[0]}&discount_price_lte=${price[1]}`
-      delete optionScreen.undefined
-
-      for (const [key, value] of Object.entries(optionScreen)) {
-         if (value) {
-            queryParam += `&screen=${key}`
-         }
-      }
 
       for(const [key, value] of Object.entries(optionFeature)){
          if (value) {
@@ -107,11 +94,6 @@ function ShopFilter({ pathname }) {
    const handleFeatureChange = (e) => {
       const { id, checked } = e.target
       setOptionFeature((prev) => ({ ...prev, [id]: checked }))
-   }
-
-   const handleScreenChange = (e) => {
-      const { checked, id } = e.target
-      setOptionScreen((prev) => ({ ...prev, [id]: checked }))
    }
 
    const handlePriceChange = (event, newValue) => {
@@ -136,19 +118,7 @@ function ShopFilter({ pathname }) {
       // đồng bộ giá
       if(queryObj.discount_price_gte)
          setPrice([Number.parseInt(queryObj.discount_price_gte), Number.parseInt(queryObj.discount_price_lte)])
-
-      // đồng bộ option màn hình
-      const screen = queryObj.screen
-      if (screen){
-         if (Array.isArray(screen)){
-            for(let i = 0; i < screen.length; i++)
-               setOptionScreen((prev) => ({ ...prev, [`${screen[i]}`]: true }))
-         }
-         else{
-            setOptionScreen((prev) => ({ ...prev, [`${screen}`]: true }))
-         }
-      }
-
+         
       // đồng bộ option tínhh năng
       const feature = queryObj.feature
       if (feature){
@@ -240,19 +210,6 @@ function ShopFilter({ pathname }) {
                ]}
                handleChange={handleFeatureChange}
                optionCheck={optionFeature}
-            />
-
-            <FilterCard
-               title="Màn hình"
-               options={[
-                  { id: "Tất cả", label: "Tất cả" },
-                  { id: "Màn hình nhỏ", label: "Màn hình nhỏ" },
-                  { id: "Màn hình trung bình", label: "Màn hình trung bình" },
-                  { id: "Màn hình lớn", label: "Màn hình rộng" },
-                  { id: "Màn hình gập", label: "Màn hình gập" },
-               ]}
-               handleChange={handleScreenChange}
-               optionCheck={optionScreen}
             />
             <button className="btn1" onClick={handleSubmitFilter}>
                Lọc danh sách
