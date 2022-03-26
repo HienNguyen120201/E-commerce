@@ -36,7 +36,7 @@ const Home = () => {
             unitPrice: cartItemUser[i].unitPrice,
             color: cartItemUser[i].color,
             size: cartItemUser[i].size,
-            quantity: 1
+            quantity: 0
             }
             dispatch(addItem(product))
         }
