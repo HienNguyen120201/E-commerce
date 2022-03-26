@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.item {
+  padding: 2rem 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #ebecf1;
+  align-items: center;
+  text-transform: uppercase;
+  width: 98%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.itemBtn {
+  display: flex;
+
+  flex-direction: column;
+  gap: 1rem;
+  position: absolute;
+  top: 3rem;
+  right: -6rem;
+  transition: all 0.3s ease-in;
+}
+
+.item:hover .itemBtn {
+  right: 3%;
+}
+
+.cartBtn,
+.heartBtn {
+  width: 45px; 
+  height: 45px;
+  padding: 1.1rem;
+  border-radius: 50%;
+  color: white;
+  background-color: #1e1f29f5;
+  transition: all 0.2s ease-in;
+  overflow: visible;
+  cursor: pointer;
+}
+
+.cartBtn:hover,
+.heartBtn:hover {
+  border: 1px solid #d43031;
+  background-color: transparent;
+  color: #d43031;
+  transform: rotate(360deg);
+  padding: .9rem;
+
+}
+
+.item .item-img {
+  max-width: 200px;
+  min-width: 150px;
+}
+
+.item .item-img img {
+  width: 90%;
+  object-fit: cover;
+}
+
+.item .device {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  margin-top: 33px;
+  margin-bottom: 8px;
+  /* identical to box height */
+
+  color: #8d99ae;
+}
+
+.item .device-name {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  /* identical to box height */
+  color: #2b2d42;
+  padding: 0 1rem 0;
+}
+
+.item .price {
+  /* VND */
+  font-style: normal;
+  font-weight: 700;
+  /* identical to box height */
+  margin-top: 15px;
+  margin-bottom: 10px;
+
+  color: #2b2d42;
+}
+
+.item .price span {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+
+  color: #d43031;
+}
+
+.item .old-price {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  /* identical to box height */
+  text-decoration-line: line-through;
+  margin: 0 0 20px;
+  color: #333333;
+}
+
+.item .rating {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  width: 100%;
+}
+
+.item .rating .stars {
+  color: #d43031;
+}
+
+.item .rating .horizontal-line {
+  border-top: 1px solid #f1f3f6;
+  flex: 1 1;
+}
