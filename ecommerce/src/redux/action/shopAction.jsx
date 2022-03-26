@@ -1,3 +1,4 @@
+import axiosClient from "../../api/axiosClient"
 /* action trả về các tag đã fill */
 export const submitFilter = (data) => {
    return {
@@ -76,6 +77,33 @@ export const getSelectedProduct = (id) => {
 export const searchProduct = (keyword) => {
    return {
       type: "SEARCH_PRODUCT",
-      payload: keyword 
+      payload: keyword,
+   }
+}
+
+export const fetchProductsData = () => {
+   return async (dispatch) => {
+      const data = await Promise.all([
+         await (await axiosClient.get("/Product")).data,
+         await (await axiosClient.get("/Product/GetColor")).data,
+         await (await axiosClient.get("/Product/GetSize")).data,
+         await (await axiosClient.get("/Product/GetTag")).data,
+         await (await axiosClient.get("/Product/GetFeature")).data,
+      ])
+      dispatch(setProducts(data))
+   }
+}
+
+export const filter = (data) =>{
+   return {
+      type: "FILTER",
+      payload: data,
+   }
+}
+
+export const setFilters = (data) =>{
+   return {
+      type: "SET_FILTER",
+      payload: data,
    }
 }

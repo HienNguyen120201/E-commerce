@@ -6,7 +6,7 @@ import "../../css/ShopStyle/CategoryCard.css"
 import { useState } from "react"
 import Collapse from "@mui/material/Collapse"
 
-function CategoryCard({ title, listCategory, isOpen, category, subCategory }) {
+function CategoryCard({ title, listCategory, isOpen, category, subCategory, handleClickType }) {
    const [open, setOpen] = useState(isOpen)
 
    const handleClick = () => {
@@ -26,7 +26,7 @@ function CategoryCard({ title, listCategory, isOpen, category, subCategory }) {
                   {listCategory.map((item, index) => {
                      return (
                         <li key={index}>
-                           <Link to={`${subCategory[index]}`}>{item}</Link>
+                           <Link to={`${subCategory[index]}`} onClick={ handleClickType}>{item}</Link>
                         </li>
                      )
                   })}

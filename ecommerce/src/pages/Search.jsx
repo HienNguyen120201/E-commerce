@@ -56,7 +56,6 @@ function Search() {
       window.location.reload()
 
    }
-
    return (
       <div>
          {loading ? (

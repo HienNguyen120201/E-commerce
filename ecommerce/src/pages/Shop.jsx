@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import ShopFilter from "./../components/Shop/ShopFilter"
 import Grid from "@mui/material/Grid"
 import ProductList from "./../components/Shop/ProductList"
@@ -7,27 +7,32 @@ import "./../css/ShopStyle/Shop.css"
 import { FaTimes } from "react-icons/fa"
 import { useSelector } from "react-redux"
 import ShopSkeleton from "../components/Shop/ShopSkeleton"
-
+import { useDispatch } from "react-redux"
+import { fetchProductsData } from "./../redux/action/shopAction"
 function Shop() {
    const currentUrl = window.location.pathname.substring(1)
    const { products } = useSelector((state) => state.shop)
-   const tagList = useSelector((state) => state.shop.filteredTag)
-   // console.log(tagList, "hehehe")
-   let category = -1;
-   let title;
-   if (currentUrl === "Mobile") {
+   const filteredProducts =  useSelector((state) => state.shop.filterProducts)
+   const isFilter =  useSelector((state) => state.shop.isFilter)
+   const filteredTag =  useSelector((state) => state.shop.filteredTag)
+   const dispatch = useDispatch()
+   console.log(filteredTag)
+   let category = -1
+   let cate = ""
+   let title
+   if (currentUrl.includes("Mobile")) {
       category = 1
       title = "Điện thoại"
-   }
-   else if (currentUrl === "Laptop") {
+      cate = "Mobile"
+   } else if (currentUrl.includes("Laptop")) {
       category = 2
       title = "Laptop"
-   }
-   else if (currentUrl === "Accessory") {
+      cate = "Laptop"
+   } else if (currentUrl.includes("Accessory")) {
       category = 3
       title = "Phụ kiện"
+      cate = "Accessory"
    }
-
    window.onpopstate = function () {
       window.location.reload()
       handleLoading(false)
@@ -38,16 +43,29 @@ function Shop() {
    }
    const [tag, setTag] = useState([])
    const handleSetTag = (value) => {
-      setTag(value);
+      setTag([...value])
    }
-   console.log(tag)
-   // let resTag = (tagList.length > 0) ? tagList: tag
 
+   useEffect(() => {
+      dispatch(fetchProductsData())
+   }, [dispatch])
+
+   let list = isFilter ? filteredProducts: products.filter(product => product.type === cate)
+   useEffect(() => {
+      if (products.length > 0) {
+         setLoading(false)
+      }
+   }, [products])
    return (
       <>
          <Grid container style={{ marginBottom: "5rem" }}>
             <Grid item xl={3}>
-               <ShopFilter pathname={currentUrl} handleLoading={handleLoading} cate={category} handleSetTag={handleSetTag} />
+               <ShopFilter
+                  pathname={currentUrl}
+                  handleLoading={handleLoading}
+                  cate={category}
+                  handleSetTag={handleSetTag}
+               />
             </Grid>
 
             <Grid item xl={9} style={{ paddingLeft: "5rem" }}>
@@ -59,7 +77,7 @@ function Shop() {
                         <Card>
                            <div className="filtercard-header">
                               <h2>{title}</h2>
-                              <span>{`(${products.length} sản phẩm)`}</span>
+                              <span>{`(${list.length} sản phẩm)`}</span>
                            </div>
                            <div className="filter-tag-list">
                               <span>Lọc theo:</span>
@@ -74,7 +92,8 @@ function Shop() {
                            </div>
                         </Card>
                      </div>
-                     <ProductList />
+                     <ProductList cate={cate} />
+
                   </>
                )}
             </Grid>
