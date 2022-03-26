@@ -17,8 +17,6 @@ const Header = () => {
    }
    const isLogin = useSelector((state) => state.login.isLogin)
    const user = useSelector((state)=>state.login.userInfo)
-   console.log(isLogin)
-   console.log(user)
    return (
       <div>
          <div id="top-header">

@@ -39,6 +39,10 @@ function Login_compo()
         dispatch(setLoginAction(dataload));
         navigate("/");
       }
+      else{
+        alert("Đăng nhập không thành công! Vui lòng thử lại!");
+      }
+      
   };
   
 

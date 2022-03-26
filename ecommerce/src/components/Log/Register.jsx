@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import "../../css/LogStyle/Register.css";
 import { Link } from 'react-router-dom'
 
@@ -8,6 +9,7 @@ import { Link } from 'react-router-dom'
 
 function Register_compo()
 {
+    let navigate = useNavigate();
     const [SignUp, setSignUp] = useState(
     {
       FullName: "",
@@ -37,6 +39,7 @@ function Register_compo()
         SignUp
       );
       alert("Đăng ký thành công!");
+      navigate("/");
     } catch (err) {
       alert("Đăng ký không thành công!");
     }

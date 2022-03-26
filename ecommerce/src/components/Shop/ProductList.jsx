@@ -9,7 +9,6 @@ function ProductList({cate}) {
    const isFilter =  useSelector((state) => state.shop.isFilter)
    console.log(products)
    let list = isFilter ? filteredProducts: products.filter(product => product.type === cate)
-   console.log("hehe")
    return (
       <>
          <Grid container style={{ marginTop: "5rem" }}>

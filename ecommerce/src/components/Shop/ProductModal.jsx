@@ -8,7 +8,8 @@ import Slide from "@mui/material/Slide"
 import { useSelector, useDispatch } from "react-redux"
 import { getSelectedProduct } from "./../../redux/action/shopAction"
 import "./../../css/ShopStyle/components.css"
-import { addToCart } from "./../../redux/action/shopAction"
+import { addItem } from "../../redux/shop-cart/CartItemsSlide"
+import axios from 'axios';
 
 const formatVND = (num) => {
    return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(num)
@@ -32,24 +33,42 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
    const [sizeIndex, setSizeIndex] = useState(null)
    const [qty, setQty] = useState(1)
    const [dataReturn, setDataReturn] = useState(false)
+   console.log("curProduct là: ",curProduct)
 
    /*
    * --------------------------------  EVENT HANDLER ------------------------- */
-
+   const isLogin = useSelector((state) => state.login.isLogin)
+   const user = useSelector((state)=>state.login.userInfo)
    const handleClick = () => {
       if (colorCheck !== "" && sizeCheck !== "") {
-         const product = {
-            id: curProduct[0].id,
+         if(isLogin)
+         {
+            const product = {
+            UserName: user,
+            productId: curProduct[0].productId,
             name: curProduct[0].name,
-            market_price: curProduct[0].market_price,
-            discount_price: curProduct[0].discount_price,
+            unitPrice: curProduct[0].unitPrice,
             color: colorCheck,
             size: sizeCheck,
-            qty: qty,
-            thumbnail: curProduct[0].imageList[colorIndex],
+            quantity: qty
+            }
+            axios.post("https://localhost:44306/api/Product",product)
+            openToastSuccess(TransitionLeft)
+            dispatch(addItem(product))
+         }
+         else{
+            const product = {
+            productId: curProduct[0].productId,
+            name: curProduct[0].name,
+            unitPrice: curProduct[0].unitPrice,
+            color: colorCheck,
+            size: sizeCheck,
+            quantity: qty,
+            image1:curProduct[0].imgUrl1
          }
          openToastSuccess(TransitionLeft)
-         dispatch(addToCart(product))
+         dispatch(addItem(product))
+         }
       } else {
          let msg = ""
          if (colorCheck === "" && sizeCheck === "") msg = "Bạn cần chọn màu và dung lượng"
