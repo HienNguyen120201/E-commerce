@@ -5,22 +5,25 @@ import CategoryCard from "./CategoryCard"
 import FilterCard from "./FilterCard"
 import Slider from "@mui/material/Slider"
 import "./../../css/ShopStyle/components.css"
-import { setFilters, filter } from "./../../redux/action/shopAction"
+import { setFilters, filter, submitFilter } from "./../../redux/action/shopAction"
 import { useNavigate } from "react-router-dom"
-import queryString from "query-string"
 import { useSelector } from "react-redux"
+import queryString from 'query-string';
+
 const formatVND = (num) => {
    return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(num)
 }
 
-function ShopFilter({ pathname, handleLoading, cate, handleSetTag }) {
+function ShopFilter({ pathname }) {
    let navigate = useNavigate()
    const dispatch = useDispatch()
    const isLoaded = useSelector((state) => state.shop.isLoaded)
+   const isFilter = useSelector((state) => state.shop.isFilter)
 
    /*
     * ------------------------  HOOK ------------------------------ */
    const products = useSelector((state) => state.shop.products)
+   const filteredTag = useSelector((state) => state.shop.filteredTag)
    const [price, setPrice] = useState([1000, 50000000])
    const [optionScreen, setOptionScreen] = useState({
       allScreens: false,
@@ -36,16 +39,16 @@ function ShopFilter({ pathname, handleLoading, cate, handleSetTag }) {
       quickCharge: false,
       waterProof: false,
    })
-
+   const [curActive, setCurActive] = useState("")
 
    const listTag = () => {
-      const arrPrams = query.split("&")
+      const arrPrams = window.location.search.split("&")
       let listTags = []
       let urlPath = window.location.pathname.split("/")
       if (urlPath.length > 2) {
          listTags.push(urlPath.pop())
       }
-      // console.log(arrPrams)
+     
       if (arrPrams.length > 2) {
          let i = 0
          for (i = 0; i < arrPrams.length; i++) if (arrPrams[i].includes("price")) break
@@ -59,14 +62,13 @@ function ShopFilter({ pathname, handleLoading, cate, handleSetTag }) {
    }
    const handleSelectType = (e) => {
       let x = e.target.innerHTML
-      // setType(x)
-      console.log(listTag())
       setQuery(`type=${x}&`)
-      
-      handleSetTag([x])
+      setCurActive("")
+      // handleSetTag([x])
+      dispatch(submitFilter([x]))
       if (isLoaded && x !== "") {
          dispatch(setFilters(true))
-         dispatch(filter(`type=${x}`))
+         dispatch(filter(`type=${x.toLowerCase()}`))
       }
    }
 
@@ -74,8 +76,9 @@ function ShopFilter({ pathname, handleLoading, cate, handleSetTag }) {
     *------------------------ HANDLE STATE CHANGE ----------------- */
 
    const handleSubmitFilter = () => {
-      console.log("close")
       let queryParam = ""
+   
+      queryParam += filteredTag.length !== 0 ? `type=${filteredTag[0]}&`: ""
       if (price[0]) queryParam += `discount_price_gte=${price[0]}&discount_price_lte=${price[1]}`
       delete optionScreen.undefined
 
@@ -84,19 +87,21 @@ function ShopFilter({ pathname, handleLoading, cate, handleSetTag }) {
             queryParam += `&screen=${key}`
          }
       }
-      queryParam = queryParam[0] === "&" ? queryParam.substring(1) : queryParam
 
+      for(const [key, value] of Object.entries(optionFeature)){
+         if (value) {
+            queryParam += `&feature=${key}`
+         }
+      }
+      queryParam = queryParam[0] === "&" ? queryParam.substring(1) : queryParam
       navigate(`?${queryParam}`)
       setQuery(queryParam)
-     
-      if (products.length > 0 && query !== "") {
-        
-         handleSetTag(listTag())
-         dispatch(setFilters(true))
-         dispatch(filter(query))
-      }
 
-      window.location.reload()
+      dispatch(submitFilter(listTag()))
+      if (products.length > 0 && queryParam !== "") {
+         dispatch(setFilters(true))
+         dispatch(filter(queryParam))
+      }
    }
 
    const handleFeatureChange = (e) => {
@@ -112,54 +117,57 @@ function ShopFilter({ pathname, handleLoading, cate, handleSetTag }) {
    const handlePriceChange = (event, newValue) => {
       setPrice(newValue)
    }
-   /*
-    *--------------------------- DISPATCH TO PUSH FILTERED PRODUCTS TO STORE ----------------------- */
-   //* dispatch cho lần render đầu tiên
-   // useEffect((e) => {
-   //    const setDep = () => {
-   //       let paramsList = queryString.parse(window.location.search)
 
-   //       // console.log("hihi")
-   //       if (paramsList["discount_price_gte"])
-   //          handlePriceChange(e, [
-   //             Number.parseInt(paramsList["discount_price_gte"]),
-   //             Number.parseInt(paramsList["discount_price_lte"]),
-   //          ])
-   //       let screenList = paramsList["screen"]
-   //       if (!Array.isArray(screenList)) {
-   //          screenList = [screenList]
-   //       }
-   //       if (screenList.length > 0) {
-   //          screenList.forEach((item) => {
-   //             if (item) {
-   //                // console.log(item)
-   //                setOptionScreen((prev) => ({ ...prev, [item]: true }))
-   //             }
-   //          })
-   //       }
-   //       handleSetTag(listTag())
-   //       dispatch(setFilters(true))
-   //    }
-
-   //    setDep()
-   // }, [])
-
-   //* dispatch khi có sự thay đổi các dependencies
+   
+   //* dispatch khi có sự thay đổi các dependencies: đồng bộ filter vs param url
    useEffect(() => {
       let urlPath = window.location.pathname.split("/")
       let param = decodeURI(window.location.search.substring(1))
+      const queryObj = queryString.parse(window.location.search)
       if (urlPath.length > 2) {
          setQuery(`type=${urlPath.pop()}&${param}`)
-         // console.log("oke")
-      } else setQuery("")
+         setCurActive(window.location.pathname.split('/')[2])
+      } else {
+         setQuery("")
+         // đồng bộ danh mục hãng điện thoại
+         setCurActive("")
+      }
+   
+      // đồng bộ giá
+      if(queryObj.discount_price_gte)
+         setPrice([Number.parseInt(queryObj.discount_price_gte), Number.parseInt(queryObj.discount_price_lte)])
 
-      // console.log(query)
+      // đồng bộ option màn hình
+      const screen = queryObj.screen
+      if (screen){
+         if (Array.isArray(screen)){
+            for(let i = 0; i < screen.length; i++)
+               setOptionScreen((prev) => ({ ...prev, [`${screen[i]}`]: true }))
+         }
+         else{
+            setOptionScreen((prev) => ({ ...prev, [`${screen}`]: true }))
+         }
+      }
+
+      // đồng bộ option tínhh năng
+      const feature = queryObj.feature
+      if (feature){
+         if (Array.isArray(feature)){
+            for(let i = 0; i < feature.length; i++)
+            setOptionFeature((prev) => ({ ...prev, [`${feature[i]}`]: true }))
+         }
+         else{
+            setOptionFeature((prev) => ({ ...prev, [`${feature}`]: true }))
+         }
+      }
+
       if (products.length > 0 && query !== "") {
-         handleSetTag(listTag())
+         dispatch(submitFilter(listTag()))
          dispatch(setFilters(true))
          dispatch(filter(query))
       }
-   }, [products, dispatch])
+      
+   }, [products, dispatch, isFilter])
 
    let category = {}
    if (pathname.includes("Mobile")) {
@@ -167,10 +175,9 @@ function ShopFilter({ pathname, handleLoading, cate, handleSetTag }) {
          <CategoryCard
             title="Điện thoại"
             listCategory={["Iphone", "Xiaomi", "Samsung", "Oppo", "LG", "Khác"]}
-            category="Mobile"
             subCategory={["Iphone", "Xiaomi", "Samsung", "Oppo", "Lg", "Other_phone"]}
-            isOpen={true}
             handleClickType={handleSelectType}
+            curActive={curActive}
          />
       )
    } else if (pathname.includes("Laptop")) {
@@ -178,10 +185,9 @@ function ShopFilter({ pathname, handleLoading, cate, handleSetTag }) {
          <CategoryCard
             title="Laptop"
             listCategory={["Macbook", "Dell", "Lenovo", "Asus", "Khác"]}
-            isOpen={true}
-            category="Laptop"
             subCategory={["Macbook", "Dell", "Lenovo", "Asus", "other_laptop"]}
             handleClickType={handleSelectType}
+            curActive={curActive}
          />
       )
    } else {
@@ -189,10 +195,9 @@ function ShopFilter({ pathname, handleLoading, cate, handleSetTag }) {
          <CategoryCard
             title="Phụ kiện"
             listCategory={["Pin dự phòng", "Tai nghe", "Củ sạc, cáp sạc", "Loa Bluetooth", "Khác"]}
-            isOpen={true}
-            category="Accessory"
             subCategory={["pin-du-phong", "tai-nghe", "cap-sac", "loa-bluetooth", "other_accesory"]}
             handleClickType={handleSelectType}
+            curActive={curActive}
          />
       )
    }
@@ -227,11 +232,11 @@ function ShopFilter({ pathname, handleLoading, cate, handleSetTag }) {
             <FilterCard
                title="Tính năng đặc biệt"
                options={[
-                  { id: "allFeatrues", label: "Tất cả" },
-                  { id: "finger", label: "Bảo mật vân tay" },
-                  { id: "faceId", label: "Nhận diện khuôn mặt" },
-                  { id: "quickCharge", label: "Sạc nhanh" },
-                  { id: "waterProof", label: "Chống nước chống bụi" },
+                  { id: "Tất cả", label: "Tất cả" },
+                  { id: "Bảo mật vân tay", label: "Bảo mật vân tay" },
+                  { id: "Nhận diện khuôn mặt", label: "Nhận diện khuôn mặt" },
+                  { id: "Sạc nhanh", label: "Sạc nhanh" },
+                  { id: "Chống nước chống bụi", label: "Chống nước chống bụi" },
                ]}
                handleChange={handleFeatureChange}
                optionCheck={optionFeature}

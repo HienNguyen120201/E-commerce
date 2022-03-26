@@ -12,24 +12,19 @@ import { fetchProductsData } from "./../redux/action/shopAction"
 function Shop() {
    const currentUrl = window.location.pathname.substring(1)
    const { products } = useSelector((state) => state.shop)
-   const filteredProducts =  useSelector((state) => state.shop.filterProducts)
-   const isFilter =  useSelector((state) => state.shop.isFilter)
-   const filteredTag =  useSelector((state) => state.shop.filteredTag)
+   const filteredProducts = useSelector((state) => state.shop.filterProducts)
+   const isFilter = useSelector((state) => state.shop.isFilter)
+   const filteredTag = useSelector((state) => state.shop.filteredTag)
    const dispatch = useDispatch()
-   console.log(filteredTag)
-   let category = -1
    let cate = ""
    let title
    if (currentUrl.includes("Mobile")) {
-      category = 1
       title = "Điện thoại"
       cate = "Mobile"
    } else if (currentUrl.includes("Laptop")) {
-      category = 2
       title = "Laptop"
       cate = "Laptop"
    } else if (currentUrl.includes("Accessory")) {
-      category = 3
       title = "Phụ kiện"
       cate = "Accessory"
    }
@@ -42,31 +37,25 @@ function Shop() {
    const handleLoading = (value) => {
       setLoading(value)
    }
-   const [tag, setTag] = useState([])
-   const handleSetTag = (value) => {
-      setTag([...value])
-   }
 
    useEffect(() => {
       dispatch(fetchProductsData())
    }, [dispatch])
 
-   let list = isFilter ? filteredProducts: products.filter(product => product.type === cate)
+   let list = isFilter ? filteredProducts : products.filter((product) => product.type === cate)
    useEffect(() => {
       if (products.length > 0) {
          setLoading(false)
       }
    }, [products])
-   
+   console.log(products)
+   // console.log(filteredTag)
    return (
       <>
          <Grid container style={{ marginBottom: "5rem" }}>
             <Grid item xl={3}>
                <ShopFilter
                   pathname={currentUrl}
-                  handleLoading={handleLoading}
-                  cate={category}
-                  handleSetTag={handleSetTag}
                />
             </Grid>
 
@@ -83,7 +72,7 @@ function Shop() {
                            </div>
                            <div className="filter-tag-list">
                               <span>Lọc theo:</span>
-                              {tag.map((item, idx) => {
+                              {filteredTag.map((item, idx) => {
                                  return (
                                     <div className="filter-tag-item" key={idx}>
                                        <span>{item}</span>

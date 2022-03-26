@@ -46,7 +46,7 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
             color: colorCheck,
             size: sizeCheck,
             qty: qty,
-            thumbnail: curProduct[0].imageList[colorIndex],
+            thumbnail: curProduct[0].imgUrl1,
          }
          openToastSuccess(TransitionLeft)
          dispatch(addToCart(product))

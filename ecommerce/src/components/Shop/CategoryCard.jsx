@@ -1,18 +1,22 @@
 import React from "react"
 import ExpandLess from "@mui/icons-material/ExpandLess"
 import ExpandMore from "@mui/icons-material/ExpandMore"
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import "../../css/ShopStyle/CategoryCard.css"
 import { useState } from "react"
 import Collapse from "@mui/material/Collapse"
 
-function CategoryCard({ title, listCategory, isOpen, category, subCategory, handleClickType }) {
-   const [open, setOpen] = useState(isOpen)
-
+function CategoryCard({ title, listCategory, subCategory, handleClickType, curActive }) {
+   const [open, setOpen] = useState(true)
+   // console.log(curActive)
    const handleClick = () => {
       setOpen(!open)
    }
 
+   let activeStyle = {
+      textDecoration: "underline",
+      color: "red",
+   }
    return (
       <div className="category-container">
          <div className="category__heading">
@@ -24,9 +28,17 @@ function CategoryCard({ title, listCategory, isOpen, category, subCategory, hand
             <Collapse in={open} timeout="auto" unmountOnExit>
                <ul>
                   {listCategory.map((item, index) => {
+                     const currSelect = item === curActive? "activeStyle": undefined
+                   
                      return (
                         <li key={index}>
-                           <Link to={`${subCategory[index]}`} onClick={ handleClickType}>{item}</Link>
+                           <NavLink
+                              to={`${subCategory[index]}`}
+                              onClick={handleClickType}
+                              style={({ isActive}) => (isActive || currSelect ? activeStyle : undefined)}
+                           >
+                              {item}
+                           </NavLink>
                         </li>
                      )
                   })}
