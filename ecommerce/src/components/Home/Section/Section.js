@@ -20,7 +20,7 @@ function SampleNextArrow(props) {
     bottom: "-3rem", 
     right: "2rem",
     display: "flex",
-    padding: ".15rem"
+    padding: ".5rem"
 
 
   };
@@ -44,9 +44,9 @@ function SamplePrevArrow(props) {
     color: 'black', 
     position: "absolute", 
     bottom: "-3rem",
-    right: "4rem",
+    right: "4.4rem",
     display: "flex",
-    padding: ".15rem",
+    padding: ".5rem",
   }
   return (
     <div
@@ -109,14 +109,15 @@ function SimpleSlider(props) {
                 <div className="slider">
                     <Slider {...settings} >
                     {
-                        itemList.map(item => 
+                        itemList.map((item) => 
                         <Item 
-                        key = {item.id}
-                        imageLink={item.imageLink}
+                        key = {item.productId}
+                        currId={item.productId}
+                        imageLink={item.imgUrl1}
                         type={item.type}
-                        productName={item.productName}
-                        productPrice={item.productPrice}
-                        protductOldPrice={item.protductOldPrice}
+                        productName={item.name}
+                        productPrice={item.unitPrice}
+                        protductOldPrice={item.oldPrice}
                         stars={item.stars}
                         />
                         )

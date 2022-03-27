@@ -168,7 +168,6 @@ export const shopReducer = (state = initState, action) => {
       case "SEARCH_PRODUCT":
          console.log(action.payload)
       case "FILTER":
-         // console.log(action.payload)
          const query = action.payload.split("&")
          let filteredProducts = []
          let check = false;
