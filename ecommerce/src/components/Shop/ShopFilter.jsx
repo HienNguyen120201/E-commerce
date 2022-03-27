@@ -69,6 +69,7 @@ function ShopFilter({ pathname }) {
          dispatch(setFilters(true))
          dispatch(filter(`type=${x.toLowerCase()}`))
       }
+      console.log("oke")
    }
 
    /*
