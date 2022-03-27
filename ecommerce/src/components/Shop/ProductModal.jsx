@@ -77,8 +77,6 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
          openToastError(TransitionLeft, msg)
       }
    }
-   console.log(currId)
-
    useEffect(() => {
       dispatch(getSelectedProduct(currId))
    }, [dispatch])
@@ -113,7 +111,7 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
       for (let i = 1; i <= dAverage; i++) {
          rating1.push(<BsStarFill fontSize="1.6rem" style={ratingStyle} />)
       }
-      if (rating_average1 > dAverage) rating.push(<BsStarHalf fontSize="1.6rem" style={ratingStyle} />)
+      if (rating_average1 > dAverage) rating1.push(<BsStarHalf fontSize="1.6rem" style={ratingStyle} />)
 
       return (
          <div className="prodModal-container">

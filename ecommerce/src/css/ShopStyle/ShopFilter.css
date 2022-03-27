@@ -3,8 +3,8 @@
     font-size: 1.5rem;
 }
 .sf_sidebar_category, .sf_filter_price  {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+    margin-top: 1rem;
+    /* margin-bottom: 1rem; */
     position: relative;
 }
 
@@ -15,5 +15,19 @@
 }
 
 .sf_filter_value{
-    font-size: 1.4rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+#active1{
+    color: red;
+}
+.sf_category_title, .sf_filter_title, .filter__heading > h3{
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.category-container{
+    padding-left: 1.5rem;
 }

@@ -11,22 +11,19 @@ const initState = {
    isLoaded: false,
    filterProducts: [],
    isFilter: false,
+   searchResult: [],
 }
 
 export const shopReducer = (state = initState, action) => {
    switch (action.type) {
+      
       case "SUBMIT_FILTER":
-         const res = []
-         const option = action.payload
-         for (const [key, value] of Object.entries(option)) {
-            if (value) {
-               res.push(key)
-            }
-         }
+         console.log(action.payload)
          return {
             ...state,
-            filteredTag: [...res],
+            filteredTag: [...action.payload],
          }
+
       case "ADD_TO_CART":
          const alreadyInCart = state.cart.find((item) =>
             item.id === action.payload.id &&
@@ -166,22 +163,44 @@ export const shopReducer = (state = initState, action) => {
          }
 
       case "SEARCH_PRODUCT":
-         console.log(action.payload)
+         console.log(state.products)
+         let res = []
+         const key = action.payload
+         state.products.forEach((product) => {
+            if (
+               product.name.includes(key) ||
+               product.features.some(feature => feature.includes(key)) ||
+               // product.tags.includes(key) ||
+               product.tags.some(tag => tag.includes(key)) ||
+               product.type.includes(key)
+            ) {
+               res.push(product)
+            }
+         })
+         return {
+            ...state,
+            searchKeywords: action.payload,
+            // products: [...action.payload.data]
+            searchResult: [...res],
+         }
+
       case "FILTER":
+         // console.log(action.payload)
          const query = action.payload.split("&")
          let filteredProducts = []
-         let check = false;
+         let check = false
+
          query.forEach((item) => {
             if (item.includes("type")) {
-               console.log(item)
                const value = item.split("=")[1].toLowerCase()
-               filteredProducts = state.products.filter((p) => p.tags[0] === value)
+               if (filteredProducts.length === 0)
+                  filteredProducts = state.products.filter((p) => p.tags.includes(value))
+               else filteredProducts = filteredProducts.filter((p) => p.tags.includes(value))
                check = true
             } else if (item.includes("discount_price_gte")) {
                const value = Number.parseInt(item.split("=")[1])
                if (filteredProducts.length === 0 && !check) {
                   filteredProducts = state.products.filter((p) => Number.parseInt(p.unitPrice) >= value)
-                  
                } else {
                   filteredProducts = filteredProducts.filter((p) => Number.parseInt(p.unitPrice) >= value)
                }
@@ -192,10 +211,17 @@ export const shopReducer = (state = initState, action) => {
                } else {
                   filteredProducts = filteredProducts.filter((p) => Number.parseInt(p.unitPrice) <= value)
                }
-            }
-            console.log(filteredProducts)
+            } else if (item.includes("feature")) {
+               const value = item.split("=")[1]
+               if (filteredProducts.length === 0 && !check) {
+                  filteredProducts = state.products.filter((p) => p.features.includes(value))
+               } else {
+                  filteredProducts = filteredProducts.filter((p) => p.features.includes(value))
+               }
+            } 
+            // console.log(filteredProducts)
          })
-        
+
          return {
             ...state,
             filterProducts: filteredProducts,
@@ -204,6 +230,12 @@ export const shopReducer = (state = initState, action) => {
          return {
             ...state,
             isFilter: action.payload,
+         }
+
+      case "CLEAR_FILTER":
+         return {
+            ...state,
+            filteredTag: [],
          }
 
       default:

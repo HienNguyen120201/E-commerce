@@ -25,6 +25,10 @@
 .filter__form-group label {
     position: relative;
     cursor: pointer;
+    font-weight: 500;
+}
+.filter__form-group label:hover{
+    color: red;
 }
 
 .filter__form-group label:before {

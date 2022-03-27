@@ -7,11 +7,14 @@ function ProductList({cate}) {
    const products = useSelector((state) => state.shop.products)
    const filteredProducts =  useSelector((state) => state.shop.filterProducts)
    const isFilter =  useSelector((state) => state.shop.isFilter)
-   console.log(products)
+   // console.log(products)
    let list = isFilter ? filteredProducts: products.filter(product => product.type === cate)
+
+   const x = list.length > 0? "shopProduct-list shadow" : ""
+
    return (
       <>
-         <Grid container style={{ marginTop: "5rem" }}>
+         <Grid container className={x}>
             {list.map((item, idx) => {
                // const sale = item.market_price - item.discount_price
                // const sale_text = item.market_price > item.discount_price ? `Giảm ${formatVND(sale)}` : null

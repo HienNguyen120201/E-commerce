@@ -34,7 +34,6 @@ function ProductItem(props) {
       setOpenToastSuccess(true)
    }
    const handleCloseToastSuccess = (event, reason) => {
-      console.log("close")
       if (reason === "clickaway") {
          return
       }
@@ -64,12 +63,12 @@ function ProductItem(props) {
          }
       }
    }, [open])
-
+   // console.log(imgSrc)
    return (
       <div className="product-item">
          <div className="product-item__image">
-            <Link to="/">
-               <img src={imgSrc} alt="dienthoai" width="230px" />
+            <Link to="#" onClick={handleClickOpen("body")}>
+               <img src={imgSrc[0]} alt="dienthoai" width="230px" />
             </Link>
          </div>
 

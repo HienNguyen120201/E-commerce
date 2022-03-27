@@ -107,3 +107,10 @@ export const setFilters = (data) =>{
       payload: data,
    }
 }
+
+export const clearFilters = () =>{
+   return {
+      type: "CLEAR_FILTER",
+      payload: "" ,
+   }
+}

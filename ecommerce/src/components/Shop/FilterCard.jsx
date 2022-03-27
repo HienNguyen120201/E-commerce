@@ -16,9 +16,8 @@ function FilterCard({ title, options, handleChange, optionCheck }) {
                                 <input
                                     type="checkbox"
                                     id={`${item.id}`}
-                                    checked={optionCheck[a]}
+                                    checked={optionCheck[a] === true}
                                     onChange={handleChange}
-                                    name={`${item.label}`}
                                 />
                                 <label
                                     htmlFor={`${item.id}`}
