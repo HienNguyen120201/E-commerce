@@ -9,7 +9,6 @@ import { setFilters, filter, submitFilter } from "./../../redux/action/shopActio
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import queryString from "query-string"
-import { useSelector } from "react-redux"
 const formatVND = (num) => {
    return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(num)
 }
