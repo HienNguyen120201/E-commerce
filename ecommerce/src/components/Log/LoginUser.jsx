@@ -1,13 +1,15 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { delLoginAction } from '../../redux/Login/LoginUser';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useNavigate } from 'react-router-dom';
 
 const LoginUser = props => {
+  let navigate = useNavigate();
   const dispatch = useDispatch();
-  const LogOut= async =>{
+  const LogOut=()=>{
     dispatch(delLoginAction());
     localStorage.clear();
+    navigate("/");
   }
   return (
     <div className="Logout">
