@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { searchProduct } from "./../redux/action/shopAction"
-import { setFilters, clearFilters } from "./../redux/action/shopAction"
 import LoginUser from "../components/Log/LoginUser"
 
 const Header = () => {
@@ -16,17 +15,8 @@ const Header = () => {
       dispatch(searchProduct(keyword))
       navigate(`/Search/${keyword}`)
    }
-
-   const handleSelectCategory = () => {
-      dispatch(setFilters(false));
-      dispatch(clearFilters(""));
-      setKeyword("")
-   }
-
    const isLogin = useSelector((state) => state.login.isLogin)
    const user = useSelector((state)=>state.login.userInfo)
-   console.log(isLogin)
-   console.log(user)
    return (
       <div>
          <div id="top-header">
@@ -93,13 +83,13 @@ const Header = () => {
                      <Link to="/Home">
                         <li className="nav_li">Trang chủ</li>
                      </Link>
-                     <Link to="/Laptop" onClick={handleSelectCategory}>
+                     <Link to="/Laptop" >
                         <li className="nav_li">Laptop</li>
                      </Link>
-                     <Link to="/Mobile" onClick={handleSelectCategory}>
+                     <Link to="/Mobile">
                         <li className="nav_li">Điện thoại</li>
                      </Link>
-                     <Link to="/Accessory" onClick={handleSelectCategory}>
+                     <Link to="/Accessory">
                         <li className="nav_li">Phụ kiện</li>
                      </Link>
                   </ul>
