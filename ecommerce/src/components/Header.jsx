@@ -16,7 +16,6 @@ const Header = () => {
       dispatch(searchProduct(keyword))
       navigate(`/Search/${keyword}`)
    }
-
    const handleSelectCategory = (e) => {
       dispatch(setFilters(false));
       dispatch(clearFilters(e.target.id));

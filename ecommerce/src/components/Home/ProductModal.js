@@ -1,4 +1,4 @@
-import "./../../css/ShopStyle/ProductModal.css"
+import '../../css/ShopStyle/ProductModal.css'
 import Grid from "@mui/material/Grid"
 import { AiOutlineClose } from "react-icons/ai"
 import { BsStarFill, BsCheckLg, BsStarHalf } from "react-icons/bs"
@@ -10,6 +10,7 @@ import { getSelectedProduct } from "./../../redux/action/shopAction"
 import "./../../css/ShopStyle/components.css"
 import { addItem } from "../../redux/shop-cart/CartItemsSlide"
 import axios from 'axios';
+import { fetchProductsData } from './../../redux/action/shopAction'
 
 const formatVND = (num) => {
    return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(num)
@@ -19,21 +20,53 @@ function TransitionLeft(props) {
    return <Slide {...props} direction="left" />
 }
 
+// const curProduct = [{
+//    "productId": 1,
+//    "name": "Iphone 11 64GB/128GB Chính Hãng VN/A",
+//    "type": "Mobile",
+//    "unitPrice": 13499000,
+//    "oldPrice": 17999000,
+//    "status": "BestSeller",
+//    "imgUrl1": "https://i.ibb.co/wsrrV4t/iphone-12-mint.webp",
+//    "imgUrl2": "https://i.ibb.co/T4MbqCD/iphone-12-black.webp",
+//    "imgUrl3": "https://i.ibb.co/KmJ889n/iphone-12-red.webp",
+//    "rating": 5,
+//    "description": "iPhone 11 với 6 phiên bản màu sắc, camera có khả năng chụp ảnh vượt trội, thời lượng pin cực dài và bộ vi xử lý mạnh nhất từ trước đến nay sẽ mang đến trải nghiệm tuyệt vời dành cho bạn",
+//    "sizes": ["s"],
+//    "colors": ["white"],
+//    "tags": [null],
+//    "features": [null],
+//    "billDetails": null
+// }]
+
+
 const sizeImg = 350
 
 function ProductModal({ handleClose, openToastSuccess, openToastError, currId }) {
    /*
    * --------------------------------  HOOK ----------------------------------- */
-
    const dispatch = useDispatch()
+
+   useEffect(() => {
+      dispatch(getSelectedProduct(currId))
+   }, [dispatch])
+
+   useEffect(() => {
+      dispatch(fetchProductsData())
+    }, [dispatch])
+
    const curProduct = useSelector((state) => state.shop.selectedProduct)
+
+   useEffect(() => {
+      setDataReturn(true)
+   }, [curProduct])
+
    const [colorIndex, setcolorIndex] = useState(null)
    const [colorCheck, setColorCheck] = useState("")
    const [sizeCheck, setSizeCheck] = useState("")
    const [sizeIndex, setSizeIndex] = useState(null)
    const [qty, setQty] = useState(1)
    const [dataReturn, setDataReturn] = useState(false)
-   console.log("curProduct là: ",curProduct)
 
    /*
    * --------------------------------  EVENT HANDLER ------------------------- */
@@ -77,14 +110,8 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
          openToastError(TransitionLeft, msg)
       }
    }
-   useEffect(() => {
-      dispatch(getSelectedProduct(currId))
-   }, [dispatch])
 
-   useEffect(() => {
-      setDataReturn(true)
-   }, [curProduct])
-
+   
    /*-------------------------------------------------------------------------- */
 
    if (!dataReturn) {
@@ -109,9 +136,9 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
       const dAverage = Math.floor(rating_average1)
       const rating1 = []
       for (let i = 1; i <= dAverage; i++) {
-         rating1.push(<BsStarFill fontSize="1.6rem" style={ratingStyle} />)
+         rating1.push(<BsStarFill key={i} fontSize="1.6rem" style={ratingStyle} />)
       }
-      if (rating_average1 > dAverage) rating1.push(<BsStarHalf fontSize="1.6rem" style={ratingStyle} />)
+      if (rating_average1 > dAverage) rating.push(<BsStarHalf fontSize="1.6rem" style={ratingStyle} />)
 
       return (
          <div className="prodModal-container">

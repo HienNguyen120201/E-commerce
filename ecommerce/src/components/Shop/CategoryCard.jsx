@@ -2,7 +2,6 @@ import React from "react"
 import { NavLink } from "react-router-dom"
 import "../../css/ShopStyle/CategoryCard.css"
 
-
 function CategoryCard({listCategory, subCategory, handleClickType, curActive }) {
    let activeStyle = {
       textDecoration: "underline",
@@ -13,7 +12,6 @@ function CategoryCard({listCategory, subCategory, handleClickType, curActive }) 
          <ul>
             {listCategory.map((item, index) => {
                const currSelect = item === curActive ? "activeStyle" : undefined
-
                return (
                   <li key={index}>
                      <NavLink

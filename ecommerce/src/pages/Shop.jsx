@@ -40,7 +40,6 @@ function Shop() {
    useEffect(() => {
       dispatch(fetchProductsData())
    }, [dispatch])
-
    let list = isFilter ? filteredProducts : products.filter((product) => product.type === cate)
    useEffect(() => {
       if (products.length > 0) {
@@ -78,7 +77,6 @@ function Shop() {
                            </div>
                         </Card>
                      </div>
-
                      <ProductList cate={cate} />
 
                   </>

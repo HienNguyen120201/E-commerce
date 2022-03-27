@@ -14,15 +14,16 @@ import Search from '../pages/Search'
 const Router = () => {
     return (
         <Routes>
-            <Route path='/' element={Home}/>
+            <Route path='/' element={<Home/>}/>
+            <Route path='/Home' element={<Home/>}/>
             <Route path='/shop' element={<Shop />}/>
             <Route path='/Cart' element={<Cart/>}/>
             <Route path='/Login' element={<Login/>}/>
            <Route path='/Register' element={<Register/>}/>
             <Route path='/ResetPass'element={<ResetPass/>}/>
-            <Route path='/Laptop/*' element={<Shop />}/>
-            <Route path='/Mobile/*' element={<Shop />}/>
-            <Route path='/Accessory/*' element={<Shop />}/>
+            <Route path='/Laptop' element={<Shop />}/>
+            <Route path='/Mobile' element={<Shop />}/>
+            <Route path='/Accessory' element={<Shop />}/>
             <Route path='/Search/*' element={<Search />}/>
         </Routes>
     )
