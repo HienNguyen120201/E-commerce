@@ -48,18 +48,16 @@ function Shop() {
          setLoading(false)
       }
    }, [products])
-   console.log(products)
+   // console.log(products)
    // console.log(filteredTag)
    return (
       <>
          <Grid container style={{ marginBottom: "5rem" }}>
             <Grid item xl={3}>
-               <ShopFilter
-                  pathname={currentUrl}
-               />
+               <ShopFilter pathname={currentUrl} />
             </Grid>
 
-            <Grid item xl={9} style={{ paddingLeft: "5rem" }}>
+            <Grid item xl={9} style={{ paddingLeft: "3rem" }}>
                {loading ? (
                   <ShopSkeleton />
                ) : (
@@ -83,6 +81,7 @@ function Shop() {
                            </div>
                         </Card>
                      </div>
+
                      <ProductList cate={cate} />
                   </>
                )}

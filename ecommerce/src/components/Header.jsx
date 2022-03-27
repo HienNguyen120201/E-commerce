@@ -19,6 +19,7 @@ const Header = () => {
    const handleSelectCategory = () => {
       dispatch(setFilters(false));
       dispatch(clearFilters(""));
+      setKeyword("")
    }
 
    return (

@@ -4,13 +4,15 @@
   padding-bottom: 1rem;
   padding-top: 7px;
   color: #333;
+  /* padding-left: 2rem; */
+  font-size: 16px;
 }
 
-.category__dropdown ul li a:hover {
+.category-container ul li a:hover {
   color: #d10124;
 }
 
-.category__dropdown ul li a {
+.category-container ul li a {
   text-decoration: none;
   color: #333;
   line-height: 1.75;
@@ -20,7 +22,7 @@
   justify-content: space-between;
   padding-right: 1rem;
 }
-.category__dropdown {
+.category-containe {
   margin-left: 2rem;
 }
 
@@ -30,4 +32,7 @@
 }
 .category__heading  a {
   text-decoration: none;
+}
+.subcate-link:hover{
+  color: #fff;
 }

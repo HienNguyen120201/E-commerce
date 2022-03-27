@@ -3,9 +3,10 @@
     gap: 10px;
 }
 .filtercard-header h2 {
-    font-size: 2rem;
+    font-size: 2.3rem;
     margin-top: 0;
     margin-bottom: 0;
+    font-weight: 600;
 }
 .filtercard-header span {
     display: inline-block;
@@ -22,7 +23,10 @@
     background-color: #fff;
     color: #333;
     border-radius: 5px;
-    padding: 5px 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 0;
     position: relative;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
@@ -39,5 +43,37 @@
     font-size: 1.4rem;
 }
 .filter-tag-list * {
-    margin-right: 5px;
+    margin-right: 9px;
+}
+.filter-tag-list{
+    padding-top: 1rem;
+}
+
+.shadow{
+    /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; */
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; */
+    box-shadow: rgb(0 0 0 / 2%) 0px 1px 3px 0px, rgb(27 31 35 / 15%) 0px 0px 0px 1px;
+}
+
+.shopProduct-list{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+#root{
+    background-color: #f8f8fa;
+}
+
+#navigation{
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+}
+
+.search-title{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+.search-result{
+    margin-bottom: 5rem;
 }

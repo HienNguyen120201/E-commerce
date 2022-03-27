@@ -22,14 +22,6 @@ function Search() {
    const x = window.location.pathname.split("/")
    const urlSearchPath = decodeURI(x[x.length - 1])
 
-   // const searchResult = (keyword) => {
-   //    console.log(keyword)
-   //    return (dispatch) => {
-   //       axiosClient.get(`/products?q=${keyword}`).then((response) => {
-   //          dispatch(setProducts(response.data))
-   //       })
-   //    }
-   // }
    /* dispatch khi urlparams hoặc search thay đổi */
    useEffect(() => {
       if (searchKeywords !== "") {
@@ -51,6 +43,7 @@ function Search() {
       setLoading(true)
    }, [])
 
+   // console.log(searchResult)
    /*
     * reload khi user nhấn nút backward hoặc forward để load lại trạng thái tìm kiếm.
     * cách khác để không reload page nhưng vẫn load lại từ khoá tìm kiếm? */
@@ -62,7 +55,9 @@ function Search() {
    const render =
       searchResult.length === 0 ? (
          <>
-            <h2>Chúng tôi không thể tìm thấy từ khoá bạn yêu cầu</h2>
+            <h2 style={{fontWeight: "500", marginTop: "4rem", marginBottom: "8rem"}}>
+               Không có kết quả phù hợp với từ khoá <span style={{color: '#ff2f2f', fontWeight: '700'}}>{searchKeywords}</span>
+            </h2>
          </>
       ) : (
          <>
@@ -80,7 +75,7 @@ function Search() {
                            <ProductItem
                               id={item.productId}
                               title={item.name}
-                              imgSrc={item.imgUrl1}
+                              imgSrc={[item.imgUrl1, item.imgUrl2, item.imgUrl3]}
                               discount_price={item.unitPrice}
                               market_price={item.oldPrice}
                               isSale={item.market_price > item.discount_price ? true : false}

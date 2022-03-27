@@ -8,7 +8,7 @@ import "./../../css/ShopStyle/components.css"
 import { setFilters, filter, submitFilter } from "./../../redux/action/shopAction"
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
-import queryString from 'query-string';
+import queryString from "query-string"
 
 const formatVND = (num) => {
    return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(num)
@@ -40,13 +40,18 @@ function ShopFilter({ pathname }) {
       let listTags = []
       let urlPath = window.location.pathname.split("/")
       if (urlPath.length > 2) {
-         listTags.push(urlPath.pop())
+         listTags.push(decodeURI(urlPath.pop()))
       }
-     
+
       if (arrPrams.length > 2) {
          let i = 0
          for (i = 0; i < arrPrams.length; i++) if (arrPrams[i].includes("price")) break
-         listTags.push("Giá từ " + arrPrams[i].split("=")[1] + " đến " + arrPrams[(i += 1)].split("=")[1])
+         listTags.push(
+            "Giá từ " +
+               formatVND(Number.parseInt(arrPrams[i].split("=")[1])) +
+               " đến " +
+               formatVND(Number.parseInt(arrPrams[(i += 1)].split("=")[1]))
+         )
          i++
          for (i; i < arrPrams.length; i++) {
             listTags.push(decodeURI(arrPrams[i].split("=")[1]))
@@ -56,9 +61,9 @@ function ShopFilter({ pathname }) {
    }
    const handleSelectType = (e) => {
       let x = e.target.innerHTML
+      console.log(x)
       setQuery(`type=${x}&`)
       setCurActive("")
-      // handleSetTag([x])
       dispatch(submitFilter([x]))
       if (isLoaded && x !== "") {
          dispatch(setFilters(true))
@@ -71,11 +76,11 @@ function ShopFilter({ pathname }) {
 
    const handleSubmitFilter = () => {
       let queryParam = ""
-   
-      queryParam += filteredTag.length !== 0 ? `type=${filteredTag[0]}&`: ""
+
+      queryParam += filteredTag.length !== 0 ? `type=${filteredTag[0]}&` : ""
       if (price[0]) queryParam += `discount_price_gte=${price[0]}&discount_price_lte=${price[1]}`
 
-      for(const [key, value] of Object.entries(optionFeature)){
+      for (const [key, value] of Object.entries(optionFeature)) {
          if (value) {
             queryParam += `&feature=${key}`
          }
@@ -100,50 +105,58 @@ function ShopFilter({ pathname }) {
       setPrice(newValue)
    }
 
-   
-   //* dispatch khi có sự thay đổi các dependencies: đồng bộ filter vs param url
+   //* -------------------dispatch khi có sự thay đổi các dependencies: đồng bộ filter vs param url --------------
    useEffect(() => {
       let urlPath = window.location.pathname.split("/")
       let param = decodeURI(window.location.search.substring(1))
       const queryObj = queryString.parse(window.location.search)
       if (urlPath.length > 2) {
-         setQuery(`type=${urlPath.pop()}&${param}`)
-         setCurActive(window.location.pathname.split('/')[2])
+         const x = decodeURI(urlPath.pop())
+         console.log(x)
+         setQuery(`type=${x}&${param}`)
+         setCurActive(window.location.pathname.split("/")[2])
       } else {
          setQuery("")
          // đồng bộ danh mục hãng điện thoại
          setCurActive("")
       }
-   
+
       // đồng bộ giá
-      if(queryObj.discount_price_gte)
+      if (queryObj.discount_price_gte)
          setPrice([Number.parseInt(queryObj.discount_price_gte), Number.parseInt(queryObj.discount_price_lte)])
-         
+
       // đồng bộ option tínhh năng
       const feature = queryObj.feature
-      if (feature){
-         if (Array.isArray(feature)){
-            for(let i = 0; i < feature.length; i++)
-            setOptionFeature((prev) => ({ ...prev, [`${feature[i]}`]: true }))
-         }
-         else{
+      if (feature) {
+         if (Array.isArray(feature)) {
+            for (let i = 0; i < feature.length; i++) setOptionFeature((prev) => ({ ...prev, [`${feature[i]}`]: true }))
+         } else {
             setOptionFeature((prev) => ({ ...prev, [`${feature}`]: true }))
          }
       }
+
+      if (!isFilter)
+         setOptionFeature({
+            allFeatrues: false,
+            finger: false,
+            faceId: false,
+            quickCharge: false,
+            waterProof: false,
+         })
 
       if (products.length > 0 && query !== "") {
          dispatch(submitFilter(listTag()))
          dispatch(setFilters(true))
          dispatch(filter(query))
       }
-      
    }, [products, dispatch, isFilter])
 
    let category = {}
+   let title = ""
    if (pathname.includes("Mobile")) {
+      title = "Danh mục điện thoại"
       category = (
          <CategoryCard
-            title="Điện thoại"
             listCategory={["Iphone", "Xiaomi", "Samsung", "Oppo", "LG", "Khác"]}
             subCategory={["Iphone", "Xiaomi", "Samsung", "Oppo", "Lg", "Other_phone"]}
             handleClickType={handleSelectType}
@@ -151,9 +164,9 @@ function ShopFilter({ pathname }) {
          />
       )
    } else if (pathname.includes("Laptop")) {
+      title = "Danh mục Máy tính"
       category = (
          <CategoryCard
-            title="Laptop"
             listCategory={["Macbook", "Dell", "Lenovo", "Asus", "Khác"]}
             subCategory={["Macbook", "Dell", "Lenovo", "Asus", "other_laptop"]}
             handleClickType={handleSelectType}
@@ -161,11 +174,11 @@ function ShopFilter({ pathname }) {
          />
       )
    } else {
+      title = "Danh mục phụ kiện"
       category = (
          <CategoryCard
-            title="Phụ kiện"
             listCategory={["Pin dự phòng", "Tai nghe", "Củ sạc, cáp sạc", "Loa Bluetooth", "Khác"]}
-            subCategory={["pin-du-phong", "tai-nghe", "cap-sac", "loa-bluetooth", "other_accesory"]}
+            subCategory={["pin-du-phong", "Tai nghe", "cap-sac", "loa-bluetooth", "other_accesory"]}
             handleClickType={handleSelectType}
             curActive={curActive}
          />
@@ -173,9 +186,9 @@ function ShopFilter({ pathname }) {
    }
 
    return (
-      <div className="sf_container" style={{ marginTop: "5rem" }}>
+      <div className="sf_container" style={{ marginTop: "3rem" }}>
          <div className="sf_sidebar_category">
-            <h4 className="sf_category_title">Danh mục</h4>
+            <h4 className="sf_category_title">{title}</h4>
          </div>
          {category}
          <div>

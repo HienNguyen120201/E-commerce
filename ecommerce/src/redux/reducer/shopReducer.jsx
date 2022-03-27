@@ -16,7 +16,9 @@ const initState = {
 
 export const shopReducer = (state = initState, action) => {
    switch (action.type) {
+      
       case "SUBMIT_FILTER":
+         console.log(action.payload)
          return {
             ...state,
             filteredTag: [...action.payload],
@@ -167,8 +169,9 @@ export const shopReducer = (state = initState, action) => {
          state.products.forEach((product) => {
             if (
                product.name.includes(key) ||
-               product.features.includes(key) ||
-               product.tags.includes(key) ||
+               product.features.some(feature => feature.includes(key)) ||
+               // product.tags.includes(key) ||
+               product.tags.some(tag => tag.includes(key)) ||
                product.type.includes(key)
             ) {
                res.push(product)

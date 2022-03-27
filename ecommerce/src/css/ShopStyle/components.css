@@ -1,80 +1,82 @@
 /* ------------------ File chứa các css cho các components có thể tái sử dụng ------------------ */
 .slider_mui {
-  color: #d10124 !important;
+   color: #d10124 !important;
 }
 
 .slider_mui:hover {
-  color: red;
+   color: red;
 }
 
 .slider_mui .MuiSlider-thumb {
-  height: 15px;
-  width: 15px;
+   height: 15px;
+   width: 15px;
 }
 
-.MuiBadge-badge{
-  font-size: 15px !important;
+.MuiBadge-badge {
+   font-size: 15px !important;
 }
 
 .btn-small {
-  padding: 5px 11px;
-  color: #fff;
-  border-radius: 20px;
-  display: inline-block;
-  font-size: 13px;
+   padding: 5px 11px;
+   color: #fff;
+   border-radius: 20px;
+   display: inline-block;
+   font-size: 13px;
 }
 
 .green-gradient {
-  background: -webkit-linear-gradient(left, #60bb22, #20863d);
+   background: -webkit-linear-gradient(left, #60bb22, #20863d);
 }
 .red-gradient {
-  background: #f85032; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-      to right,
-      #e73827,
-      #f85032
-  ); /* Chrome 10-25, Safari 5.1-6 */
+   background: #f85032; /* fallback for old browsers */
+   background: -webkit-linear-gradient(to right, #e73827, #f85032); /* Chrome 10-25, Safari 5.1-6 */
 }
 
 .btn1 {
-  z-index: 1;
-  position: relative;
-  font-size: inherit;
-  font-family: inherit;
-  color: white;
-  outline: none;
-  border: none;
-  background-color: hsl(236, 32%, 26%);
+   z-index: 1;
+   position: relative;
+   font-size: inherit;
+   font-family: inherit;
+   color: white;
+   padding: 0.5em 1em;
+   outline: none;
+   border: none;
+   background-color: hsl(236, 32%, 26%);
+   overflow: hidden;
+   transition: color 0.4s ease-in-out;
 }
 
 .btn1::before {
-  content: "";
-  z-index: -1;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #ff2f2f;
-  transform-origin: center right;
-  transform: scaleX(0);
-  transition: transform 0.25s ease-in-out;
+   content: "";
+   z-index: -1;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   width: 1em;
+   height: 1em;
+   border-radius: 50%;
+   background-color: #ff2f2f;
+
+   transform-origin: center;
+   transform: translate3d(-50%, -50%, 0) scale3d(0, 0, 0);
+   transition: transform 0.45s ease-in-out;
 }
 
 .btn1:hover {
-  cursor: pointer;
+   cursor: pointer;
+   color: #fff;
 }
 
 .btn1:hover::before {
-  transform-origin: center left;
-  transform: scaleX(1);
+   transform: translate3d(-50%, -50%, 0) scale3d(15, 15, 15);
 }
 
-.btn1{
-  margin-top: 4rem;
-  display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 1.5rem 3.5rem;
-  margin-bottom: 5rem;
+.btn1 {
+   margin-top: 4rem;
+   display: inline-block;
+   margin-left: auto;
+   margin-right: auto;
+   padding: 1.5rem 3.5rem;
+   margin-bottom: 5rem;
 }
+
