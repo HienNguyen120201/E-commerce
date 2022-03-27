@@ -257,8 +257,6 @@ const Home = () => {
         itemList={saleContent.itemList}
         />
 
-        <CountDownSale />
-
         <NewProduct 
         title={newProductContent.title}
         itemList={newProductContent.itemList}

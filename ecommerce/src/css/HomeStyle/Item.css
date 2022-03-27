@@ -21,6 +21,7 @@ html {
   text-align: center;
   position: relative;
   overflow: hidden;
+  height: 500px;
 }
 
 .itemBtn {
@@ -64,6 +65,7 @@ html {
 .item .item-img {
   max-width: 200px;
   min-width: 150px;
+  height: 200px;
 }
 
 .item .item-img img {
@@ -89,6 +91,7 @@ html {
   /* identical to box height */
   color: #2b2d42;
   padding: 0 1rem 0;
+  cursor: pointer;
 }
 
 .item .price {
