@@ -10,11 +10,12 @@ import Shop from '../pages/Shop'
 import Register from '../pages/Register'
 import ResetPass from '../pages/ResetPass'
 import Search from '../pages/Search'
+import HomePage from '../pages/HomePage'
 
 const Router = () => {
     return (
         <Routes>
-            <Route path='/' element={<Home/>}/>
+            <Route path='/' element={<HomePage/>}/>
             <Route path='/Home' element={<Home/>}/>
             <Route path='/shop' element={<Shop />}/>
             <Route path='/Cart' element={<Cart/>}/>
