@@ -1,0 +1,19 @@
+
+.bill li {
+    list-style-type: none;
+    padding-top: 30px;
+}
+
+.info-bill {
+    display: flex;
+    justify-content: space-between;
+    font-size: medium;
+}
+
+.left-list li {
+    text-align: left;
+}
+
+.right-list li {
+    margin-right: 20px;
+}

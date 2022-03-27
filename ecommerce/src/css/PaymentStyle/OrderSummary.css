@@ -1,0 +1,19 @@
+.discount {
+    display: flex;
+    justify-content: space-between;
+}
+
+.apply {
+    width: 120px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid #3182CE;;
+    color: #3182CE;;
+}
+
+.discount input[type=text] {
+    width: 60%;
+    border-radius: 5px;
+    background: #E2E8F0;
+    border: none;
+}
