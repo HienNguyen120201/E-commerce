@@ -40,6 +40,7 @@ function Search() {
    /* */
    useEffect(() => {
       dispatch(searchProduct(urlSearchPath))
+      // dispatch(searchResult(urlSearchPath))
       setLoading(true)
    }, [])
 

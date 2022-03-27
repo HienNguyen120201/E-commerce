@@ -1,0 +1,153 @@
+
+
+
+
+
+
+.reset_page
+{
+    width: 400px;
+    height: 250px;
+   margin: auto;
+    margin-top: 100px;
+    margin-bottom: 150px;
+    text-align: center;
+   
+    background-color: #f8f9fd;
+    padding-top: 20px;
+    box-shadow: 8px 8px 8px 10px #DFDCDC;
+    border-radius: 12px;
+    
+   
+}
+
+.reset_frame
+{
+    width: 400px;
+    height: 250px;
+    margin-top: 16px;
+    margin-left: 0px;
+   
+    
+}
+
+
+
+.resettext
+{
+  font-size: 24px;
+  font-family: sans-serif;
+  font-weight: bold;
+  width: 370px;
+  height: 35px;
+  font-family: "Montserrat", sans-serif !important;
+  text-align: left;
+  margin: auto;
+}
+
+.reset_box
+{
+    width: 400px;
+    height: 150px;
+    margin-top: 23px;
+}
+
+
+.username
+{
+    margin-left: 5px;
+    margin: auto;
+    width: 370px;
+    height: 40px;
+    margin-top: 12px;
+    border-radius: 5px;
+    background-color: #DFDCDC;
+    border: none;
+    padding: 15px;
+    
+}
+
+
+
+
+.username::placeholder
+{
+        color: #A8A7A7;
+        font-size: 14px;
+        text-align: left;
+        font-family: "Montserrat", sans-serif !important;
+    
+}
+
+
+
+
+
+
+.reset_text
+{
+    width: 110px;
+    height: 34px;
+    border: none;
+    border-radius: 5px;
+    font-family: "Montserrat", sans-serif !important;
+    font-size: 14px;
+    margin-top: 15px;
+    color: black;
+    float: right;
+    margin-right: 15px;
+    background-color: #FFC312;
+}
+.back_text
+{
+        margin-top: 15px;
+        width: 110px;
+        height: 34px;
+        border: none;
+        border-radius: 5px;
+        font-family: "Montserrat", sans-serif !important;
+        font-size: 14px;
+        color: black;
+        float: left;
+        margin-left: 15px;
+        background-color: #FFC312;
+        transition: all 0.15s ease-in;
+    
+}
+.back_text:hover
+{
+    background-color: #fddf86;
+}
+
+.SendEmail
+{
+    width: 110px;
+    height: 34px;
+    border: none;
+    border-radius: 5px;
+    font-family: "Montserrat", sans-serif !important;
+    font-size: 14px;
+    margin-top: 15px;
+    color: black;
+    float: right;
+    margin-right: 15px;
+    background-color: #FFC312;
+    transition: all 0.15s ease-in;
+}
+
+.SendEmail:hover
+{
+    background-color: #fddf86;
+}
+
+
+
+
+
+hr
+{
+    margin-left: 18px;
+}
+
+
+

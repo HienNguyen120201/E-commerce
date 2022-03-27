@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals"
 import "./css/Home.css"
 import Layout from "./components/Layout"
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import { store } from './redux/store'
 
 /* -------------------  Redux -------------------------------*/
 import { createStore, applyMiddleware } from "redux"
@@ -15,6 +16,7 @@ import { composeWithDevTools } from "redux-devtools-extension"
 /* ---------------------------------------------------------*/
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
+// const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
 
 ReactDOM.render(
   <React.StrictMode>

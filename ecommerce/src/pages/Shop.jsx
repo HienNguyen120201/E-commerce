@@ -28,7 +28,6 @@ function Shop() {
       title = "Phụ kiện"
       cate = "Accessory"
    }
-
    window.onpopstate = function () {
       window.location.reload()
       handleLoading(false)
@@ -48,8 +47,6 @@ function Shop() {
          setLoading(false)
       }
    }, [products])
-   // console.log(products)
-   // console.log(filteredTag)
    return (
       <>
          <Grid container style={{ marginBottom: "5rem" }}>
@@ -83,6 +80,7 @@ function Shop() {
                      </div>
 
                      <ProductList cate={cate} />
+
                   </>
                )}
             </Grid>
