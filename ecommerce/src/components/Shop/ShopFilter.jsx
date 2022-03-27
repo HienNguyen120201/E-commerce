@@ -69,7 +69,6 @@ function ShopFilter({ pathname }) {
          dispatch(setFilters(true))
          dispatch(filter(`type=${x.toLowerCase()}`))
       }
-      console.log("oke")
    }
 
    /*
@@ -77,8 +76,9 @@ function ShopFilter({ pathname }) {
 
    const handleSubmitFilter = () => {
       let queryParam = ""
-
-      queryParam += filteredTag.length !== 0 ? `type=${filteredTag[0]}&` : ""
+      const urlPath = window.location.pathname.split("/")
+      if (urlPath.length > 2)
+         queryParam += `type=${urlPath[2]}&`
       if (price[0]) queryParam += `discount_price_gte=${price[0]}&discount_price_lte=${price[1]}`
 
       for (const [key, value] of Object.entries(optionFeature)) {
@@ -93,6 +93,7 @@ function ShopFilter({ pathname }) {
       dispatch(submitFilter(listTag()))
       if (products.length > 0 && queryParam !== "") {
          dispatch(setFilters(true))
+         console.log(queryParam)
          dispatch(filter(queryParam))
       }
    }
@@ -150,7 +151,7 @@ function ShopFilter({ pathname }) {
          dispatch(setFilters(true))
          dispatch(filter(query))
       }
-   }, [products, dispatch, isFilter])
+   }, [products, dispatch])
 
    let category = {}
    let title = ""

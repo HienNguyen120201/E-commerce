@@ -187,9 +187,10 @@ export const shopReducer = (state = initState, action) => {
       case "FILTER":
          // console.log(action.payload)
          const query = action.payload.split("&")
-         let filteredProducts = []
+         let filteredProducts = state.products.filter(product => product.type === state.category)
+         console.log(filteredProducts)
          let check = false
-
+         console.log(query)
          query.forEach((item) => {
             if (item.includes("type")) {
                const value = item.split("=")[1].toLowerCase()
@@ -236,6 +237,7 @@ export const shopReducer = (state = initState, action) => {
          return {
             ...state,
             filteredTag: [],
+            category: action.payload
          }
 
       default:

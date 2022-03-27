@@ -17,10 +17,11 @@ const Header = () => {
       navigate(`/Search/${keyword}`)
    }
 
-   const handleSelectCategory = () => {
+   const handleSelectCategory = (e) => {
       dispatch(setFilters(false));
-      dispatch(clearFilters(""));
+      dispatch(clearFilters(e.target.id));
       setKeyword("")
+      // dispatch(fetchProductsData())
    }
 
    const isLogin = useSelector((state) => state.login.isLogin)
@@ -94,13 +95,13 @@ const Header = () => {
                         <li className="nav_li">Trang chủ</li>
                      </Link>
                      <Link to="/Laptop" onClick={handleSelectCategory}>
-                        <li className="nav_li">Laptop</li>
+                        <li className="nav_li" id = "Laptop">Laptop</li>
                      </Link>
                      <Link to="/Mobile" onClick={handleSelectCategory}>
-                        <li className="nav_li">Điện thoại</li>
+                        <li className="nav_li" id = "Mobile">Điện thoại</li>
                      </Link>
                      <Link to="/Accessory" onClick={handleSelectCategory}>
-                        <li className="nav_li">Phụ kiện</li>
+                        <li className="nav_li" id = "Accessory">Phụ kiện</li>
                      </Link>
                   </ul>
                </div>

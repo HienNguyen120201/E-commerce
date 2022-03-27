@@ -11,7 +11,8 @@ function ProductList({cate}) {
    let list = isFilter ? filteredProducts: products.filter(product => product.type === cate)
 
    const x = list.length > 0? "shopProduct-list shadow" : ""
-
+   console.log(filteredProducts)
+   console.log(isFilter)
    return (
       <>
          <Grid container className={x}>
