@@ -19,5 +19,4 @@ const LoginUser = props => {
     
   )
 }
-
 export default LoginUser

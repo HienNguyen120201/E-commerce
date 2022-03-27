@@ -9,7 +9,7 @@ import { setFilters, filter, submitFilter } from "./../../redux/action/shopActio
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import queryString from "query-string"
-
+import { useSelector } from "react-redux"
 const formatVND = (num) => {
    return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(num)
 }
@@ -42,7 +42,6 @@ function ShopFilter({ pathname }) {
       if (urlPath.length > 2) {
          listTags.push(decodeURI(urlPath.pop()))
       }
-
       if (arrPrams.length > 2) {
          let i = 0
          for (i = 0; i < arrPrams.length; i++) if (arrPrams[i].includes("price")) break
@@ -76,6 +75,7 @@ function ShopFilter({ pathname }) {
     *------------------------ HANDLE STATE CHANGE ----------------- */
 
    const handleSubmitFilter = () => {
+      console.log("close")
       let queryParam = ""
 
       queryParam += filteredTag.length !== 0 ? `type=${filteredTag[0]}&` : ""
@@ -89,7 +89,6 @@ function ShopFilter({ pathname }) {
       queryParam = queryParam[0] === "&" ? queryParam.substring(1) : queryParam
       navigate(`?${queryParam}`)
       setQuery(queryParam)
-
       dispatch(submitFilter(listTag()))
       if (products.length > 0 && queryParam !== "") {
          dispatch(setFilters(true))

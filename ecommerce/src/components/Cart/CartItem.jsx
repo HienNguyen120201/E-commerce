@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { useDispatch } from 'react-redux'
 import { updateItem, removeItem } from "../../redux/shop-cart/CartItemsSlide"
@@ -7,8 +7,6 @@ import numberWithCommas from '../../utils/numberWithCommas'
 const CartItem = props => {
 
     const dispatch = useDispatch()
-
-    const itemRef = useRef(null)
 
     const [item, setItem] = useState(props.item)
     const [quantity, setQuantity] = useState(props.item.quantity)
@@ -33,7 +31,7 @@ const CartItem = props => {
     return (
         <tr>
             <td></td>
-            <td className="nameStyle">{item.name}</td>
+            <td className="nameStyle">{item.name}-{item.color}-{item.size}GB</td>
             <td className="text-center">{numberWithCommas(Number(item.unitPrice))}</td>
             <td>
                 <div className="quantity1">
