@@ -9,8 +9,8 @@ import { useSelector, useDispatch } from "react-redux"
 import { getSelectedProduct } from "./../../redux/action/shopAction"
 import "./../../css/ShopStyle/components.css"
 import { addItem } from "../../redux/shop-cart/CartItemsSlide"
-import axios from 'axios';
-
+import axios from "axios"
+import { dictionary } from "../../utils/dictionary"
 const formatVND = (num) => {
    return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(num)
 }
@@ -23,7 +23,7 @@ const sizeImg = 350
 
 function ProductModal({ handleClose, openToastSuccess, openToastError, currId }) {
    /*
-   * --------------------------------  HOOK ----------------------------------- */
+    * --------------------------------  HOOK ----------------------------------- */
 
    const dispatch = useDispatch()
    const curProduct = useSelector((state) => state.shop.selectedProduct)
@@ -33,41 +33,39 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
    const [sizeIndex, setSizeIndex] = useState(null)
    const [qty, setQty] = useState(1)
    const [dataReturn, setDataReturn] = useState(false)
-   console.log("curProduct là: ",curProduct)
+   console.log("curProduct là: ", curProduct)
 
    /*
-   * --------------------------------  EVENT HANDLER ------------------------- */
+    * --------------------------------  EVENT HANDLER ------------------------- */
    const isLogin = useSelector((state) => state.login.isLogin)
-   const user = useSelector((state)=>state.login.userInfo)
+   const user = useSelector((state) => state.login.userInfo)
    const handleClick = () => {
       if (colorCheck !== "" && sizeCheck !== "") {
-         if(isLogin)
-         {
+         if (isLogin) {
             const product = {
-            UserName: user,
-            productId: curProduct[0].productId,
-            name: curProduct[0].name,
-            unitPrice: curProduct[0].unitPrice,
-            color: colorCheck,
-            size: sizeCheck,
-            quantity: qty
+               UserName: user,
+               productId: curProduct[0].productId,
+               name: curProduct[0].name,
+               unitPrice: curProduct[0].unitPrice,
+               color: colorCheck,
+               size: sizeCheck,
+               quantity: qty,
             }
-            axios.post("https://localhost:44306/api/Product",product)
+            axios.post("https://localhost:44306/api/Product", product)
             openToastSuccess(TransitionLeft)
             dispatch(addItem(product))
-         }
-         else{
+         } else {
             const product = {
-            productId: curProduct[0].productId,
-            name: curProduct[0].name,
-            unitPrice: curProduct[0].unitPrice,
-            color: colorCheck,
-            size: sizeCheck,
-            quantity: qty,
-            image1:curProduct[0].imgUrl1
-         }
-         openToastSuccess(TransitionLeft)
-         dispatch(addItem(product))
+               productId: curProduct[0].productId,
+               name: curProduct[0].name,
+               unitPrice: curProduct[0].unitPrice,
+               color: colorCheck,
+               size: sizeCheck,
+               quantity: qty,
+               image1: curProduct[0].imgUrl1,
+            }
+            openToastSuccess(TransitionLeft)
+            dispatch(addItem(product))
          }
       } else {
          let msg = ""
@@ -90,21 +88,10 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
    if (!dataReturn) {
       return <div>loading</div>
    } else {
+      let { name, type, oldPrice, unitPrice, colors, sizes, description, rating, review_count, sell_count } =
+         curProduct[0]
 
-      let {
-         name,
-         type,
-         oldPrice,
-         unitPrice,
-         colors,
-         sizes,
-         description,
-         rating,
-         review_count,
-         sell_count,
-      } = curProduct[0]
-
-      const imageList = [curProduct[0].imgUrl1, curProduct[0].imgUrl2, curProduct[0].imgUrl3];
+      const imageList = [curProduct[0].imgUrl1, curProduct[0].imgUrl2, curProduct[0].imgUrl3]
       let rating_average1 = Math.floor(rating * 2 + 0.5) / 2
       const dAverage = Math.floor(rating_average1)
       const rating1 = []
@@ -112,7 +99,7 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
          rating1.push(<BsStarFill fontSize="1.6rem" style={ratingStyle} />)
       }
       if (rating_average1 > dAverage) rating1.push(<BsStarHalf fontSize="1.6rem" style={ratingStyle} />)
-
+      console.log(colors)
       return (
          <div className="prodModal-container">
             <div className="prodModal__header">
@@ -141,76 +128,68 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
                         <p>{description}</p>
 
                         <div className="proModal__price">
-                           <span className="new_price">
-                              {formatVND((unitPrice + 1000000 * sizeIndex) * qty)}
-                           </span>
-                           <span className="market_price">
-                              {formatVND((oldPrice + 1000000 * sizeIndex) * qty)}
-                           </span>
+                           <span className="new_price">{formatVND((unitPrice + 1000000 * sizeIndex) * qty)}</span>
+                           <span className="market_price">{formatVND((oldPrice + 1000000 * sizeIndex) * qty)}</span>
                         </div>
 
-                        <div className="proModal__color">
-                           <p>Màu sắc: {colorCheck}</p>
-                           <ul>
-                              {colors.map((item, idx) => {
-                                 return (
-                                    <li
-                                       className={item}
-                                       key={idx}
-                                       onClick={() => {
-                                          setColorCheck(item)
-                                          setcolorIndex(idx)
-                                       }}
-                                    >
-                                       <div
-                                          className={
-                                             colorIndex === idx ? "icon-check" : "icon-check hidden-check"
-                                          }
+                        {colors.length > 0 ? (
+                           <div className="proModal__color">
+                              <p>Màu sắc: &nbsp; {dictionary[`${colorCheck}`]}</p>
+                              <ul>
+                                 {colors.map((item, idx) => {
+                                    return (
+                                       <li
+                                          className={item}
+                                          key={idx}
+                                          onClick={() => {
+                                             setColorCheck(item)
+                                             setcolorIndex(idx)
+                                          }}
                                        >
-                                          <BsCheckLg fontSize="2rem" />
-                                       </div>
-                                    </li>
-                                 )
-                              })}
-                           </ul>
-                        </div>
+                                          <div
+                                             className={colorIndex === idx ? "icon-check" : "icon-check hidden-check"}
+                                          >
+                                             <BsCheckLg fontSize="2rem" />
+                                          </div>
+                                       </li>
+                                    )
+                                 })}
+                              </ul>
+                           </div>
+                        ) : (
+                           ""
+                        )}
 
-                        <div className="proModal__size">
-                           <p>Dung lượng</p>
-                           <ul>
-                              {sizes.map((item, idx) => {
-                                 return (
-                                    <li
-                                       key={idx}
-                                       onClick={() => {
-                                          setSizeCheck(item)
-                                          setSizeIndex(idx)
-                                       }}
-                                       className={sizeIndex === idx ? "size-check" : ""}
-                                    >
-                                       <span>{item}</span>
-                                    </li>
-                                 )
-                              })}
-                           </ul>
-                        </div>
-
+                        {sizes.length > 0 ? (
+                           <div className="proModal__size">
+                              {sizes.length > 0 ? <p>Dung lượng</p> : ""}
+                              <ul>
+                                 {sizes.map((item, idx) => {
+                                    return (
+                                       <li
+                                          key={idx}
+                                          onClick={() => {
+                                             setSizeCheck(item)
+                                             setSizeIndex(idx)
+                                          }}
+                                          className={sizeIndex === idx ? "size-check" : ""}
+                                       >
+                                          <span>{item}</span>
+                                       </li>
+                                    )
+                                 })}
+                              </ul>
+                           </div>
+                        ) : (
+                           ""
+                        )}
                         <div className="proModal__qty">
                            <p>Số lượng</p>
                            <div className="cart-plus-minus">
-                              <div
-                                 className="decrease"
-                                 onClick={() => setQty((prev) => (prev === 1 ? 1 : prev - 1))}
-                              >
+                              <div className="decrease" onClick={() => setQty((prev) => (prev === 1 ? 1 : prev - 1))}>
                                  -
                               </div>
-                              <input
-                                 type="text"
-                                 className="quantity-box"
-                                 name="qtybutton"
-                                 value={qty}
-                                 readOnly
-                              />
+                              <input type="text" className="quantity-box" name="qtybutton" value={qty} readOnly />
                               <div className="increase" onClick={() => setQty((prev) => prev + 1)}>
                                  +
                               </div>

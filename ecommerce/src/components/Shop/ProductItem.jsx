@@ -68,7 +68,7 @@ function ProductItem(props) {
       <div className="product-item">
          <div className="product-item__image">
             <Link to="#" onClick={handleClickOpen("body")}>
-               <img src={imgSrc[0]} alt="dienthoai" width="230px" />
+               <img src={imgSrc[0]} alt="dienthoai" width="100%" height="100%" />
             </Link>
          </div>
 
