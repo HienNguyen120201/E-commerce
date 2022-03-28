@@ -5,6 +5,7 @@ import {Sale, CountDownSale, NewProduct, BestSeller} from '../components/Home/Se
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {fetchProductsData} from "../redux/action/shopAction"
+import axios from "axios"
 
 
 // const saleList = [
@@ -165,13 +166,13 @@ const Home = () => {
   let user = useSelector((state)=>state.login.userInfo)
   const dispatch = useDispatch()
   useEffect(() => {
-        // if(isLogin)
-        // {
-        //   axios.post("https://localhost:44306/api/Product/GetBill",{UserName:user})
-        //     .then(res => {
-        //         setCartItemUser(res.data)
-        // })
-        // }
+        if(isLogin)
+        {
+          axios.post("https://localhost:44306/api/Product/GetBill",{UserName:user})
+            .then(res => {
+                setCartItemUser(res.data)
+        })
+        }
         setDidMount(true);
           return () => setDidMount(false);
     },[])
@@ -238,7 +239,7 @@ const Home = () => {
         {
           const product = {
             productId: cartItemUser[i].productId,
-            name: cartItemUser[i].productName,
+            name: cartItemUser[i].name,
             unitPrice: cartItemUser[i].unitPrice,
             color: cartItemUser[i].color,
             size: cartItemUser[i].size,
