@@ -32,7 +32,7 @@ const HomePage = () => {
         {
           const product = {
             productId: cartItemUser[i].productId,
-            name: cartItemUser[i].productName,
+            name: cartItemUser[i].name,
             unitPrice: cartItemUser[i].unitPrice,
             color: cartItemUser[i].color,
             size: cartItemUser[i].size,

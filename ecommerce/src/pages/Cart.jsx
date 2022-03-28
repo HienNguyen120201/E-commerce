@@ -49,19 +49,6 @@ const Cart = () => {
 	console.log(Billdetail)
 	const payment = async (e) => {
 		 e.preventDefault();
-		if(isLogin)
-		{
-			const result = await axios.post("https://localhost:44306/api/Product/PostBill",bill)
-			console.log(result.data)
-			if (result.data) {
-        		alert("Thanh toán thành công");
-        		navigate("/Home");
-        	}else{
-        		alert("Thanh toán không thành công");
-      		}
-		}
-		else
-		{
 			const result = await axios.post("https://localhost:44306/api/Product/PostBillDetail",BillAndDetail)
 			if (result.data) {
         		alert("Thanh toán thành công");
@@ -69,9 +56,6 @@ const Cart = () => {
         	}else{
         		alert("Thanh toán không thành công");
       		}
-		}
-   
-      
 	  };
   return (
     <div className="container">
