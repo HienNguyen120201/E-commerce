@@ -33,8 +33,6 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
    const [sizeIndex, setSizeIndex] = useState(null)
    const [qty, setQty] = useState(1)
    const [dataReturn, setDataReturn] = useState(false)
-   console.log("curProduct là: ", curProduct)
-
    /*
     * --------------------------------  EVENT HANDLER ------------------------- */
    const isLogin = useSelector((state) => state.login.isLogin)
