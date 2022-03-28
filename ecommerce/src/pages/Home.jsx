@@ -160,10 +160,6 @@ import axios from "axios"
 
 
 const Home = () => {
-  const isLogin = useSelector((state) => state.login.isLogin)
-  let [cartItemUser,setCartItemUser]=useState([])
-  const [didMount, setDidMount] = useState(false); 
-  let user = useSelector((state)=>state.login.userInfo)
   const dispatch = useDispatch()
   useEffect(() => {
         if(isLogin)
@@ -176,7 +172,6 @@ const Home = () => {
         setDidMount(true);
           return () => setDidMount(false);
     },[])
-
     useEffect(() => {
        dispatch(fetchProductsData())
     }, [dispatch])
@@ -228,7 +223,6 @@ const Home = () => {
     //   stars: [1,2,3],
     // },
 
-
   if(!didMount) {
     return null;
   }
@@ -248,7 +242,6 @@ const Home = () => {
             dispatch(addItem(product))
         }
   }
-
   return (
     
     <div>
