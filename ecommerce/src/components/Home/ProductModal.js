@@ -138,7 +138,7 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
       for (let i = 1; i <= dAverage; i++) {
          rating1.push(<BsStarFill key={i} fontSize="1.6rem" style={ratingStyle} />)
       }
-      if (rating_average1 > dAverage) rating.push(<BsStarHalf fontSize="1.6rem" style={ratingStyle} />)
+      if (rating_average1 > dAverage) rating1.push(<BsStarHalf fontSize="1.6rem" style={ratingStyle} />)
 
       return (
          <div className="prodModal-container">
