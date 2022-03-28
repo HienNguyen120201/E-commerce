@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
 import { useSelector, useDispatch } from "react-redux"
 import { addItem } from '../redux/shop-cart/CartItemsSlide.js';
 import {Sale, CountDownSale, NewProduct, BestSeller} from '../components/Home/Section/Section.js'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {fetchProductsData} from "../redux/action/shopAction"
+import axios from "axios"
 
 
 // const saleList = [
@@ -161,6 +161,17 @@ import {fetchProductsData} from "../redux/action/shopAction"
 
 const Home = () => {
   const dispatch = useDispatch()
+  useEffect(() => {
+        if(isLogin)
+        {
+          axios.post("https://localhost:44306/api/Product/GetBill",{UserName:user})
+            .then(res => {
+                setCartItemUser(res.data)
+        })
+        }
+        setDidMount(true);
+          return () => setDidMount(false);
+    },[])
     useEffect(() => {
        dispatch(fetchProductsData())
     }, [dispatch])
@@ -173,7 +184,7 @@ const Home = () => {
     const products = useSelector((state) => state.shop.products)
     // console.log(products[0])
     products.map((product) => {
-      product.stars = new Array(Math.round(product.rating)).fill(1)
+      // product.stars = new Array(Math.round(product.rating)).fill(1)
       if(product.status === "BestSeller")
       {
         bestSellerList.push(product); 
@@ -212,6 +223,25 @@ const Home = () => {
     //   stars: [1,2,3],
     // },
 
+  if(!didMount) {
+    return null;
+  }
+
+  if(isLogin && cartItemUser.length >0)
+  {
+    for(var i=0;i<cartItemUser.length;i++)
+        {
+          const product = {
+            productId: cartItemUser[i].productId,
+            name: cartItemUser[i].name,
+            unitPrice: cartItemUser[i].unitPrice,
+            color: cartItemUser[i].color,
+            size: cartItemUser[i].size,
+            quantity: 0
+            }
+            dispatch(addItem(product))
+        }
+  }
   return (
     
     <div>
@@ -219,6 +249,7 @@ const Home = () => {
         title={saleContent.title}
         itemList={saleContent.itemList}
         />
+
 
         <NewProduct 
         title={newProductContent.title}

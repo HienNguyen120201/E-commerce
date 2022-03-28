@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { FaStar, FaCartPlus, FaHeart } from "react-icons/fa";
 // FaStar
 import '../../../css/HomeStyle/Item.css'
@@ -11,6 +11,21 @@ import Grow from "@mui/material/Grow"
 import Dialog from "@mui/material/Dialog"
 import DialogContent from "@mui/material/DialogContent"
 import ProductModal from "../ProductModal"
+
+function Rating(props) {
+    const countStar = Math.round(props.rating);
+    console.log(countStar)
+    const arrStar = new Array(countStar).fill(1);
+    return (
+        <Fragment>
+            {    
+                arrStar.map((star, index) => <FaStar key={index} />)
+            }
+        </Fragment>
+        
+    );
+
+}
 
 function Item (props) {
     const [open, setOpen] = React.useState(false)
@@ -106,11 +121,10 @@ function Item (props) {
             <div className="rating">
                 <div className="horizontal-line"></div>
                 <span className="stars">
-                    {
-                        props.stars.map((star, index) => 
-                            <FaStar key={index} />
-                        )
-                    }
+                    
+                    <Rating 
+                        rating={props.rating}
+                    />
                 </span>
                 <div className="horizontal-line"></div>
             </div>

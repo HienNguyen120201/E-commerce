@@ -118,7 +118,7 @@ function SimpleSlider(props) {
                         productName={item.name}
                         productPrice={item.unitPrice}
                         protductOldPrice={item.oldPrice}
-                        stars={item.stars}
+                        rating={item.rating}
                         />
                         )
                     }
