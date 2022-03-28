@@ -21,7 +21,6 @@ html {
   text-align: center;
   position: relative;
   overflow: hidden;
-  height: 500px;
 }
 
 .itemBtn {
@@ -65,12 +64,13 @@ html {
 .item .item-img {
   max-width: 200px;
   min-width: 150px;
-  height: 200px;
+  height: 150px;
 }
 
 .item .item-img img {
   width: 90%;
   object-fit: cover;
+  margin:auto;
 }
 
 .item .device {
@@ -91,7 +91,13 @@ html {
   /* identical to box height */
   color: #2b2d42;
   padding: 0 1rem 0;
-  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  width: 100%;
+
 }
 
 .item .price {

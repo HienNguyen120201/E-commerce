@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
 import { useSelector, useDispatch } from "react-redux"
 import { addItem } from '../redux/shop-cart/CartItemsSlide.js';
 import {Sale, CountDownSale, NewProduct, BestSeller} from '../components/Home/Section/Section.js'
@@ -189,7 +188,7 @@ const Home = () => {
     const products = useSelector((state) => state.shop.products)
     // console.log(products[0])
     products.map((product) => {
-      product.stars = new Array(Math.round(product.rating)).fill(1)
+      // product.stars = new Array(Math.round(product.rating)).fill(1)
       if(product.status === "BestSeller")
       {
         bestSellerList.push(product); 
@@ -256,6 +255,7 @@ const Home = () => {
         title={saleContent.title}
         itemList={saleContent.itemList}
         />
+
 
         <NewProduct 
         title={newProductContent.title}
