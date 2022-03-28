@@ -29,6 +29,7 @@
 }
 .product-item__image {
   text-align: center;
+  height: 200px;
 }
 .discount-price {
   color: #be1e2d;
