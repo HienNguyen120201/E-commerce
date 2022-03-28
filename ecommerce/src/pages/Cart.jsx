@@ -34,8 +34,7 @@ const Cart = () => {
       Huyen: "",
       Tinh: "",
       PhoneNumber: "",
-      TotalPrice: 1000000,
-      PaymentMethod: "momo",
+      PaymentMethod: "",
    })
 
    const handleChangeBill = (e) => {
@@ -55,21 +54,7 @@ const Cart = () => {
    }
 
    const payment = async (e) => {
-    //   console.log(Billdetail)
-    //   console.log(bill)
-	//   console.log(BillAndDetail)
-
       e.preventDefault()
-      if (isLogin) {
-         const result = await axios.post("https://localhost:44306/api/Product/PostBill", bill)
-         console.log(result.data)
-         if (result.data) {
-            alert("Thanh toán thành công")
-            navigate("/Home")
-         } else {
-            alert("Thanh toán không thành công")
-         }
-      } else {
          const result = await axios.post("https://localhost:44306/api/Product/PostBillDetail", BillAndDetail)
          if (result.data) {
             alert("Thanh toán thành công")
@@ -77,8 +62,7 @@ const Cart = () => {
          } else {
             alert("Thanh toán không thành công")
          }
-      }
-   }
+   };
    return (
       <div className="container">
          <div className="section">
