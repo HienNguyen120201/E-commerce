@@ -34,7 +34,7 @@ const Cart = () => {
       Huyen: "",
       Tinh: "",
       PhoneNumber: "",
-      PaymentMethod: "momo",
+      PaymentMethod: "",
    })
 
    const handleChangeBill = (e) => {
@@ -55,9 +55,6 @@ const Cart = () => {
 
    const payment = async (e) => {
       e.preventDefault()
-      console.log(Bill)
-      console.log(BillAndDetail)
-      console.log(Billdetail)
          const result = await axios.post("https://localhost:44306/api/Product/PostBillDetail", BillAndDetail)
          if (result.data) {
             alert("Thanh toán thành công")
