@@ -212,6 +212,15 @@
 .Blue {
     background-color: #3498db;
 }
+.Red{
+    background-color: #ff2f2f;
+}
+.Blue{
+    background-color: #3498db;
+}
+.Gray{
+    background-color: gray;
+}
 
 .proModal__size > ul {
     display: flex;
