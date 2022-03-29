@@ -186,6 +186,7 @@
     width: 35rem;
     height: 43rem;
 }
+
 .Yellow {
     background-color: #fff200;
 }
@@ -212,14 +213,17 @@
 .Blue {
     background-color: #3498db;
 }
+.Gold{
+    background-color: #FFC312;
+}
 .Red{
-    background-color: #ff2f2f;
+    background-color: #EA2027;
 }
-.Blue{
-    background-color: #3498db;
+.Silver{
+    background-color: #f1f2f6;
 }
-.Gray{
-    background-color: gray;
+.Grey{
+    background-color: #535c68;
 }
 
 .proModal__size > ul {

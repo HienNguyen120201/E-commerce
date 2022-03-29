@@ -84,11 +84,11 @@ export const searchProduct = (keyword) => {
 export const fetchProductsData = () => {
    return async (dispatch) => {
       const data = await Promise.all([
-         await (await axiosClient.get("/Product")).data,
-         await (await axiosClient.get("/Product/GetColor")).data,
-         await (await axiosClient.get("/Product/GetSize")).data,
-         await (await axiosClient.get("/Product/GetTag")).data,
-         await (await axiosClient.get("/Product/GetFeature")).data,
+         await (await axiosClient.get("/products")).data,
+         await (await axiosClient.get("/colors")).data,
+         await (await axiosClient.get("/sizes")).data,
+         await (await axiosClient.get("/tags")).data,
+         await (await axiosClient.get("/features")).data,
       ])
       dispatch(setProducts(data))
    }
@@ -108,9 +108,9 @@ export const setFilters = (data) =>{
    }
 }
 
-export const clearFilters = () =>{
+export const clearFilters = (data) =>{
    return {
       type: "CLEAR_FILTER",
-      payload: "" ,
+      payload: data ,
    }
 }

@@ -12,13 +12,13 @@ const initState = {
    filterProducts: [],
    isFilter: false,
    searchResult: [],
+   isClear: false,
 }
 
 export const shopReducer = (state = initState, action) => {
    switch (action.type) {
-      
       case "SUBMIT_FILTER":
-         console.log(action.payload)
+         // console.log(action.payload)
          return {
             ...state,
             filteredTag: [...action.payload],
@@ -169,9 +169,9 @@ export const shopReducer = (state = initState, action) => {
          state.products.forEach((product) => {
             if (
                product.name.includes(key) ||
-               product.features.some(feature => feature.includes(key)) ||
+               product.features.some((feature) => feature.includes(key)) ||
                // product.tags.includes(key) ||
-               product.tags.some(tag => tag.includes(key)) ||
+               product.tags.some((tag) => tag.includes(key)) ||
                product.type.includes(key)
             ) {
                res.push(product)
@@ -185,10 +185,18 @@ export const shopReducer = (state = initState, action) => {
          }
 
       case "FILTER":
-         // console.log(action.payload)
+         console.log(action.payload)
+         if (action.payload === "")
+            return {
+               ...state,
+            }
+
          const query = action.payload.split("&")
          let filteredProducts = []
          let check = false
+
+         filteredProducts = state.products.filter((product) => product.type === state.category)
+         // console.log(state)
 
          query.forEach((item) => {
             if (item.includes("type")) {
@@ -218,7 +226,7 @@ export const shopReducer = (state = initState, action) => {
                } else {
                   filteredProducts = filteredProducts.filter((p) => p.features.includes(value))
                }
-            } 
+            }
             // console.log(filteredProducts)
          })
 
@@ -233,9 +241,12 @@ export const shopReducer = (state = initState, action) => {
          }
 
       case "CLEAR_FILTER":
+         const temp = state.isClear
          return {
             ...state,
             filteredTag: [],
+            category: action.payload,
+            isClear: !temp,
          }
 
       default:

@@ -17,7 +17,7 @@ function ShopFilter({ pathname }) {
    let navigate = useNavigate()
    const dispatch = useDispatch()
    const isLoaded = useSelector((state) => state.shop.isLoaded)
-   const isFilter = useSelector((state) => state.shop.isFilter)
+   const isClear = useSelector((state) => state.shop.isClear)
 
    /*
     * ------------------------  HOOK ------------------------------ */
@@ -38,10 +38,11 @@ function ShopFilter({ pathname }) {
       const arrPrams = window.location.search.split("&")
       let listTags = []
       let urlPath = window.location.pathname.split("/")
+
       if (urlPath.length > 2) {
          listTags.push(decodeURI(urlPath.pop()))
       }
-      if (arrPrams.length > 2) {
+      if (arrPrams.length >= 2) {
          let i = 0
          for (i = 0; i < arrPrams.length; i++) if (arrPrams[i].includes("price")) break
          listTags.push(
@@ -59,7 +60,6 @@ function ShopFilter({ pathname }) {
    }
    const handleSelectType = (e) => {
       let x = e.target.innerHTML
-      console.log(x)
       setQuery(`type=${x}&`)
       setCurActive("")
       dispatch(submitFilter([x]))
@@ -67,17 +67,19 @@ function ShopFilter({ pathname }) {
          dispatch(setFilters(true))
          dispatch(filter(`type=${x.toLowerCase()}`))
       }
-      console.log("oke")
    }
 
    /*
     *------------------------ HANDLE STATE CHANGE ----------------- */
 
    const handleSubmitFilter = () => {
-      console.log("close")
       let queryParam = ""
+      const urlPath = window.location.pathname.split("/")
 
-      queryParam += filteredTag.length !== 0 ? `type=${filteredTag[0]}&` : ""
+      if (urlPath.length === 3) {
+         queryParam += filteredTag.length !== 0 ? `type=${urlPath[2]}&` : ""
+      }
+
       if (price[0]) queryParam += `discount_price_gte=${price[0]}&discount_price_lte=${price[1]}`
 
       for (const [key, value] of Object.entries(optionFeature)) {
@@ -85,10 +87,17 @@ function ShopFilter({ pathname }) {
             queryParam += `&feature=${key}`
          }
       }
+      let b = queryParam.split("&")
+      if (queryParam.includes("type=")) {
+         b.shift()
+      }
+      b = b.join("&")
+
       queryParam = queryParam[0] === "&" ? queryParam.substring(1) : queryParam
-      navigate(`?${queryParam}`)
-      setQuery(queryParam)
-      dispatch(submitFilter(listTag()))
+      navigate(`?${b}`)
+      setQuery(listTag())
+      const x = listTag()
+      dispatch(submitFilter(x))
       if (products.length > 0 && queryParam !== "") {
          dispatch(setFilters(true))
          dispatch(filter(queryParam))
@@ -108,10 +117,10 @@ function ShopFilter({ pathname }) {
    useEffect(() => {
       let urlPath = window.location.pathname.split("/")
       let param = decodeURI(window.location.search.substring(1))
+
       const queryObj = queryString.parse(window.location.search)
       if (urlPath.length > 2) {
          const x = decodeURI(urlPath.pop())
-         console.log(x)
          setQuery(`type=${x}&${param}`)
          setCurActive(window.location.pathname.split("/")[2])
       } else {
@@ -134,7 +143,8 @@ function ShopFilter({ pathname }) {
          }
       }
 
-      if (!isFilter)
+      if (isClear) {
+         console.log(isClear)
          setOptionFeature({
             allFeatrues: false,
             finger: false,
@@ -142,13 +152,15 @@ function ShopFilter({ pathname }) {
             quickCharge: false,
             waterProof: false,
          })
-
-      if (products.length > 0 && query !== "") {
-         dispatch(submitFilter(listTag()))
+         setPrice([1000, 50000000])
+      }
+      const x = listTag()
+      if (products.length > 0 && query !== "" && x.length > 0 ) {
+         dispatch(submitFilter(x))
          dispatch(setFilters(true))
          dispatch(filter(query))
       }
-   }, [products, dispatch, isFilter])
+   }, [products, dispatch, isClear])
 
    let category = {}
    let title = ""

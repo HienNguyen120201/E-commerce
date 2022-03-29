@@ -6,9 +6,10 @@
   cursor: pointer;
 }
 .product-item__info {
-  padding-top: 2rem;
-  padding-bottom: 3rem;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
   line-height: 17px;
+  height: 200px
 }
 .product-item {
   font-size: 1.5rem;
@@ -29,8 +30,10 @@
 }
 .product-item__image {
   text-align: center;
-  height: 200px;
+  height: 230px;
+  width: 230px
 }
+
 .discount-price {
   color: #be1e2d;
   font-weight: 600;
