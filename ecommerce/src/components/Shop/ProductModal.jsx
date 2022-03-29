@@ -88,7 +88,7 @@ function ProductModal({ handleClose, openToastSuccess, openToastError, currId })
    } else {
       let { name, type, oldPrice, unitPrice, colors, sizes, description, rating, review_count, sell_count } =
          curProduct[0]
-
+      console.log(colors)
       const imageList = [curProduct[0].imgUrl1, curProduct[0].imgUrl2, curProduct[0].imgUrl3]
       let rating_average1 = Math.floor(rating * 2 + 0.5) / 2
       const dAverage = Math.floor(rating_average1)
