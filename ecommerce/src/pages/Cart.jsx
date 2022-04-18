@@ -2,7 +2,7 @@ import { ConstructionOutlined } from "@mui/icons-material"
 import React, { useEffect, useState } from "react"
 import CartItem from "../components/Cart/CartItem"
 import numberWithCommas from "../utils/numberWithCommas"
-import { useNavigate } from "react-router-dom"
+import { useNavigate,Link } from "react-router-dom"
 import axios from "axios"
 
 import { useSelector } from "react-redux"
@@ -155,7 +155,9 @@ const Cart = () => {
                         </label>
                      </div>
                      <div className="text-right">
+                        <Link to="/Home">
                         <button className=" btn-success my-1">Tiếp tục mua hàng</button>
+                        </Link>
                         <button className=" btn-success my-1" onClick={payment}>
                            Đặt hàng
                         </button>
